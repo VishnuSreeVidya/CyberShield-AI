@@ -269,8 +269,7 @@ This project is licensed under the MIT License.
 
 ## 👨‍💻 Author
 
-**Vidya Kotturu**
+**Kotturu Vishnu Sree Vidya**
 
 Computer Science Student | Full Stack Developer | Cybersecurity Enthusiast
 
-If you found this project helpful, consider giving it a ⭐ on GitHub.
