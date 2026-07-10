@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Upload Logs — CyberShield AI{% endblock %}
+{% block content %}
+<div style="max-width:520px;margin:40px auto;">
+  <div class="glass-card" style="padding:28px;">
+    <div class="auth-brand" style="margin-bottom:24px;">
+      <div class="auth-brand-icon" style="width:44px;height:44px;"><i data-lucide="upload"></i></div>
+      <div class="auth-brand-title" style="font-size:18px;">Import Log File</div>
+      <div class="auth-brand-subtitle">Upload server logs for automatic threat analysis</div>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data" action="">
+      <div class="form-group">
+        <label class="form-label">Log File</label>
+        <div class="upload-area" onclick="document.getElementById('file').click()">
+          <i data-lucide="file-input"></i>
+          <div class="upload-area-title">Click to select file</div>
+          <div class="upload-area-subtitle">Apache / Nginx logs (.log), CSV, JSON, TXT</div>
+          <input type="file" id="file" name="file" required
+                 accept=".log,.txt,.csv,.json"
+                 style="display:none;"
+                 onchange="this.closest('.upload-area').querySelector('.upload-area-title').textContent = this.files[0].name">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">
+        <i data-lucide="cloud-upload"></i> Upload &amp; Analyze
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Alerts — CyberShield AI{% endblock %}
+{% block content %}
+<div class="page-header" style="display:flex;align-items:center;justify-content:space-between;">
+  <div>
+    <h1 class="page-title">Alerts</h1>
+    <p class="page-subtitle">All detected threats and security alerts</p>
+  </div>
+</div>
+
+{% if alerts %}
+<div class="glass-card" style="overflow:hidden;">
+  <div style="overflow-x:auto;">
+    <table class="glass-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Severity</th>
+          <th>Attack Type</th>
+          <th>Source IP</th>
+          <th>Description</th>
+          <th>Detected At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for alert in alerts %}
+        <tr>
+          <td style="color:var(--text-muted);font-family:var(--font-mono);">#{{ alert.id }}</td>
+          <td><span class="severity-badge {{ alert.severity|lower }}">{{ alert.severity }}</span></td>
+          <td style="font-weight:500;">{{ alert.attack_type }}</td>
+          <td><code>{{ alert.source_ip or '—' }}</code></td>
+          <td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;">{{ alert.description or '—' }}</td>
+          <td style="font-size:12px;">{{ alert.detected_at.strftime('%Y-%m-%d %H:%M:%S') if alert.detected_at else '—' }}</td>
+          <td>
+            {% if alert.log_id %}
+            <a href="{{ url_for('logs.detail', log_id=alert.log_id) }}" class="btn btn-outline btn-sm">
+              <i data-lucide="eye"></i> View Log
+            </a>
+            {% else %}—{% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% if pagination.pages > 1 %}
+<div class="pagination-soc">
+  {% for page_num in pagination.iter_pages() %}
+    {% if page_num %}
+      <a href="{{ url_for('dashboard.alerts', page=page_num) }}"
+         class="{{ 'active' if page_num == pagination.page else '' }}">{{ page_num }}</a>
+    {% else %}
+      <span class="disabled">…</span>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endif %}
+
+{% else %}
+<div class="glass-card">
+  <div class="empty-state">
+    <i data-lucide="bell"></i>
+    <div class="empty-state-title">No Alerts</div>
+    <div class="empty-state-desc">Upload logs to start threat detection. Alerts will appear here.</div>
+    <a href="{{ url_for('logs.upload') }}" class="btn btn-primary" style="margin-top:16px;">
+      <i data-lucide="upload"></i> Upload Logs
+    </a>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

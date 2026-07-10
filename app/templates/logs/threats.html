@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}Threat Detection — CyberShield AI{% endblock %}
+{% block content %}
+<div class="page-header" style="display:flex;align-items:center;justify-content:space-between;">
+  <div>
+    <h1 class="page-title">Threat Detection</h1>
+    <p class="page-subtitle">Log entries with detected threats</p>
+  </div>
+  <a href="{{ url_for('logs.upload') }}" class="btn btn-primary">
+    <i data-lucide="upload"></i> Upload Logs
+  </a>
+</div>
+
+{% if logs %}
+<div class="glass-card" style="overflow:hidden;">
+  <div style="overflow-x:auto;">
+    <table class="glass-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Timestamp</th>
+          <th>IP Address</th>
+          <th>Method</th>
+          <th>URL</th>
+          <th>Status</th>
+          <th>Alerts</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for log in logs %}
+        <tr>
+          <td style="color:var(--text-muted);font-family:var(--font-mono);">#{{ log.id }}</td>
+          <td style="font-size:12px;">{{ log.timestamp.strftime('%Y-%m-%d %H:%M:%S') if log.timestamp else '—' }}</td>
+          <td><code>{{ log.ip_address or '—' }}</code></td>
+          <td>
+            {% if log.http_method %}
+              <span class="status-badge" style="background:rgba(0,187,255,0.1);color:#00bbff;border-color:rgba(0,187,255,0.2);">
+                {{ log.http_method }}
+              </span>
+            {% else %}—{% endif %}
+          </td>
+          <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;">{{ log.request_url or '—' }}</td>
+          <td>
+            {% if log.status_code %}
+              <span class="status-badge {{ 'success' if log.status_code < 300 else 'warning' if log.status_code < 400 else 'danger' }}">
+                {{ log.status_code }}
+              </span>
+            {% else %}—{% endif %}
+          </td>
+          <td>
+            {% set alert_count = log.alerts|length %}
+            <span class="severity-badge {{ 'critical' if alert_count > 2 else 'high' if alert_count > 1 else 'medium' }}">
+              {{ alert_count }}
+            </span>
+          </td>
+          <td>
+            <a href="{{ url_for('logs.detail', log_id=log.id) }}" class="btn btn-outline btn-sm">
+              <i data-lucide="eye"></i> View
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% if pagination.pages > 1 %}
+<div class="pagination-soc">
+  {% for page_num in pagination.iter_pages() %}
+    {% if page_num %}
+      <a href="{{ url_for('logs.threats', page=page_num) }}"
+         class="{{ 'active' if page_num == pagination.page else '' }}">{{ page_num }}</a>
+    {% else %}
+      <span class="disabled">…</span>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endif %}
+
+{% else %}
+<div class="glass-card">
+  <div class="empty-state">
+    <i data-lucide="shield-alert"></i>
+    <div class="empty-state-title">No Threats Detected</div>
+    <div class="empty-state-desc">Upload logs to begin threat analysis. Entries with detected threats will appear here.</div>
+    <a href="{{ url_for('logs.upload') }}" class="btn btn-primary" style="margin-top:16px;">
+      <i data-lucide="upload"></i> Upload Logs
+    </a>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

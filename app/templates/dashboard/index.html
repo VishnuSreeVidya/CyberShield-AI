@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — CyberShield AI{% endblock %}
+{% block extra_head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1 class="page-title">SOC Dashboard</h1>
+  <p class="page-subtitle">Real-time threat intelligence and log analytics.</p>
+</div>
+
+<div class="stat-grid">
+  <div class="stat-card glass-card">
+    <div class="stat-card-info">
+      <div class="stat-card-label">Total Logs Processed</div>
+      <div class="stat-card-value" style="color:var(--accent);">{{ total_logs }}</div>
+    </div>
+    <div class="stat-card-icon" style="background:var(--accent-dim);color:var(--accent);">
+      <i data-lucide="database"></i>
+    </div>
+  </div>
+  <div class="stat-card glass-card">
+    <div class="stat-card-info">
+      <div class="stat-card-label">Total Alerts</div>
+      <div class="stat-card-value" style="color:#ffc107;">{{ total_alerts }}</div>
+    </div>
+    <div class="stat-card-icon" style="background:rgba(255,193,7,0.15);color:#ffc107;">
+      <i data-lucide="triangle-alert"></i>
+    </div>
+  </div>
+  <div class="stat-card glass-card">
+    <div class="stat-card-info">
+      <div class="stat-card-label">Failed Login Attempts</div>
+      <div class="stat-card-value" style="color:#00bbff;">{{ failed_login }}</div>
+    </div>
+    <div class="stat-card-icon" style="background:rgba(0,187,255,0.15);color:#00bbff;">
+      <i data-lucide="key-round"></i>
+    </div>
+  </div>
+  <div class="stat-card glass-card">
+    <div class="stat-card-info">
+      <div class="stat-card-label">Brute Force Attacks</div>
+      <div class="stat-card-value" style="color:#ff8800;">{{ brute_force }}</div>
+    </div>
+    <div class="stat-card-icon" style="background:var(--high-bg);color:var(--high);">
+      <i data-lucide="zap"></i>
+    </div>
+  </div>
+  <div class="stat-card glass-card">
+    <div class="stat-card-info">
+      <div class="stat-card-label">SQL Injection Attempts</div>
+      <div class="stat-card-value" style="color:var(--critical);">{{ sql_injection }}</div>
+    </div>
+    <div class="stat-card-icon" style="background:var(--critical-bg);color:var(--critical);">
+      <i data-lucide="bug"></i>
+    </div>
+  </div>
+  <div class="stat-card glass-card">
+    <div class="stat-card-info">
+      <div class="stat-card-label">XSS Attempts</div>
+      <div class="stat-card-value" style="color:#d946ef;">{{ xss }}</div>
+    </div>
+    <div class="stat-card-icon" style="background:rgba(217,70,239,0.15);color:#d946ef;">
+      <i data-lucide="activity"></i>
+    </div>
+  </div>
+  <div class="stat-card glass-card">
+    <div class="stat-card-info">
+      <div class="stat-card-label">Critical Threats</div>
+      <div class="stat-card-value" style="color:var(--critical);">{{ critical }}</div>
+    </div>
+    <div class="stat-card-icon" style="background:var(--critical-bg);color:var(--critical);">
+      <i data-lucide="flame"></i>
+    </div>
+  </div>
+  <div class="stat-card glass-card">
+    <div class="stat-card-info">
+      <div class="stat-card-label">High Risk IPs</div>
+      <div class="stat-card-value" style="color:var(--accent);">{{ high_risk_ips }}</div>
+    </div>
+    <div class="stat-card-icon" style="background:var(--accent-dim);color:var(--accent);">
+      <i data-lucide="earth"></i>
+    </div>
+  </div>
+</div>
+
+<div class="charts-grid">
+  <div class="chart-card glass-card">
+    <div class="chart-card-header">
+      <div>
+        <div class="chart-card-title">Attack Timeline</div>
+        <div class="chart-card-subtitle">Attacks detected per hour (last 24h)</div>
+      </div>
+    </div>
+    <div class="chart-container">
+      <canvas id="attackTimelineChart"></canvas>
+    </div>
+  </div>
+  <div class="chart-card glass-card">
+    <div class="chart-card-header">
+      <div>
+        <div class="chart-card-title">Attack Types Distribution</div>
+      </div>
+    </div>
+    <div class="chart-container">
+      <canvas id="attackTypesChart"></canvas>
+    </div>
+  </div>
+  <div class="chart-card glass-card">
+    <div class="chart-card-header">
+      <div>
+        <div class="chart-card-title">Top Attacking IPs</div>
+        <div class="chart-card-subtitle">Most active source addresses</div>
+      </div>
+    </div>
+    <div class="chart-container">
+      <canvas id="topIpsChart"></canvas>
+    </div>
+  </div>
+  <div class="chart-card glass-card">
+    <div class="chart-card-header">
+      <div>
+        <div class="chart-card-title">Severity Distribution</div>
+      </div>
+    </div>
+    <div class="chart-container">
+      <canvas id="severityChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="alert-feed-card glass-card">
+  <div class="alert-feed-header">
+    <div class="alert-feed-title">Live Alert Feed</div>
+    <span class="alert-feed-status">Auto-updating</span>
+  </div>
+  {% if recent_alerts %}
+  <div class="alert-feed-list">
+    {% for alert in recent_alerts %}
+    <div class="alert-feed-item">
+      <span class="severity-badge {{ alert.severity|lower }}">{{ alert.severity }}</span>
+      <span style="font-weight:500;">{{ alert.attack_type }}</span>
+      <span class="alert-desc">from</span>
+      <span class="alert-ip">{{ alert.source_ip or '—' }}</span>
+      <span class="alert-time">{{ alert.detected_at.strftime('%Y-%m-%d %H:%M') if alert.detected_at else '—' }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <i data-lucide="inbox"></i>
+    <div class="empty-state-title">No Alerts</div>
+    <div class="empty-state-desc">Upload logs to start threat detection.</div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+const chartColors = {
+  critical: '#ff3355',
+  high: '#ff8800',
+  medium: '#ffc107',
+  low: '#6c757d',
+  accent: '#00ff88',
+  grid: 'rgba(255,255,255,0.04)',
+  text: '#8888aa',
+};
+
+Chart.defaults.color = chartColors.text;
+Chart.defaults.borderColor = chartColors.grid;
+
+async function loadCharts() {
+  try {
+    const typeRes = await fetch('/api/dashboard/alerts_by_type');
+    const typeData = await typeRes.json();
+    const labels = Object.keys(typeData);
+    const values = Object.values(typeData);
+
+    if (labels.length) {
+      new Chart(document.getElementById('attackTypesChart'), {
+        type: 'doughnut',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: values,
+            backgroundColor: ['#ff3355','#ff8800','#ffc107','#00bbff','var(--accent)','#d946ef','#6c757d'],
+            borderWidth: 0,
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { padding: 16, usePointStyle: true, pointStyle: 'circle' },
+            },
+          },
+        },
+      });
+    }
+
+    const statsRes = await fetch('/api/dashboard/stats');
+    const statsData = await statsRes.json();
+
+    new Chart(document.getElementById('severityChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Critical', 'High', 'Medium', 'Low'],
+        datasets: [{
+          label: 'Alerts',
+          data: [statsData.critical, statsData.high, statsData.medium, statsData.low],
+          backgroundColor: ['rgba(255,51,85,0.6)', 'rgba(255,136,0,0.6)', 'rgba(255,193,7,0.6)', 'rgba(108,117,125,0.6)'],
+          borderColor: ['#ff3355', '#ff8800', '#ffc107', '#6c757d'],
+          borderWidth: 1,
+          borderRadius: 4,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, grid: { color: chartColors.grid } },
+          x: { grid: { display: false } },
+        },
+      },
+    });
+
+    new Chart(document.getElementById('attackTimelineChart'), {
+      type: 'line',
+      data: {
+        labels: ['00:00','02:00','04:00','06:00','08:00','10:00','12:00','14:00','16:00','18:00','20:00','22:00'],
+        datasets: [{
+          label: 'Attacks',
+          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          borderColor: 'var(--accent)',
+          backgroundColor: 'rgba(0,255,136,0.05)',
+          fill: true,
+          tension: 0.4,
+          pointRadius: 3,
+          pointBackgroundColor: 'var(--accent)',
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, grid: { color: chartColors.grid } },
+          x: { grid: { display: false } },
+        },
+      },
+    });
+
+    new Chart(document.getElementById('topIpsChart'), {
+      type: 'bar',
+      data: {
+        labels: ['—'],
+        datasets: [{
+          label: 'Alerts',
+          data: [0],
+          backgroundColor: ['rgba(0,255,136,0.4)'],
+          borderRadius: 4,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: 'y',
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { beginAtZero: true, grid: { color: chartColors.grid } },
+          y: { grid: { display: false } },
+        },
+      },
+    });
+
+  } catch (e) { console.error('Chart error:', e); }
+}
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof lucide !== 'undefined') lucide.createIcons();
+  loadCharts();
+});
+</script>
+{% endblock %}
