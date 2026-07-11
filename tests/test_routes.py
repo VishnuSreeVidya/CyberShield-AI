@@ -114,6 +114,60 @@ class TestAPIRoutes:
         stats = rv.get_json()
         assert stats['total_logs'] >= 0
 
+    def test_attack_timeline(self, client, auth_headers):
+        rv = client.get('/api/dashboard/timeline')
+        assert rv.status_code == 200
+        data = rv.get_json()
+        assert 'labels' in data
+        assert 'data' in data
+        assert len(data['labels']) == 24
+        assert len(data['data']) == 24
+
+    def test_top_ips(self, client, auth_headers):
+        rv = client.get('/api/dashboard/top_ips')
+        assert rv.status_code == 200
+        data = rv.get_json()
+        assert 'labels' in data
+        assert 'data' in data
+        assert isinstance(data['labels'], list)
+        assert isinstance(data['data'], list)
+
+    def test_timeline_requires_auth(self, client):
+        rv = client.get('/api/dashboard/timeline')
+        assert rv.status_code in (302, 401)
+
+    def test_top_ips_requires_auth(self, client):
+        rv = client.get('/api/dashboard/top_ips')
+        assert rv.status_code in (302, 401)
+
+
+class TestReportExports:
+    def test_export_csv(self, client, auth_headers):
+        rv = client.get('/dashboard/reports/export/csv')
+        assert rv.status_code == 200
+        assert rv.mimetype == 'text/csv'
+
+    def test_export_json(self, client, auth_headers):
+        rv = client.get('/dashboard/reports/export/json')
+        assert rv.status_code == 200
+        assert rv.mimetype == 'application/json'
+
+    def test_export_pdf(self, client, auth_headers):
+        rv = client.get('/dashboard/reports/export/pdf')
+        assert rv.status_code == 200
+        assert rv.mimetype == 'application/pdf'
+        assert b'%PDF' in rv.data
+
+    def test_reports_page(self, client, auth_headers):
+        rv = client.get('/dashboard/reports', follow_redirects=True)
+        assert rv.status_code == 200
+        assert b'Reports' in rv.data
+
+    def test_settings_page(self, client, auth_headers):
+        rv = client.get('/dashboard/settings', follow_redirects=True)
+        assert rv.status_code == 200
+        assert b'Settings' in rv.data
+
 
 class TestMainRoutes:
     def test_health_endpoint(self, client):

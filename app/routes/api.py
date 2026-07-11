@@ -1,8 +1,9 @@
 from flask import jsonify
 from flask_login import login_required
+from datetime import datetime, timedelta, timezone
 from app import db
 from app.models import LogEntry, Alert, Report
-from sqlalchemy import func
+from sqlalchemy import func, extract, case
 
 
 def register_api_routes(main_bp):
@@ -47,5 +48,41 @@ def register_api_routes(main_bp):
             'attack_type': a.attack_type,
             'severity': a.severity,
             'description': a.description,
+            'source_ip': a.source_ip,
             'detected_at': a.detected_at.isoformat() if a.detected_at else None,
         } for a in alerts])
+
+    @main_bp.route('/api/dashboard/timeline')
+    @login_required
+    def attack_timeline():
+        now = datetime.now(timezone.utc)
+        hours = []
+        counts = []
+        for i in range(23, -1, -1):
+            start = now - timedelta(hours=i + 1)
+            end = now - timedelta(hours=i)
+            label = end.strftime('%H:00')
+            count = Alert.query.filter(
+                Alert.detected_at >= start,
+                Alert.detected_at < end,
+            ).count()
+            hours.append(label)
+            counts.append(count)
+        return jsonify({'labels': hours, 'data': counts})
+
+    @main_bp.route('/api/dashboard/top_ips')
+    @login_required
+    def top_ips():
+        rows = db.session.query(
+            Alert.source_ip, func.count(Alert.id).label('cnt')
+        ).filter(
+            Alert.source_ip.isnot(None)
+        ).group_by(
+            Alert.source_ip
+        ).order_by(
+            func.count(Alert.id).desc()
+        ).limit(10).all()
+        return jsonify({
+            'labels': [row[0] for row in rows],
+            'data': [row[1] for row in rows],
+        })

@@ -36,14 +36,18 @@ The project is built using **Python**, **Flask**, **PostgreSQL**, **SQLAlchemy**
 
 * Total Logs Processed & Threat Summary
 * Real-Time Alert Feed with Severity Badges
-* Attack Timeline & Type Distribution Charts
-* Top Attacking IP Addresses
+* Dynamic Attack Timeline & Type Distribution Charts (via API)
+* Top Attacking IP Addresses (live data)
 * Severity Distribution Breakdown
 * High-Risk IP Tracking
+* PDF / CSV / JSON Report Export
 
-### Reports *(Coming Soon)*
+### Reports
 
 * Export Reports as PDF / CSV / JSON
+* Attack Type Breakdown
+* Severity Distribution
+* Top Attacking IPs
 
 ### Security
 
@@ -105,7 +109,7 @@ CyberShield-AI/
 │   ├── templates/      # Jinja2 templates
 │   └── utils/          # Log parsers and utilities
 │
-├── tests/              # pytest test suite (86 tests)
+├── tests/              # pytest test suite (95 tests)
 ├── config.py           # Flask configuration
 ├── run.py              # Application entry point
 ├── requirements.txt    # Python dependencies
@@ -232,7 +236,7 @@ Attempts: 3 Failed Logins
 pytest tests/ -q
 ```
 
-86 tests covering models, authentication, parsers, detection engine, and route integration.
+95 tests covering models, authentication, parsers, detection engine, and route integration.
 
 ---
 
@@ -245,7 +249,6 @@ pytest tests/ -q
 * Machine Learning-Based Anomaly Detection
 * REST API Documentation (Swagger/OpenAPI)
 * Multi-Tenant Support
-* Report Generation (PDF/CSV)
 
 ---
 

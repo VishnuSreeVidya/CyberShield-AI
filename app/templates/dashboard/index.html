@@ -229,19 +229,22 @@ async function loadCharts() {
       },
     });
 
+    const timelineRes = await fetch('/api/dashboard/timeline');
+    const timelineData = await timelineRes.json();
+
     new Chart(document.getElementById('attackTimelineChart'), {
       type: 'line',
       data: {
-        labels: ['00:00','02:00','04:00','06:00','08:00','10:00','12:00','14:00','16:00','18:00','20:00','22:00'],
+        labels: timelineData.labels,
         datasets: [{
           label: 'Attacks',
-          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          borderColor: 'var(--accent)',
+          data: timelineData.data,
+          borderColor: '#00ff88',
           backgroundColor: 'rgba(0,255,136,0.05)',
           fill: true,
           tension: 0.4,
           pointRadius: 3,
-          pointBackgroundColor: 'var(--accent)',
+          pointBackgroundColor: '#00ff88',
         }],
       },
       options: {
@@ -255,14 +258,17 @@ async function loadCharts() {
       },
     });
 
+    const topIpsRes = await fetch('/api/dashboard/top_ips');
+    const topIpsData = await topIpsRes.json();
+
     new Chart(document.getElementById('topIpsChart'), {
       type: 'bar',
       data: {
-        labels: ['—'],
+        labels: topIpsData.labels.length ? topIpsData.labels : ['No data'],
         datasets: [{
           label: 'Alerts',
-          data: [0],
-          backgroundColor: ['rgba(0,255,136,0.4)'],
+          data: topIpsData.data.length ? topIpsData.data : [0],
+          backgroundColor: 'rgba(0,255,136,0.4)',
           borderRadius: 4,
         }],
       },
