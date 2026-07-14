@@ -2,6 +2,8 @@
 {% block title %}CyberShield AI — Real-Time SOC Log Analyzer{% endblock %}
 {% block content %}
 <div class="auth-page">
+  <div class="auth-glow-orb"></div>
+  <canvas id="auth-particles"></canvas>
   <div class="auth-card glass-card">
     <div class="auth-brand">
       <div class="auth-brand-icon"><i data-lucide="shield-check"></i></div>
@@ -11,7 +13,7 @@
 
     <form method="POST" action="{{ url_for('auth.login') }}">
       <div class="form-group">
-        <label class="form-label">Username</label>
+        <label class="form-label">Email</label>
         <input class="form-input" id="email" name="username" placeholder="you@example.com" required>
       </div>
       <div class="form-group">
@@ -41,17 +43,18 @@
       <div class="demo-roles-grid">
         <div class="demo-role-card" onclick="fillLogin('admin', 'admin123')">
           <div class="demo-role-name"><i data-lucide="shield" style="width:14px;height:14px;vertical-align:middle;"></i> Admin</div>
-          <div class="demo-role-email">admin</div>
+          <div class="demo-role-email">admin@cybershield.io</div>
         </div>
         <div class="demo-role-card" onclick="fillLogin('analyst', 'analyst123')">
           <div class="demo-role-name"><i data-lucide="user" style="width:14px;height:14px;vertical-align:middle;"></i> Security Analyst</div>
-          <div class="demo-role-email">analyst</div>
+          <div class="demo-role-email">analyst@cybershield.io</div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<script src="{{ url_for('static', filename='js/auth-bg.js') }}"></script>
 <script>
 function fillLogin(username, password) {
   document.getElementById('email').value = username;

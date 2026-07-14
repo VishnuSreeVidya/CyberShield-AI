@@ -1,169 +1,171 @@
 {% extends "base.html" %}
 {% block title %}Dashboard — CyberShield AI{% endblock %}
 {% block extra_head %}
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/chart.umd.min.js') }}"></script>
 {% endblock %}
 {% block content %}
-<div class="page-header">
-  <h1 class="page-title">SOC Dashboard</h1>
-  <p class="page-subtitle">Real-time threat intelligence and log analytics.</p>
-</div>
+<div class="space-y-6">
+  <div>
+    <h1 class="page-title">SOC Dashboard</h1>
+    <p class="page-subtitle">Real-time threat intelligence and log analytics.</p>
+  </div>
 
-<div class="stat-grid">
-  <div class="stat-card glass-card">
-    <div class="stat-card-info">
-      <div class="stat-card-label">Total Logs Processed</div>
-      <div class="stat-card-value" style="color:var(--accent);">{{ total_logs }}</div>
+  <div class="stat-grid">
+    <div class="stat-card glass-card">
+      <div class="stat-card-info">
+        <div class="stat-card-label">Total Logs Processed</div>
+        <div class="stat-card-value" style="color:var(--primary);">{{ total_logs }}</div>
+      </div>
+      <div class="stat-card-icon" style="background:oklch(72% .19 230/.15);color:var(--primary);">
+        <i data-lucide="database"></i>
+      </div>
     </div>
-    <div class="stat-card-icon" style="background:var(--accent-dim);color:var(--accent);">
-      <i data-lucide="database"></i>
+    <div class="stat-card glass-card">
+      <div class="stat-card-info">
+        <div class="stat-card-label">Total Alerts</div>
+        <div class="stat-card-value" style="color:var(--chart-2);">{{ total_alerts }}</div>
+      </div>
+      <div class="stat-card-icon" style="background:oklch(82% .19 75/.15);color:var(--chart-2);">
+        <i data-lucide="triangle-alert"></i>
+      </div>
+    </div>
+    <div class="stat-card glass-card">
+      <div class="stat-card-info">
+        <div class="stat-card-label">Failed Login Attempts</div>
+        <div class="stat-card-value" style="color:var(--primary);">{{ failed_login }}</div>
+      </div>
+      <div class="stat-card-icon" style="background:oklch(72% .19 230/.15);color:var(--primary);">
+        <i data-lucide="key-round"></i>
+      </div>
+    </div>
+    <div class="stat-card glass-card">
+      <div class="stat-card-info">
+        <div class="stat-card-label">Brute Force Attacks</div>
+        <div class="stat-card-value" style="color:var(--chart-2);">{{ brute_force }}</div>
+      </div>
+      <div class="stat-card-icon" style="background:oklch(82% .19 75/.15);color:var(--chart-2);">
+        <i data-lucide="zap"></i>
+      </div>
+    </div>
+    <div class="stat-card glass-card">
+      <div class="stat-card-info">
+        <div class="stat-card-label">SQL Injection Attempts</div>
+        <div class="stat-card-value" style="color:var(--chart-1);">{{ sql_injection }}</div>
+      </div>
+      <div class="stat-card-icon" style="background:oklch(65% .25 22/.15);color:var(--chart-1);">
+        <i data-lucide="bug"></i>
+      </div>
+    </div>
+    <div class="stat-card glass-card">
+      <div class="stat-card-info">
+        <div class="stat-card-label">XSS Attempts</div>
+        <div class="stat-card-value" style="color:var(--chart-5);">{{ xss }}</div>
+      </div>
+      <div class="stat-card-icon" style="background:oklch(78% .22 155/.15);color:var(--chart-5);">
+        <i data-lucide="activity"></i>
+      </div>
+    </div>
+    <div class="stat-card glass-card">
+      <div class="stat-card-info">
+        <div class="stat-card-label">Critical Threats</div>
+        <div class="stat-card-value" style="color:var(--chart-1);">{{ critical }}</div>
+      </div>
+      <div class="stat-card-icon" style="background:oklch(65% .25 22/.15);color:var(--chart-1);">
+        <i data-lucide="flame"></i>
+      </div>
+    </div>
+    <div class="stat-card glass-card">
+      <div class="stat-card-info">
+        <div class="stat-card-label">High Risk IPs</div>
+        <div class="stat-card-value" style="color:var(--primary);">{{ high_risk_ips }}</div>
+      </div>
+      <div class="stat-card-icon" style="background:oklch(72% .19 230/.15);color:var(--primary);">
+        <i data-lucide="earth"></i>
+      </div>
     </div>
   </div>
-  <div class="stat-card glass-card">
-    <div class="stat-card-info">
-      <div class="stat-card-label">Total Alerts</div>
-      <div class="stat-card-value" style="color:#ffc107;">{{ total_alerts }}</div>
-    </div>
-    <div class="stat-card-icon" style="background:rgba(255,193,7,0.15);color:#ffc107;">
-      <i data-lucide="triangle-alert"></i>
-    </div>
-  </div>
-  <div class="stat-card glass-card">
-    <div class="stat-card-info">
-      <div class="stat-card-label">Failed Login Attempts</div>
-      <div class="stat-card-value" style="color:#00bbff;">{{ failed_login }}</div>
-    </div>
-    <div class="stat-card-icon" style="background:rgba(0,187,255,0.15);color:#00bbff;">
-      <i data-lucide="key-round"></i>
-    </div>
-  </div>
-  <div class="stat-card glass-card">
-    <div class="stat-card-info">
-      <div class="stat-card-label">Brute Force Attacks</div>
-      <div class="stat-card-value" style="color:#ff8800;">{{ brute_force }}</div>
-    </div>
-    <div class="stat-card-icon" style="background:var(--high-bg);color:var(--high);">
-      <i data-lucide="zap"></i>
-    </div>
-  </div>
-  <div class="stat-card glass-card">
-    <div class="stat-card-info">
-      <div class="stat-card-label">SQL Injection Attempts</div>
-      <div class="stat-card-value" style="color:var(--critical);">{{ sql_injection }}</div>
-    </div>
-    <div class="stat-card-icon" style="background:var(--critical-bg);color:var(--critical);">
-      <i data-lucide="bug"></i>
-    </div>
-  </div>
-  <div class="stat-card glass-card">
-    <div class="stat-card-info">
-      <div class="stat-card-label">XSS Attempts</div>
-      <div class="stat-card-value" style="color:#d946ef;">{{ xss }}</div>
-    </div>
-    <div class="stat-card-icon" style="background:rgba(217,70,239,0.15);color:#d946ef;">
-      <i data-lucide="activity"></i>
-    </div>
-  </div>
-  <div class="stat-card glass-card">
-    <div class="stat-card-info">
-      <div class="stat-card-label">Critical Threats</div>
-      <div class="stat-card-value" style="color:var(--critical);">{{ critical }}</div>
-    </div>
-    <div class="stat-card-icon" style="background:var(--critical-bg);color:var(--critical);">
-      <i data-lucide="flame"></i>
-    </div>
-  </div>
-  <div class="stat-card glass-card">
-    <div class="stat-card-info">
-      <div class="stat-card-label">High Risk IPs</div>
-      <div class="stat-card-value" style="color:var(--accent);">{{ high_risk_ips }}</div>
-    </div>
-    <div class="stat-card-icon" style="background:var(--accent-dim);color:var(--accent);">
-      <i data-lucide="earth"></i>
-    </div>
-  </div>
-</div>
 
-<div class="charts-grid">
-  <div class="chart-card glass-card">
-    <div class="chart-card-header">
-      <div>
-        <div class="chart-card-title">Attack Timeline</div>
-        <div class="chart-card-subtitle">Attacks detected per hour (last 24h)</div>
+  <div class="charts-grid">
+    <div class="chart-card glass-card">
+      <div class="chart-card-header">
+        <div>
+          <div class="chart-card-title">Attack Timeline</div>
+          <div class="chart-card-subtitle">Attacks detected per hour (last 24h)</div>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas id="attackTimelineChart"></canvas>
       </div>
     </div>
-    <div class="chart-container">
-      <canvas id="attackTimelineChart"></canvas>
-    </div>
-  </div>
-  <div class="chart-card glass-card">
-    <div class="chart-card-header">
-      <div>
-        <div class="chart-card-title">Attack Types Distribution</div>
+    <div class="chart-card glass-card">
+      <div class="chart-card-header">
+        <div>
+          <div class="chart-card-title">Attack Types Distribution</div>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas id="attackTypesChart"></canvas>
       </div>
     </div>
-    <div class="chart-container">
-      <canvas id="attackTypesChart"></canvas>
-    </div>
-  </div>
-  <div class="chart-card glass-card">
-    <div class="chart-card-header">
-      <div>
-        <div class="chart-card-title">Top Attacking IPs</div>
-        <div class="chart-card-subtitle">Most active source addresses</div>
+    <div class="chart-card glass-card">
+      <div class="chart-card-header">
+        <div>
+          <div class="chart-card-title">Top Attacking IPs</div>
+          <div class="chart-card-subtitle">Most active source addresses</div>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas id="topIpsChart"></canvas>
       </div>
     </div>
-    <div class="chart-container">
-      <canvas id="topIpsChart"></canvas>
-    </div>
-  </div>
-  <div class="chart-card glass-card">
-    <div class="chart-card-header">
-      <div>
-        <div class="chart-card-title">Severity Distribution</div>
+    <div class="chart-card glass-card">
+      <div class="chart-card-header">
+        <div>
+          <div class="chart-card-title">Severity Distribution</div>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas id="severityChart"></canvas>
       </div>
     </div>
-    <div class="chart-container">
-      <canvas id="severityChart"></canvas>
-    </div>
   </div>
-</div>
 
-<div class="alert-feed-card glass-card">
-  <div class="alert-feed-header">
-    <div class="alert-feed-title">Live Alert Feed</div>
-    <span class="alert-feed-status">Auto-updating</span>
-  </div>
-  {% if recent_alerts %}
-  <div class="alert-feed-list">
-    {% for alert in recent_alerts %}
-    <div class="alert-feed-item">
-      <span class="severity-badge {{ alert.severity|lower }}">{{ alert.severity }}</span>
-      <span style="font-weight:500;">{{ alert.attack_type }}</span>
-      <span class="alert-desc">from</span>
-      <span class="alert-ip">{{ alert.source_ip or '—' }}</span>
-      <span class="alert-time">{{ alert.detected_at.strftime('%Y-%m-%d %H:%M') if alert.detected_at else '—' }}</span>
+  <div class="alert-feed-card glass-card">
+    <div class="alert-feed-header">
+      <div class="alert-feed-title">Live Alert Feed</div>
+      <span class="alert-feed-status">Auto-updating</span>
     </div>
-    {% endfor %}
+    {% if recent_alerts %}
+    <div class="alert-feed-list">
+      {% for alert in recent_alerts %}
+      <div class="alert-feed-item">
+        <span class="severity-badge {{ alert.severity|lower }}">{{ alert.severity }}</span>
+        <span style="font-weight:500;">{{ alert.attack_type }}</span>
+        <span class="alert-desc">from</span>
+        <span class="alert-ip">{{ alert.source_ip or '—' }}</span>
+        <span class="alert-time">{{ alert.detected_at.strftime('%Y-%m-%d %H:%M') if alert.detected_at else '—' }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+      <i data-lucide="inbox"></i>
+      <div class="empty-state-title">No Alerts</div>
+      <div class="empty-state-desc">Upload logs to start threat detection.</div>
+    </div>
+    {% endif %}
   </div>
-  {% else %}
-  <div class="empty-state">
-    <i data-lucide="inbox"></i>
-    <div class="empty-state-title">No Alerts</div>
-    <div class="empty-state-desc">Upload logs to start threat detection.</div>
-  </div>
-  {% endif %}
 </div>
 {% endblock %}
 
 {% block extra_scripts %}
 <script>
 const chartColors = {
-  critical: '#ff3355',
-  high: '#ff8800',
-  medium: '#ffc107',
-  low: '#6c757d',
-  accent: '#00ff88',
+  critical: 'oklch(65% .25 22)',
+  high: 'oklch(82% .19 75)',
+  medium: 'oklch(82% .24 95)',
+  low: 'oklch(55% .03 250)',
+  primary: 'oklch(72% .19 230)',
   grid: 'rgba(255,255,255,0.04)',
   text: '#8888aa',
 };
@@ -185,7 +187,7 @@ async function loadCharts() {
           labels: labels,
           datasets: [{
             data: values,
-            backgroundColor: ['#ff3355','#ff8800','#ffc107','#00bbff','var(--accent)','#d946ef','#6c757d'],
+            backgroundColor: [chartColors.critical, chartColors.high, chartColors.medium, chartColors.primary, 'oklch(78% .22 155)', 'oklch(70% .22 300)', chartColors.low],
             borderWidth: 0,
           }],
         },
@@ -212,8 +214,8 @@ async function loadCharts() {
         datasets: [{
           label: 'Alerts',
           data: [statsData.critical, statsData.high, statsData.medium, statsData.low],
-          backgroundColor: ['rgba(255,51,85,0.6)', 'rgba(255,136,0,0.6)', 'rgba(255,193,7,0.6)', 'rgba(108,117,125,0.6)'],
-          borderColor: ['#ff3355', '#ff8800', '#ffc107', '#6c757d'],
+            backgroundColor: ['oklch(65% .25 22/.6)', 'oklch(82% .19 75/.6)', 'oklch(82% .24 95/.6)', 'oklch(55% .03 250/.6)'],
+            borderColor: [chartColors.critical, chartColors.high, chartColors.medium, chartColors.low],
           borderWidth: 1,
           borderRadius: 4,
         }],
@@ -239,12 +241,12 @@ async function loadCharts() {
         datasets: [{
           label: 'Attacks',
           data: timelineData.data,
-          borderColor: '#00ff88',
-          backgroundColor: 'rgba(0,255,136,0.05)',
+          borderColor: chartColors.primary,
+          backgroundColor: 'oklch(72% .19 230/.05)',
           fill: true,
           tension: 0.4,
           pointRadius: 3,
-          pointBackgroundColor: '#00ff88',
+          pointBackgroundColor: chartColors.primary,
         }],
       },
       options: {
@@ -268,7 +270,7 @@ async function loadCharts() {
         datasets: [{
           label: 'Alerts',
           data: topIpsData.data.length ? topIpsData.data : [0],
-          backgroundColor: 'rgba(0,255,136,0.4)',
+          backgroundColor: 'oklch(72% .19 230/.4)',
           borderRadius: 4,
         }],
       },

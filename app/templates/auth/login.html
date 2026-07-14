@@ -2,6 +2,8 @@
 {% block title %}Sign In — CyberShield AI{% endblock %}
 {% block content %}
 <div class="auth-page">
+  <div class="auth-glow-orb"></div>
+  <canvas id="auth-particles"></canvas>
   <div class="auth-card glass-card">
     <div class="auth-brand">
       <div class="auth-brand-icon"><i data-lucide="shield-check"></i></div>
@@ -12,7 +14,7 @@
     <form method="POST" action="">
       {{ form.hidden_tag() }}
       <div class="form-group">
-        {{ form.username.label(class="form-label") }}
+        <label class="form-label" for="email">Email</label>
         {{ form.username(class="form-input", id="email", placeholder="you@example.com") }}
         {% for error in form.username.errors %}<div class="form-error">{{ error }}</div>{% endfor %}
       </div>
@@ -27,7 +29,7 @@
         </label>
         <a href="#">Forgot password?</a>
       </div>
-      {{ form.submit(class="btn btn-primary btn-lg", style="width:100%;") }}
+      {{ form.submit(class="btn btn-primary btn-lg", style="width:100%;", value="Sign in to SOC") }}
     </form>
 
     <div class="auth-footer">
@@ -42,17 +44,18 @@
       <div class="demo-roles-grid">
         <div class="demo-role-card" onclick="fillLogin('admin', 'admin123')">
           <div class="demo-role-name"><i data-lucide="shield" style="width:14px;height:14px;"></i> Admin</div>
-          <div class="demo-role-email">admin</div>
+          <div class="demo-role-email">admin@cybershield.io</div>
         </div>
         <div class="demo-role-card" onclick="fillLogin('analyst', 'analyst123')">
           <div class="demo-role-name"><i data-lucide="user" style="width:14px;height:14px;"></i> Security Analyst</div>
-          <div class="demo-role-email">analyst</div>
+          <div class="demo-role-email">analyst@cybershield.io</div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<script src="{{ url_for('static', filename='js/auth-bg.js') }}"></script>
 <script>
 function fillLogin(username, password) {
   document.getElementById('email').value = username;
