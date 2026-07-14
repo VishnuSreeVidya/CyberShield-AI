@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500">
+  <defs>
+    <linearGradient id="detBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e27"/>
+      <stop offset="100%" style="stop-color:#0d1117"/>
+    </linearGradient>
+    <linearGradient id="glowGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00ff88;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#00ff88;stop-opacity:0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="500" fill="url(#detBg)"/>
+
+  <!-- Title -->
+  <text x="600" y="40" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="600" fill="white" text-anchor="middle">Threat Detection Engine - 7 Detection Rules</text>
+  <rect x="450" y="50" width="300" height="2" fill="url(#glowGreen)" rx="1"/>
+
+  <!-- Detection Rule Cards -->
+  <!-- Row 1 -->
+  <g transform="translate(40, 80)">
+    <rect width="165" height="180" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <circle cx="82" cy="45" r="22" fill="rgba(255,68,68,0.12)" stroke="#ff4444" stroke-width="1"/>
+    <text x="82" y="51" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#ff4444" text-anchor="middle">&#x1F512;</text>
+    <text x="82" y="85" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle">Failed Login</text>
+    <text x="82" y="105" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">Regex pattern</text>
+    <text x="82" y="120" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">matching</text>
+    <rect x="30" y="140" width="105" height="24" rx="12" fill="rgba(255,68,68,0.12)"/>
+    <text x="82" y="156" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ff4444" text-anchor="middle">Critical</text>
+  </g>
+
+  <g transform="translate(220, 80)">
+    <rect width="165" height="180" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <circle cx="82" cy="45" r="22" fill="rgba(255,170,0,0.12)" stroke="#ffaa00" stroke-width="1"/>
+    <text x="82" y="51" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#ffaa00" text-anchor="middle">&#x26A0;</text>
+    <text x="82" y="85" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle">Brute Force</text>
+    <text x="82" y="105" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">5+ failed logins</text>
+    <text x="82" y="120" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">from same IP</text>
+    <rect x="30" y="140" width="105" height="24" rx="12" fill="rgba(255,170,0,0.12)"/>
+    <text x="82" y="156" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ffaa00" text-anchor="middle">High</text>
+  </g>
+
+  <g transform="translate(400, 80)">
+    <rect width="165" height="180" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <circle cx="82" cy="45" r="22" fill="rgba(170,0,255,0.12)" stroke="#aa00ff" stroke-width="1"/>
+    <text x="82" y="51" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#aa00ff" text-anchor="middle">&#x1F4C9;</text>
+    <text x="82" y="85" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle">SQL Injection</text>
+    <text x="82" y="105" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">UNION SELECT,</text>
+    <text x="82" y="120" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">DROP TABLE</text>
+    <rect x="30" y="140" width="105" height="24" rx="12" fill="rgba(170,0,255,0.12)"/>
+    <text x="82" y="156" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#aa00ff" text-anchor="middle">Critical</text>
+  </g>
+
+  <g transform="translate(580, 80)">
+    <rect width="165" height="180" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <circle cx="82" cy="45" r="22" fill="rgba(255,68,68,0.12)" stroke="#ff4444" stroke-width="1"/>
+    <text x="82" y="51" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#ff4444" text-anchor="middle">&#x1F310;</text>
+    <text x="82" y="85" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle">XSS Attack</text>
+    <text x="82" y="105" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">Script tags,</text>
+    <text x="82" y="120" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">event handlers</text>
+    <rect x="30" y="140" width="105" height="24" rx="12" fill="rgba(255,68,68,0.12)"/>
+    <text x="82" y="156" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ff4444" text-anchor="middle">Critical</text>
+  </g>
+
+  <!-- Row 2 -->
+  <g transform="translate(130, 290)">
+    <rect width="165" height="180" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <circle cx="82" cy="45" r="22" fill="rgba(255,170,0,0.12)" stroke="#ffaa00" stroke-width="1"/>
+    <text x="82" y="51" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#ffaa00" text-anchor="middle">&#x1F4C1;</text>
+    <text x="82" y="85" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle">Dir. Traversal</text>
+    <text x="82" y="105" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">../, %2e%2e</text>
+    <text x="82" y="120" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">encoded variants</text>
+    <rect x="30" y="140" width="105" height="24" rx="12" fill="rgba(255,170,0,0.12)"/>
+    <text x="82" y="156" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ffaa00" text-anchor="middle">High</text>
+  </g>
+
+  <g transform="translate(310, 290)">
+    <rect width="165" height="180" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <circle cx="82" cy="45" r="22" fill="rgba(0,170,255,0.12)" stroke="#00aaff" stroke-width="1"/>
+    <text x="82" y="51" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#00aaff" text-anchor="middle">&#x1F310;</text>
+    <text x="82" y="85" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle">Port Scanning</text>
+    <text x="82" y="105" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">15+ unique</text>
+    <text x="82" y="120" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">endpoints from IP</text>
+    <rect x="30" y="140" width="105" height="24" rx="12" fill="rgba(0,170,255,0.12)"/>
+    <text x="82" y="156" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#00aaff" text-anchor="middle">Medium</text>
+  </g>
+
+  <g transform="translate(490, 290)">
+    <rect width="165" height="180" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <circle cx="82" cy="45" r="22" fill="rgba(255,68,68,0.12)" stroke="#ff4444" stroke-width="1"/>
+    <text x="82" y="51" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#ff4444" text-anchor="middle">&#x26A1;</text>
+    <text x="82" y="85" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle">DoS Attack</text>
+    <text x="82" y="105" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">100+ requests</text>
+    <text x="82" y="120" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">from same IP</text>
+    <rect x="30" y="140" width="105" height="24" rx="12" fill="rgba(255,68,68,0.12)"/>
+    <text x="82" y="156" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ff4444" text-anchor="middle">Critical</text>
+  </g>
+
+  <!-- Flow arrow -->
+  <g transform="translate(680, 300)" opacity="0.4">
+    <text x="82" y="85" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0" text-anchor="middle">Log Entry</text>
+    <text x="82" y="105" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0" text-anchor="middle">Ingested</text>
+    <text x="82" y="130" font-family="'Segoe UI', Arial, sans-serif" font-size="16" fill="#00ff88" text-anchor="middle">&#x25BC;</text>
+    <text x="82" y="155" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0" text-anchor="middle">7 Rules</text>
+    <text x="82" y="170" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0" text-anchor="middle">Applied</text>
+    <text x="82" y="195" font-family="'Segoe UI', Arial, sans-serif" font-size="16" fill="#00ff88" text-anchor="middle">&#x25BC;</text>
+    <text x="82" y="220" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0" text-anchor="middle">Alert</text>
+    <text x="82" y="235" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0" text-anchor="middle">Generated</text>
+  </g>
+</svg>

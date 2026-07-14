@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500">
+  <defs>
+    <linearGradient id="archBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e27"/>
+      <stop offset="100%" style="stop-color:#0d1117"/>
+    </linearGradient>
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00ff88;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#00ff88;stop-opacity:0.1"/>
+    </linearGradient>
+    <filter id="boxGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="500" fill="url(#archBg)"/>
+
+  <text x="600" y="35" font-family="'Segoe UI', Arial, sans-serif" font-size="18" font-weight="600" fill="white" text-anchor="middle">System Architecture</text>
+  <rect x="475" y="45" width="250" height="2" fill="url(#lineGrad)" rx="1"/>
+
+  <!-- User Layer -->
+  <g transform="translate(40, 70)">
+    <rect width="170" height="70" rx="10" fill="rgba(0,170,255,0.08)" stroke="rgba(0,170,255,0.3)" stroke-width="1" filter="url(#boxGlow)"/>
+    <text x="85" y="25" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#00aaff" text-anchor="middle">USER LAYER</text>
+    <text x="85" y="45" font-family="'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="white" text-anchor="middle">Browser</text>
+    <text x="85" y="60" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">HTML/CSS/JS</text>
+  </g>
+
+  <!-- Arrow -->
+  <g transform="translate(210, 95)" opacity="0.6">
+    <line x1="0" y1="12" x2="50" y2="12" stroke="#00ff88" stroke-width="1.5"/>
+    <polygon points="50,6 62,12 50,18" fill="#00ff88"/>
+    <text x="30" y="30" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="middle">HTTP</text>
+  </g>
+
+  <!-- Flask App -->
+  <g transform="translate(280, 60)">
+    <rect width="200" height="90" rx="10" fill="rgba(0,255,136,0.08)" stroke="rgba(0,255,136,0.3)" stroke-width="1" filter="url(#boxGlow)"/>
+    <text x="100" y="22" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#00ff88" text-anchor="middle">FLASK APP</text>
+    <text x="100" y="42" font-family="'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="white" text-anchor="middle">Python 3.13</text>
+    <text x="100" y="58" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">Flask + SQLAlchemy</text>
+    <text x="100" y="72" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">Flask-Login + WTF</text>
+  </g>
+
+  <!-- Arrows to sub-components -->
+  <g opacity="0.5">
+    <line x1="330" y1="150" x2="150" y2="200" stroke="#00ff88" stroke-width="1" stroke-dasharray="4"/>
+    <line x1="380" y1="150" x2="330" y2="200" stroke="#00ff88" stroke-width="1" stroke-dasharray="4"/>
+    <line x1="430" y1="150" x2="510" y2="200" stroke="#00ff88" stroke-width="1" stroke-dasharray="4"/>
+    <line x1="470" y1="150" x2="690" y2="200" stroke="#00ff88" stroke-width="1" stroke-dasharray="4"/>
+  </g>
+
+  <!-- Blueprint: Auth -->
+  <g transform="translate(60, 210)">
+    <rect width="150" height="80" rx="8" fill="rgba(255,170,0,0.06)" stroke="rgba(255,170,0,0.25)" stroke-width="0.8"/>
+    <text x="75" y="22" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ffaa00" text-anchor="middle">BLUEPRINT</text>
+    <text x="75" y="40" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle">Auth</text>
+    <text x="75" y="56" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="middle">Login / Register</text>
+    <text x="75" y="68" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="middle">Password Hashing</text>
+  </g>
+
+  <!-- Blueprint: Dashboard -->
+  <g transform="translate(240, 210)">
+    <rect width="150" height="80" rx="8" fill="rgba(0,255,136,0.06)" stroke="rgba(0,255,136,0.25)" stroke-width="0.8"/>
+    <text x="75" y="22" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#00ff88" text-anchor="middle">BLUEPRINT</text>
+    <text x="75" y="40" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle">Dashboard</text>
+    <text x="75" y="56" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="middle">SOC Overview</text>
+    <text x="75" y="68" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="middle">Charts + Live Feed</text>
+  </g>
+
+  <!-- Detection Engine -->
+  <g transform="translate(420, 210)">
+    <rect width="150" height="80" rx="8" fill="rgba(255,68,68,0.06)" stroke="rgba(255,68,68,0.25)" stroke-width="0.8"/>
+    <text x="75" y="22" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ff4444" text-anchor="middle">ENGINE</text>
+    <text x="75" y="40" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle">Detection</text>
+    <text x="75" y="56" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="middle">7 Threat Rules</text>
+    <text x="75" y="68" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="middle">Regex + Threshold</text>
+  </g>
+
+  <!-- Blueprint: Logs -->
+  <g transform="translate(600, 210)">
+    <rect width="150" height="80" rx="8" fill="rgba(170,0,255,0.06)" stroke="rgba(170,0,255,0.25)" stroke-width="0.8"/>
+    <text x="75" y="22" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#aa00ff" text-anchor="middle">BLUEPRINT</text>
+    <text x="75" y="40" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle">Logs</text>
+    <text x="75" y="56" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="middle">Upload + Parse</text>
+    <text x="75" y="68" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="middle">5 Format Parsers</text>
+  </g>
+
+  <!-- Arrows down to data layer -->
+  <g opacity="0.5">
+    <line x1="135" y1="290" x2="135" y2="340" stroke="#ffaa00" stroke-width="1" stroke-dasharray="4"/>
+    <line x1="315" y1="290" x2="315" y2="340" stroke="#00ff88" stroke-width="1" stroke-dasharray="4"/>
+    <line x1="495" y1="290" x2="495" y2="340" stroke="#ff4444" stroke-width="1" stroke-dasharray="4"/>
+    <line x1="675" y1="290" x2="675" y2="340" stroke="#aa00ff" stroke-width="1" stroke-dasharray="4"/>
+  </g>
+
+  <!-- Database Layer -->
+  <g transform="translate(200, 350)">
+    <rect width="200" height="80" rx="10" fill="rgba(0,170,255,0.08)" stroke="rgba(0,170,255,0.3)" stroke-width="1"/>
+    <text x="100" y="22" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#00aaff" text-anchor="middle">DATA LAYER</text>
+    <text x="100" y="42" font-family="'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="white" text-anchor="middle">PostgreSQL 18</text>
+    <text x="100" y="58" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">Users, Logs, Alerts</text>
+    <text x="100" y="72" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">Reports Tables</text>
+  </g>
+
+  <!-- Export Layer -->
+  <g transform="translate(500, 350)">
+    <rect width="200" height="80" rx="10" fill="rgba(255,170,0,0.08)" stroke="rgba(255,170,0,0.3)" stroke-width="1"/>
+    <text x="100" y="22" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#ffaa00" text-anchor="middle">EXPORT LAYER</text>
+    <text x="100" y="42" font-family="'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="white" text-anchor="middle">Reports</text>
+    <text x="100" y="58" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">PDF + CSV + JSON</text>
+    <text x="100" y="72" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">Matplotlib Charts</text>
+  </g>
+
+  <!-- Docker -->
+  <g transform="translate(780, 70)">
+    <rect width="380" height="180" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <text x="190" y="25" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0" text-anchor="middle">INFRASTRUCTURE</text>
+
+    <g transform="translate(20, 40)">
+      <rect width="165" height="55" rx="8" fill="rgba(0,170,255,0.06)" stroke="rgba(0,170,255,0.2)" stroke-width="0.5"/>
+      <text x="82" y="22" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#00aaff" text-anchor="middle">Docker Compose</text>
+      <text x="82" y="40" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">Multi-Service Orchestration</text>
+    </g>
+
+    <g transform="translate(200, 40)">
+      <rect width="160" height="55" rx="8" fill="rgba(0,255,136,0.06)" stroke="rgba(0,255,136,0.2)" stroke-width="0.5"/>
+      <text x="80" y="22" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#00ff88" text-anchor="middle">Gunicorn</text>
+      <text x="80" y="40" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">4 Workers, 120s Timeout</text>
+    </g>
+
+    <g transform="translate(20, 105)">
+      <rect width="165" height="55" rx="8" fill="rgba(170,0,255,0.06)" stroke="rgba(170,0,255,0.2)" stroke-width="0.5"/>
+      <text x="82" y="22" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#aa00ff" text-anchor="middle">Python 3.13-slim</text>
+      <text x="82" y="40" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">Optimized Image</text>
+    </g>
+
+    <g transform="translate(200, 105)">
+      <rect width="160" height="55" rx="8" fill="rgba(255,170,0,0.06)" stroke="rgba(255,170,0,0.2)" stroke-width="0.5"/>
+      <text x="80" y="22" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#ffaa00" text-anchor="middle">Health Check</text>
+      <text x="80" y="40" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">/health Endpoint</text>
+    </g>
+  </g>
+
+  <!-- Bottom label -->
+  <text x="600" y="490" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0" text-anchor="middle" opacity="0.5">CyberShield AI - Modular Flask Architecture with Blueprint Pattern</text>
+</svg>

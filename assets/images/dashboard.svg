@@ -1,0 +1,284 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750">
+  <defs>
+    <linearGradient id="dashBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e27;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#0d1117;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.08);stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.02);stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="greenLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#00cc6a;stop-opacity:0"/>
+    </linearGradient>
+    <filter id="cardGlow">
+      <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="750" fill="url(#dashBg)"/>
+
+  <!-- Sidebar -->
+  <rect x="0" y="0" width="240" height="750" fill="rgba(10,14,39,0.95)" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+  <line x1="240" y1="0" x2="240" y2="750" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+
+  <!-- Sidebar Logo -->
+  <g transform="translate(20, 20)">
+    <path d="M20 5 L35 12 L35 28 C35 38 28 45 20 48 C12 45 5 38 5 28 L5 12 Z"
+          fill="none" stroke="#00ff88" stroke-width="1.5"/>
+    <path d="M14 22 L18 26 L27 16" fill="none" stroke="#00ff88" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+  <text x="65" y="35" font-family="'Segoe UI', Arial, sans-serif" font-size="16" font-weight="700" fill="white">CyberShield</text>
+  <text x="65" y="52" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#00ff88">SOC DASHBOARD</text>
+
+  <!-- Sidebar Menu Items -->
+  <g transform="translate(20, 85)">
+    <rect x="0" y="0" width="200" height="36" rx="8" fill="rgba(0,255,136,0.1)" stroke="rgba(0,255,136,0.2)" stroke-width="0.5"/>
+    <text x="40" y="23" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#00ff88">Dashboard</text>
+    <rect x="10" y="12" width="16" height="12" rx="2" fill="none" stroke="#00ff88" stroke-width="1.2"/>
+
+    <text x="40" y="63" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#8892b0">Log Explorer</text>
+    <rect x="10" y="52" width="16" height="12" rx="2" fill="none" stroke="#8892b0" stroke-width="1.2"/>
+
+    <text x="40" y="93" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#8892b0">Alerts</text>
+    <circle cx="18" cy="58" r="8" fill="none" stroke="#8892b0" stroke-width="1.2"/>
+
+    <text x="40" y="123" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#8892b0">Reports</text>
+    <rect x="10" y="112" width="16" height="12" rx="2" fill="none" stroke="#8892b0" stroke-width="1.2"/>
+
+    <text x="40" y="153" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#8892b0">Settings</text>
+    <circle cx="18" cy="148" r="8" fill="none" stroke="#8892b0" stroke-width="1.2"/>
+  </g>
+
+  <!-- Main Content Area -->
+  <g transform="translate(260, 0)">
+
+    <!-- Header -->
+    <rect x="0" y="0" width="940" height="60" fill="rgba(255,255,255,0.02)"/>
+    <text x="20" y="38" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="600" fill="white">Security Operations Center</text>
+    <text x="750" y="30" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0">Last updated: 2 mins ago</text>
+    <circle cx="880" cy="30" r="14" fill="rgba(0,255,136,0.15)"/>
+    <text x="880" y="35" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#00ff88" text-anchor="middle">VS</text>
+
+    <!-- Stat Cards Row -->
+    <!-- Card 1: Total Logs -->
+    <g transform="translate(15, 80)">
+      <rect width="205" height="90" rx="12" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5" filter="url(#cardGlow)"/>
+      <rect x="0" y="0" width="205" height="3" rx="1.5" fill="#00ff88" opacity="0.6"/>
+      <text x="15" y="30" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0">Total Logs</text>
+      <text x="15" y="58" font-family="'Segoe UI', Arial, sans-serif" font-size="28" font-weight="700" fill="white">12,847</text>
+      <text x="15" y="78" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#00ff88">+2.4% today</text>
+    </g>
+
+    <!-- Card 2: Total Alerts -->
+    <g transform="translate(235, 80)">
+      <rect width="205" height="90" rx="12" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+      <rect x="0" y="0" width="205" height="3" rx="1.5" fill="#ff4444" opacity="0.6"/>
+      <text x="15" y="30" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0">Total Alerts</text>
+      <text x="15" y="58" font-family="'Segoe UI', Arial, sans-serif" font-size="28" font-weight="700" fill="#ff4444">342</text>
+      <text x="15" y="78" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ff4444">+12 today</text>
+    </g>
+
+    <!-- Card 3: Failed Logins -->
+    <g transform="translate(455, 80)">
+      <rect width="205" height="90" rx="12" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+      <rect x="0" y="0" width="205" height="3" rx="1.5" fill="#ffaa00" opacity="0.6"/>
+      <text x="15" y="30" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0">Failed Logins</text>
+      <text x="15" y="58" font-family="'Segoe UI', Arial, sans-serif" font-size="28" font-weight="700" fill="#ffaa00">89</text>
+      <text x="15" y="78" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ffaa00">+5 today</text>
+    </g>
+
+    <!-- Card 4: SQL Injection -->
+    <g transform="translate(675, 80)">
+      <rect width="205" height="90" rx="12" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+      <rect x="0" y="0" width="205" height="3" rx="1.5" fill="#aa00ff" opacity="0.6"/>
+      <text x="15" y="30" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0">SQL Injection</text>
+      <text x="15" y="58" font-family="'Segoe UI', Arial, sans-serif" font-size="28" font-weight="700" fill="#aa00ff">23</text>
+      <text x="15" y="78" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#aa00ff">+3 today</text>
+    </g>
+
+    <!-- Chart Area 1: Attack Timeline (Line Chart) -->
+    <g transform="translate(15, 190)">
+      <rect width="425" height="230" rx="12" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+      <text x="20" y="30" font-family="'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="white">Attack Timeline</text>
+      <text x="350" y="30" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0">Last 24 hours</text>
+
+      <!-- Y-axis labels -->
+      <text x="30" y="60" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="end">50</text>
+      <text x="30" y="100" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="end">35</text>
+      <text x="30" y="140" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="end">20</text>
+      <text x="30" y="180" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="end">5</text>
+
+      <!-- Grid lines -->
+      <line x1="35" y1="55" x2="410" y2="55" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+      <line x1="35" y1="95" x2="410" y2="95" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+      <line x1="35" y1="135" x2="410" y2="135" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+      <line x1="35" y1="175" x2="410" y2="175" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+
+      <!-- Line chart path -->
+      <polyline points="45,150 75,130 105,140 135,110 165,120 195,85 225,95 255,60 285,75 315,50 345,65 375,45 405,55"
+                fill="none" stroke="#00ff88" stroke-width="2" opacity="0.9"/>
+      <!-- Area fill -->
+      <polyline points="45,150 75,130 105,140 135,110 165,120 195,85 225,95 255,60 285,75 315,50 345,65 375,45 405,55 405,200 45,200"
+                fill="url(#greenLine)" opacity="0.1"/>
+      <!-- Data points -->
+      <circle cx="45" cy="150" r="3" fill="#00ff88"/>
+      <circle cx="135" cy="110" r="3" fill="#00ff88"/>
+      <circle cx="255" cy="60" r="3" fill="#00ff88"/>
+      <circle cx="315" cy="50" r="3" fill="#00ff88"/>
+      <circle cx="375" cy="45" r="3" fill="#00ff88"/>
+
+      <!-- X-axis labels -->
+      <text x="45" y="215" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="middle">00:00</text>
+      <text x="135" y="215" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="middle">06:00</text>
+      <text x="225" y="215" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="middle">12:00</text>
+      <text x="315" y="215" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="middle">18:00</text>
+      <text x="405" y="215" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="middle">Now</text>
+    </g>
+
+    <!-- Chart Area 2: Attack Types (Doughnut Chart) -->
+    <g transform="translate(455, 190)">
+      <rect width="425" height="230" rx="12" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+      <text x="20" y="30" font-family="'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="white">Attack Distribution</text>
+
+      <!-- Doughnut chart -->
+      <g transform="translate(130, 130)">
+        <!-- Background circle -->
+        <circle cx="0" cy="0" r="70" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="24"/>
+        <!-- SQL Injection - 35% -->
+        <circle cx="0" cy="0" r="70" fill="none" stroke="#aa00ff" stroke-width="24"
+                stroke-dasharray="154 286" stroke-dashoffset="0" transform="rotate(-90)" opacity="0.8"/>
+        <!-- XSS - 25% -->
+        <circle cx="0" cy="0" r="70" fill="none" stroke="#ff4444" stroke-width="24"
+                stroke-dasharray="110 330" stroke-dashoffset="-154" transform="rotate(-90)" opacity="0.8"/>
+        <!-- Brute Force - 20% -->
+        <circle cx="0" cy="0" r="70" fill="none" stroke="#ffaa00" stroke-width="24"
+                stroke-dasharray="88 352" stroke-dashoffset="-264" transform="rotate(-90)" opacity="0.8"/>
+        <!-- Directory Traversal - 12% -->
+        <circle cx="0" cy="0" r="70" fill="none" stroke="#00aaff" stroke-width="24"
+                stroke-dasharray="53 387" stroke-dashoffset="-352" transform="rotate(-90)" opacity="0.8"/>
+        <!-- Other - 8% -->
+        <circle cx="0" cy="0" r="70" fill="none" stroke="#8892b0" stroke-width="24"
+                stroke-dasharray="35 405" stroke-dashoffset="-405" transform="rotate(-90)" opacity="0.8"/>
+        <!-- Center text -->
+        <text x="0" y="-5" font-family="'Segoe UI', Arial, sans-serif" font-size="22" font-weight="700" fill="white" text-anchor="middle">342</text>
+        <text x="0" y="12" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="middle">alerts</text>
+      </g>
+
+      <!-- Legend -->
+      <g transform="translate(290, 70)">
+        <rect x="0" y="0" width="10" height="10" rx="2" fill="#aa00ff"/>
+        <text x="16" y="9" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ccd6f6">SQL Injection</text>
+        <text x="115" y="9" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0">35%</text>
+
+        <rect x="0" y="22" width="10" height="10" rx="2" fill="#ff4444"/>
+        <text x="16" y="31" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ccd6f6">XSS</text>
+        <text x="115" y="31" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0">25%</text>
+
+        <rect x="0" y="44" width="10" height="10" rx="2" fill="#ffaa00"/>
+        <text x="16" y="53" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ccd6f6">Brute Force</text>
+        <text x="115" y="53" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0">20%</text>
+
+        <rect x="0" y="66" width="10" height="10" rx="2" fill="#00aaff"/>
+        <text x="16" y="75" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ccd6f6">Dir. Traversal</text>
+        <text x="115" y="75" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0">12%</text>
+
+        <rect x="0" y="88" width="10" height="10" rx="2" fill="#8892b0"/>
+        <text x="16" y="97" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ccd6f6">Other</text>
+        <text x="115" y="97" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0">8%</text>
+      </g>
+    </g>
+
+    <!-- Chart Area 3: Top Attacking IPs (Bar Chart) -->
+    <g transform="translate(15, 440)">
+      <rect width="425" height="230" rx="12" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+      <text x="20" y="30" font-family="'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="white">Top Attacking IPs</text>
+
+      <!-- Horizontal bars -->
+      <g transform="translate(20, 50)">
+        <!-- IP 1 -->
+        <text x="0" y="12" font-family="'JetBrains Mono', monospace" font-size="10" fill="#ccd6f6">192.168.1.15</text>
+        <rect x="120" y="2" width="250" height="16" rx="4" fill="#ff4444" opacity="0.7"/>
+        <text x="380" y="14" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ff4444">89</text>
+
+        <!-- IP 2 -->
+        <text x="0" y="37" font-family="'JetBrains Mono', monospace" font-size="10" fill="#ccd6f6">10.0.0.52</text>
+        <rect x="120" y="27" width="180" height="16" rx="4" fill="#ffaa00" opacity="0.7"/>
+        <text x="310" y="39" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ffaa00">64</text>
+
+        <!-- IP 3 -->
+        <text x="0" y="62" font-family="'JetBrains Mono', monospace" font-size="10" fill="#ccd6f6">172.16.0.88</text>
+        <rect x="120" y="52" width="130" height="16" rx="4" fill="#aa00ff" opacity="0.7"/>
+        <text x="260" y="64" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#aa00ff">47</text>
+
+        <!-- IP 4 -->
+        <text x="0" y="87" font-family="'JetBrains Mono', monospace" font-size="10" fill="#ccd6f6">203.0.113.4</text>
+        <rect x="120" y="77" width="90" height="16" rx="4" fill="#00aaff" opacity="0.7"/>
+        <text x="220" y="89" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#00aaff">32</text>
+
+        <!-- IP 5 -->
+        <text x="0" y="112" font-family="'JetBrains Mono', monospace" font-size="10" fill="#ccd6f6">198.51.100.7</text>
+        <rect x="120" y="102" width="60" height="16" rx="4" fill="#8892b0" opacity="0.7"/>
+        <text x="190" y="114" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0">21</text>
+      </g>
+    </g>
+
+    <!-- Chart Area 4: Severity Distribution (Vertical Bar Chart) -->
+    <g transform="translate(455, 440)">
+      <rect width="425" height="230" rx="12" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+      <text x="20" y="30" font-family="'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="white">Severity Distribution</text>
+
+      <!-- Y-axis -->
+      <line x1="60" y1="50" x2="60" y2="195" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+
+      <!-- Bars -->
+      <g transform="translate(80, 50)">
+        <!-- Critical -->
+        <rect x="0" y="120" width="55" height="25" rx="4" fill="#ff4444" opacity="0.8"/>
+        <text x="27" y="137" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle">45</text>
+        <text x="27" y="165" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="middle">Critical</text>
+
+        <!-- High -->
+        <rect x="75" y="80" width="55" height="65" rx="4" fill="#ffaa00" opacity="0.8"/>
+        <text x="102" y="118" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle">89</text>
+        <text x="102" y="165" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="middle">High</text>
+
+        <!-- Medium -->
+        <rect x="150" y="50" width="55" height="95" rx="4" fill="#ffdd00" opacity="0.8"/>
+        <text x="177" y="102" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle">134</text>
+        <text x="177" y="165" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="middle">Medium</text>
+
+        <!-- Low -->
+        <rect x="225" y="105" width="55" height="40" rx="4" fill="#00aaff" opacity="0.8"/>
+        <text x="252" y="130" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle">74</text>
+        <text x="252" y="165" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0" text-anchor="middle">Low</text>
+      </g>
+    </g>
+
+    <!-- Live Alert Feed (bottom right area) -->
+    <g transform="translate(15, 685)">
+      <rect width="865" height="55" rx="12" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+      <circle cx="30" cy="27" r="4" fill="#ff4444">
+        <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+      <text x="42" y="31" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" fill="white">LIVE FEED</text>
+
+      <g transform="translate(130, 12)">
+        <rect x="0" y="0" width="8" height="8" rx="4" fill="#ff4444"/>
+        <text x="14" y="8" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ccd6f6">SQL Injection from 192.168.1.15</text>
+        <text x="280" y="8" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0">2 min ago</text>
+      </g>
+      <g transform="translate(500, 12)">
+        <rect x="0" y="0" width="8" height="8" rx="4" fill="#ffaa00"/>
+        <text x="14" y="8" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ccd6f6">Brute Force from 10.0.0.52</text>
+        <text x="230" y="8" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8892b0">5 min ago</text>
+      </g>
+    </g>
+  </g>
+</svg>

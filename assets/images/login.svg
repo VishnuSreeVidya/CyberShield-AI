@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750">
+  <defs>
+    <linearGradient id="loginBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e27;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#0d1117;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="formGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.08);stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.02);stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="btnGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#00cc6a;stop-opacity:1"/>
+    </linearGradient>
+    <filter id="inputGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="750" fill="url(#loginBg)"/>
+
+  <!-- Animated particles -->
+  <g opacity="0.3">
+    <circle cx="100" cy="100" r="2" fill="#00ff88">
+      <animate attributeName="cx" values="100;120;100" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="100;80;100" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="300" cy="200" r="1.5" fill="#00aaff">
+      <animate attributeName="cx" values="300;280;300" dur="3.5s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="200;220;200" dur="4.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="500" cy="150" r="2.5" fill="#aa00ff">
+      <animate attributeName="cx" values="500;520;500" dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="150;130;150" dur="3.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="700" cy="300" r="1.8" fill="#00ff88">
+      <animate attributeName="cx" values="700;680;700" dur="4.2s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="300;320;300" dur="5.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="900" cy="120" r="2" fill="#00aaff">
+      <animate attributeName="cx" values="900;920;900" dur="3.8s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="120;100;120" dur="4.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1100" cy="400" r="1.5" fill="#aa00ff">
+      <animate attributeName="cx" values="1100;1080;1100" dur="4.5s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="400;420;400" dur="3.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="500" r="2" fill="#00ff88">
+      <animate attributeName="cx" values="200;220;200" dur="5.5s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="500;480;500" dur="4.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="800" cy="600" r="1.8" fill="#00aaff">
+      <animate attributeName="cx" values="800;780;800" dur="3.2s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="600;620;600" dur="5.8s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Left side - Branding -->
+  <g transform="translate(100, 150)">
+    <!-- Shield icon -->
+    <g filter="url(#inputGlow)">
+      <path d="M80 15 L145 45 L145 105 C145 150 115 180 80 200 C45 180 15 150 15 105 L15 45 Z"
+            fill="none" stroke="#00ff88" stroke-width="2.5" opacity="0.8"/>
+      <path d="M80 30 L135 55 L135 103 C135 142 110 168 80 185 C50 168 25 142 25 103 L25 55 Z"
+            fill="#00ff88" opacity="0.08"/>
+      <path d="M55 100 L72 117 L108 75" fill="none" stroke="#00ff88" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <text x="80" y="260" font-family="'Segoe UI', Arial, sans-serif" font-size="38" font-weight="700" fill="white" text-anchor="middle">CyberShield AI</text>
+    <text x="80" y="295" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#8892b0" text-anchor="middle" letter-spacing="3">SECURITY OPERATIONS CENTER</text>
+
+    <!-- Feature list -->
+    <g transform="translate(-30, 330)">
+      <circle cx="10" cy="0" r="4" fill="#00ff88" opacity="0.5"/>
+      <text x="22" y="4" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#ccd6f6">Real-time Threat Detection</text>
+
+      <circle cx="10" cy="30" r="4" fill="#00aaff" opacity="0.5"/>
+      <text x="22" y="34" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#ccd6f6">Advanced Log Analysis</text>
+
+      <circle cx="10" cy="60" r="4" fill="#aa00ff" opacity="0.5"/>
+      <text x="22" y="64" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#ccd6f6">Interactive SOC Dashboard</text>
+
+      <circle cx="10" cy="90" r="4" fill="#ff6b35" opacity="0.5"/>
+      <text x="22" y="94" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#ccd6f6">PDF / CSV / JSON Reports</text>
+    </g>
+  </g>
+
+  <!-- Login Form Card -->
+  <g transform="translate(650, 150)">
+    <rect width="420" height="450" rx="16" fill="url(#formGrad)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+
+    <!-- Form header -->
+    <text x="210" y="50" font-family="'Segoe UI', Arial, sans-serif" font-size="24" font-weight="600" fill="white" text-anchor="middle">Welcome Back</text>
+    <text x="210" y="75" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#8892b0" text-anchor="middle">Sign in to your account</text>
+
+    <!-- Username field -->
+    <g transform="translate(30, 100)">
+      <text x="0" y="0" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#8892b0">Username</text>
+      <rect x="0" y="12" width="360" height="44" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+      <!-- User icon -->
+      <circle cx="20" cy="34" r="6" fill="none" stroke="#8892b0" stroke-width="1.2"/>
+      <circle cx="20" cy="30" r="3" fill="none" stroke="#8892b0" stroke-width="1"/>
+      <text x="35" y="38" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#ccd6f6">admin</text>
+      <rect x="0" y="56" width="360" height="0" fill="none"/>
+    </g>
+
+    <!-- Password field -->
+    <g transform="translate(30, 175)">
+      <text x="0" y="0" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#8892b0">Password</text>
+      <rect x="0" y="12" width="360" height="44" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+      <!-- Lock icon -->
+      <rect x="14" y="28" width="12" height="10" rx="2" fill="none" stroke="#8892b0" stroke-width="1.2"/>
+      <path d="M17 28 L17 24 C17 21 19 19 20 19 C21 19 23 21 23 24 L23 28" fill="none" stroke="#8892b0" stroke-width="1.2"/>
+      <text x="35" y="38" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#ccd6f6">********</text>
+    </g>
+
+    <!-- Remember me & Forgot password -->
+    <g transform="translate(30, 245)">
+      <rect x="0" y="0" width="14" height="14" rx="3" fill="rgba(0,255,136,0.2)" stroke="#00ff88" stroke-width="1"/>
+      <path d="M3 7 L6 10 L11 4" fill="none" stroke="#00ff88" stroke-width="1.5" stroke-linecap="round"/>
+      <text x="22" y="11" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#8892b0">Remember me</text>
+      <text x="250" y="11" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#00ff88">Forgot password?</text>
+    </g>
+
+    <!-- Sign In Button -->
+    <g transform="translate(30, 280)">
+      <rect width="360" height="48" rx="10" fill="url(#btnGrad)" opacity="0.9"/>
+      <text x="180" y="30" font-family="'Segoe UI', Arial, sans-serif" font-size="15" font-weight="600" fill="#0a0e27" text-anchor="middle">Sign In</text>
+    </g>
+
+    <!-- Divider -->
+    <line x1="50" y1="355" x2="370" y2="355" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+    <text x="210" y="360" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0" text-anchor="middle">or continue with</text>
+
+    <!-- Demo Roles -->
+    <g transform="translate(30, 380)">
+      <rect width="170" height="38" rx="8" fill="rgba(0,170,255,0.1)" stroke="rgba(0,170,255,0.3)" stroke-width="0.5"/>
+      <text x="85" y="24" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#00aaff" text-anchor="middle">Admin Demo</text>
+
+      <rect x="190" width="170" height="38" rx="8" fill="rgba(170,0,255,0.1)" stroke="rgba(170,0,255,0.3)" stroke-width="0.5"/>
+      <text x="275" y="24" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#aa00ff" text-anchor="middle">Analyst Demo</text>
+    </g>
+
+    <!-- Register link -->
+    <text x="210" y="440" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#8892b0" text-anchor="middle">
+      Don't have an account? <tspan fill="#00ff88">Sign up</tspan>
+    </text>
+  </g>
+
+  <!-- Bottom accent -->
+  <rect x="0" y="745" width="1200" height="5" fill="url(#btnGrad)" opacity="0.4"/>
+</svg>
