@@ -5,8 +5,8 @@
   let w, h, particles = [], mouse = { x: -1000, y: -1000 };
 
   function resize() {
-    w = canvas.width = canvas.offsetWidth;
-    h = canvas.height = canvas.offsetHeight;
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
   }
   resize();
   window.addEventListener('resize', resize);
@@ -16,9 +16,9 @@
     mouse.y = e.clientY;
   });
 
-  const PARTICLE_COUNT = 60;
-  const CONNECT_DIST = 140;
-  const MOUSE_DIST = 180;
+  const PARTICLE_COUNT = 80;
+  const CONNECT_DIST = 150;
+  const MOUSE_DIST = 200;
 
   for (let i = 0; i < PARTICLE_COUNT; i++) {
     particles.push({
@@ -27,7 +27,7 @@
       vx: (Math.random() - 0.5) * 0.4,
       vy: (Math.random() - 0.5) * 0.4,
       r: Math.random() * 1.5 + 0.5,
-      opacity: Math.random() * 0.5 + 0.2,
+      opacity: Math.random() * 0.5 + 0.3,
     });
   }
 
@@ -57,9 +57,9 @@
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(p2.x, p2.y);
-          const alpha = (1 - dist / CONNECT_DIST) * 0.12;
+          const alpha = (1 - dist / CONNECT_DIST) * 0.25;
           ctx.strokeStyle = 'rgba(80, 140, 255, ' + alpha + ')';
-          ctx.lineWidth = 0.5;
+          ctx.lineWidth = 0.6;
           ctx.stroke();
         }
       }
@@ -71,9 +71,9 @@
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
         ctx.lineTo(mouse.x, mouse.y);
-        const alpha = (1 - distm / MOUSE_DIST) * 0.25;
+        const alpha = (1 - distm / MOUSE_DIST) * 0.35;
         ctx.strokeStyle = 'rgba(80, 140, 255, ' + alpha + ')';
-        ctx.lineWidth = 0.6;
+        ctx.lineWidth = 0.8;
         ctx.stroke();
       }
     }
