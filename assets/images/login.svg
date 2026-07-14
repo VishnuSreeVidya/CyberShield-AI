@@ -1,157 +1,153 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750">
   <defs>
-    <linearGradient id="loginBg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0a0e27;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#0d1117;stop-opacity:1"/>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f1729"/>
+      <stop offset="100%" style="stop-color:#0d1117"/>
     </linearGradient>
-    <linearGradient id="formGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:rgba(255,255,255,0.08);stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:rgba(255,255,255,0.02);stop-opacity:1"/>
-    </linearGradient>
-    <linearGradient id="btnGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#00cc6a;stop-opacity:1"/>
-    </linearGradient>
-    <filter id="inputGlow">
-      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="btnBg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b9eff"/>
+      <stop offset="100%" style="stop-color:#2d8ae0"/>
+    </linearGradient>
   </defs>
 
   <!-- Background -->
-  <rect width="1200" height="750" fill="url(#loginBg)"/>
+  <rect width="1200" height="750" fill="url(#bg)"/>
 
-  <!-- Animated particles -->
+  <!-- Grid pattern overlay (matches CSS: 60px grid, oklch 72% .19 230 /.08) -->
+  <g opacity="0.06" stroke="#3b9eff" stroke-width="0.5">
+    <line x1="0" y1="0" x2="0" y2="750"/><line x1="60" y1="0" x2="60" y2="750"/><line x1="120" y1="0" x2="120" y2="750"/>
+    <line x1="180" y1="0" x2="180" y2="750"/><line x1="240" y1="0" x2="240" y2="750"/><line x1="300" y1="0" x2="300" y2="750"/>
+    <line x1="360" y1="0" x2="360" y2="750"/><line x1="420" y1="0" x2="420" y2="750"/><line x1="480" y1="0" x2="480" y2="750"/>
+    <line x1="540" y1="0" x2="540" y2="750"/><line x1="600" y1="0" x2="600" y2="750"/><line x1="660" y1="0" x2="660" y2="750"/>
+    <line x1="720" y1="0" x2="720" y2="750"/><line x1="780" y1="0" x2="780" y2="750"/><line x1="840" y1="0" x2="840" y2="750"/>
+    <line x1="900" y1="0" x2="900" y2="750"/><line x1="960" y1="0" x2="960" y2="750"/><line x1="1020" y1="0" x2="1020" y2="750"/>
+    <line x1="1080" y1="0" x2="1080" y2="750"/><line x1="1140" y1="0" x2="1140" y2="750"/>
+    <line x1="0" y1="0" x2="1200" y2="0"/><line x1="0" y1="60" x2="1200" y2="60"/>
+    <line x1="0" y1="120" x2="1200" y2="120"/><line x1="0" y1="180" x2="1200" y2="180"/>
+    <line x1="0" y1="240" x2="1200" y2="240"/><line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="360" x2="1200" y2="360"/><line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="0" y1="480" x2="1200" y2="480"/><line x1="0" y1="540" x2="1200" y2="540"/>
+    <line x1="0" y1="600" x2="1200" y2="600"/><line x1="0" y1="660" x2="1200" y2="660"/>
+    <line x1="0" y1="720" x2="1200" y2="720"/>
+  </g>
+
+  <!-- Glow orb 1 (top-left, CSS: top:-30% left:-10% 700px blue) -->
+  <circle cx="80" cy="-50" r="350" fill="url(#bg)" opacity="0.08">
+    <animate attributeName="cx" values="80;160;80" dur="12s" repeatCount="indefinite" fill="freeze"/>
+    <animate attributeName="cy" values="-50;10;-50" dur="12s" repeatCount="indefinite" fill="freeze"/>
+  </circle>
+  <circle cx="80" cy="-50" r="200" fill="#3b9eff" opacity="0.04">
+    <animate attributeName="cx" values="80;160;80" dur="12s" repeatCount="indefinite" fill="freeze"/>
+    <animate attributeName="cy" values="-50;10;-50" dur="12s" repeatCount="indefinite" fill="freeze"/>
+  </circle>
+
+  <!-- Glow orb 2 (bottom-right, CSS: bottom:-20% right:-15% 600px green) -->
+  <circle cx="1100" cy="850" r="300" fill="#22c55e" opacity="0.03">
+    <animate attributeName="cx" values="1100;1040;1100" dur="15s" repeatCount="indefinite" fill="freeze"/>
+    <animate attributeName="cy" values="850;810;850" dur="15s" repeatCount="indefinite" fill="freeze"/>
+  </circle>
+
+  <!-- Particle dots -->
   <g opacity="0.3">
-    <circle cx="100" cy="100" r="2" fill="#00ff88">
-      <animate attributeName="cx" values="100;120;100" dur="4s" repeatCount="indefinite"/>
-      <animate attributeName="cy" values="100;80;100" dur="3s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="300" cy="200" r="1.5" fill="#00aaff">
-      <animate attributeName="cx" values="300;280;300" dur="3.5s" repeatCount="indefinite"/>
-      <animate attributeName="cy" values="200;220;200" dur="4.5s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="500" cy="150" r="2.5" fill="#aa00ff">
-      <animate attributeName="cx" values="500;520;500" dur="5s" repeatCount="indefinite"/>
-      <animate attributeName="cy" values="150;130;150" dur="3.8s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="700" cy="300" r="1.8" fill="#00ff88">
-      <animate attributeName="cx" values="700;680;700" dur="4.2s" repeatCount="indefinite"/>
-      <animate attributeName="cy" values="300;320;300" dur="5.2s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="900" cy="120" r="2" fill="#00aaff">
-      <animate attributeName="cx" values="900;920;900" dur="3.8s" repeatCount="indefinite"/>
-      <animate attributeName="cy" values="120;100;120" dur="4.8s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="1100" cy="400" r="1.5" fill="#aa00ff">
-      <animate attributeName="cx" values="1100;1080;1100" dur="4.5s" repeatCount="indefinite"/>
-      <animate attributeName="cy" values="400;420;400" dur="3.2s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="200" cy="500" r="2" fill="#00ff88">
-      <animate attributeName="cx" values="200;220;200" dur="5.5s" repeatCount="indefinite"/>
-      <animate attributeName="cy" values="500;480;500" dur="4.2s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="800" cy="600" r="1.8" fill="#00aaff">
-      <animate attributeName="cx" values="800;780;800" dur="3.2s" repeatCount="indefinite"/>
-      <animate attributeName="cy" values="600;620;600" dur="5.8s" repeatCount="indefinite"/>
-    </circle>
+    <circle cx="150" cy="120" r="1.5" fill="#3b9eff"><animate attributeName="cy" values="120;100;120" dur="3s" repeatCount="indefinite"/></circle>
+    <circle cx="350" cy="200" r="1" fill="#22c55e"><animate attributeName="cy" values="200;220;200" dur="4s" repeatCount="indefinite"/></circle>
+    <circle cx="550" cy="80" r="1.8" fill="#3b9eff"><animate attributeName="cy" values="80;60;80" dur="2.5s" repeatCount="indefinite"/></circle>
+    <circle cx="750" cy="300" r="1.2" fill="#22c55e"><animate attributeName="cy" values="300;320;300" dur="3.5s" repeatCount="indefinite"/></circle>
+    <circle cx="950" cy="150" r="1.5" fill="#3b9eff"><animate attributeName="cy" values="150;130;150" dur="2.8s" repeatCount="indefinite"/></circle>
+    <circle cx="200" cy="500" r="1" fill="#22c55e"><animate attributeName="cy" values="500;520;500" dur="4.2s" repeatCount="indefinite"/></circle>
+    <circle cx="1050" cy="400" r="1.3" fill="#3b9eff"><animate attributeName="cy" values="400;380;400" dur="3.2s" repeatCount="indefinite"/></circle>
+    <circle cx="400" cy="600" r="1" fill="#22c55e"><animate attributeName="cy" values="600;620;600" dur="5s" repeatCount="indefinite"/></circle>
+    <circle cx="850" cy="550" r="1.5" fill="#3b9eff"><animate attributeName="cy" values="550;530;550" dur="3.8s" repeatCount="indefinite"/></circle>
+    <circle cx="100" cy="400" r="1.2" fill="#22c55e"><animate attributeName="cy" values="400;420;400" dur="4.5s" repeatCount="indefinite"/></circle>
   </g>
 
-  <!-- Left side - Branding -->
-  <g transform="translate(100, 150)">
-    <!-- Shield icon -->
-    <g filter="url(#inputGlow)">
-      <path d="M80 15 L145 45 L145 105 C145 150 115 180 80 200 C45 180 15 150 15 105 L15 45 Z"
-            fill="none" stroke="#00ff88" stroke-width="2.5" opacity="0.8"/>
-      <path d="M80 30 L135 55 L135 103 C135 142 110 168 80 185 C50 168 25 142 25 103 L25 55 Z"
-            fill="#00ff88" opacity="0.08"/>
-      <path d="M55 100 L72 117 L108 75" fill="none" stroke="#00ff88" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Auth Card (centered, max-width 400px, padding 32px) -->
+  <g transform="translate(400, 60)">
+    <!-- Card background with glassmorphism -->
+    <rect width="400" height="630" rx="10" fill="rgba(24,30,58,0.55)" stroke="rgba(59,158,255,0.18)" stroke-width="1" filter="url(#softGlow)"/>
+    <rect width="400" height="630" rx="10" fill="rgba(255,255,255,0.03)"/>
+
+    <!-- Brand icon (52x52, pulse glow) -->
+    <g transform="translate(174, 28)">
+      <rect width="52" height="52" rx="6" fill="rgba(59,158,255,0.15)" stroke="#3b9eff" stroke-width="1">
+        <animate attributeName="stroke-opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+      </rect>
+      <!-- Shield-check icon -->
+      <path d="M26 12 L38 18 L38 30 C38 37 32 42 26 45 C20 42 14 37 14 30 L14 18 Z"
+            fill="none" stroke="#3b9eff" stroke-width="1.8"/>
+      <path d="M20 30 L24 34 L33 23" fill="none" stroke="#3b9eff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </g>
 
-    <text x="80" y="260" font-family="'Segoe UI', Arial, sans-serif" font-size="38" font-weight="700" fill="white" text-anchor="middle">CyberShield AI</text>
-    <text x="80" y="295" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#8892b0" text-anchor="middle" letter-spacing="3">SECURITY OPERATIONS CENTER</text>
+    <!-- Brand title -->
+    <text x="200" y="104" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="22" font-weight="700" fill="#3b9eff" text-anchor="middle" style="text-shadow:0 0 10px rgba(59,158,255,0.3)">CyberShield AI</text>
 
-    <!-- Feature list -->
-    <g transform="translate(-30, 330)">
-      <circle cx="10" cy="0" r="4" fill="#00ff88" opacity="0.5"/>
-      <text x="22" y="4" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#ccd6f6">Real-time Threat Detection</text>
+    <!-- Brand subtitle -->
+    <text x="200" y="124" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="9" fill="#72748a" text-anchor="middle" letter-spacing="3" text-transform="uppercase">SECURITY OPERATIONS CENTER</text>
 
-      <circle cx="10" cy="30" r="4" fill="#00aaff" opacity="0.5"/>
-      <text x="22" y="34" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#ccd6f6">Advanced Log Analysis</text>
-
-      <circle cx="10" cy="60" r="4" fill="#aa00ff" opacity="0.5"/>
-      <text x="22" y="64" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#ccd6f6">Interactive SOC Dashboard</text>
-
-      <circle cx="10" cy="90" r="4" fill="#ff6b35" opacity="0.5"/>
-      <text x="22" y="94" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#ccd6f6">PDF / CSV / JSON Reports</text>
-    </g>
-  </g>
-
-  <!-- Login Form Card -->
-  <g transform="translate(650, 150)">
-    <rect width="420" height="450" rx="16" fill="url(#formGrad)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
-
-    <!-- Form header -->
-    <text x="210" y="50" font-family="'Segoe UI', Arial, sans-serif" font-size="24" font-weight="600" fill="white" text-anchor="middle">Welcome Back</text>
-    <text x="210" y="75" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#8892b0" text-anchor="middle">Sign in to your account</text>
-
-    <!-- Username field -->
-    <g transform="translate(30, 100)">
-      <text x="0" y="0" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#8892b0">Username</text>
-      <rect x="0" y="12" width="360" height="44" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
-      <!-- User icon -->
-      <circle cx="20" cy="34" r="6" fill="none" stroke="#8892b0" stroke-width="1.2"/>
-      <circle cx="20" cy="30" r="3" fill="none" stroke="#8892b0" stroke-width="1"/>
-      <text x="35" y="38" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#ccd6f6">admin</text>
-      <rect x="0" y="56" width="360" height="0" fill="none"/>
-    </g>
+    <!-- Email field -->
+    <text x="32" y="162" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600" fill="#72748a" letter-spacing="0.5">EMAIL</text>
+    <rect x="32" y="172" width="336" height="42" rx="6" fill="rgba(34,38,68,0.8)" stroke="rgba(59,158,255,0.18)" stroke-width="1"/>
+    <text x="48" y="198" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="14" fill="#72748a">you@example.com</text>
 
     <!-- Password field -->
-    <g transform="translate(30, 175)">
-      <text x="0" y="0" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#8892b0">Password</text>
-      <rect x="0" y="12" width="360" height="44" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
-      <!-- Lock icon -->
-      <rect x="14" y="28" width="12" height="10" rx="2" fill="none" stroke="#8892b0" stroke-width="1.2"/>
-      <path d="M17 28 L17 24 C17 21 19 19 20 19 C21 19 23 21 23 24 L23 28" fill="none" stroke="#8892b0" stroke-width="1.2"/>
-      <text x="35" y="38" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#ccd6f6">********</text>
+    <text x="32" y="236" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600" fill="#72748a" letter-spacing="0.5">PASSWORD</text>
+    <rect x="32" y="246" width="336" height="42" rx="6" fill="rgba(34,38,68,0.8)" stroke="rgba(59,158,255,0.18)" stroke-width="1"/>
+    <text x="48" y="272" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="14" fill="#72748a">Enter your password</text>
+
+    <!-- Remember me + Forgot password -->
+    <g transform="translate(32, 300)">
+      <rect width="14" height="14" rx="3" fill="rgba(59,158,255,0.2)" stroke="#3b9eff" stroke-width="1"/>
+      <path d="M3 7 L6 10 L11 4" fill="none" stroke="#3b9eff" stroke-width="1.5" stroke-linecap="round"/>
+      <text x="20" y="11" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" fill="#9ca3af">Remember me</text>
+    </g>
+    <text x="368" y="311" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" fill="#72748a" text-anchor="end">Forgot password?</text>
+
+    <!-- Sign in button (btn-primary, btn-lg, width 100%) -->
+    <g transform="translate(32, 330)">
+      <rect width="336" height="44" rx="6" fill="url(#btnBg)"/>
+      <text x="168" y="27" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="14" font-weight="700" fill="#0f1729" text-anchor="middle">Sign in to SOC</text>
     </g>
 
-    <!-- Remember me & Forgot password -->
-    <g transform="translate(30, 245)">
-      <rect x="0" y="0" width="14" height="14" rx="3" fill="rgba(0,255,136,0.2)" stroke="#00ff88" stroke-width="1"/>
-      <path d="M3 7 L6 10 L11 4" fill="none" stroke="#00ff88" stroke-width="1.5" stroke-linecap="round"/>
-      <text x="22" y="11" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#8892b0">Remember me</text>
-      <text x="250" y="11" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#00ff88">Forgot password?</text>
-    </g>
-
-    <!-- Sign In Button -->
-    <g transform="translate(30, 280)">
-      <rect width="360" height="48" rx="10" fill="url(#btnGrad)" opacity="0.9"/>
-      <text x="180" y="30" font-family="'Segoe UI', Arial, sans-serif" font-size="15" font-weight="600" fill="#0a0e27" text-anchor="middle">Sign In</text>
-    </g>
+    <!-- Footer -->
+    <text x="200" y="404" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" fill="#9ca3af" text-anchor="middle">Don't have an account? <tspan fill="#22c55e" font-weight="600">Sign up</tspan></text>
 
     <!-- Divider -->
-    <line x1="50" y1="355" x2="370" y2="355" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
-    <text x="210" y="360" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0" text-anchor="middle">or continue with</text>
+    <line x1="32" y1="424" x2="368" y2="424" stroke="rgba(59,158,255,0.18)" stroke-width="1"/>
 
-    <!-- Demo Roles -->
-    <g transform="translate(30, 380)">
-      <rect width="170" height="38" rx="8" fill="rgba(0,170,255,0.1)" stroke="rgba(0,170,255,0.3)" stroke-width="0.5"/>
-      <text x="85" y="24" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#00aaff" text-anchor="middle">Admin Demo</text>
+    <!-- Demo Roles label -->
+    <text x="200" y="450" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="10" fill="#72748a" text-anchor="middle" letter-spacing="1.5">DEMO ROLES</text>
 
-      <rect x="190" width="170" height="38" rx="8" fill="rgba(170,0,255,0.1)" stroke="rgba(170,0,255,0.3)" stroke-width="0.5"/>
-      <text x="275" y="24" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#aa00ff" text-anchor="middle">Analyst Demo</text>
+    <!-- Demo Role Cards (2-column grid) -->
+    <!-- Admin card -->
+    <g transform="translate(32, 464)">
+      <rect width="160" height="64" rx="10" fill="rgba(34,38,68,0.6)" stroke="rgba(59,158,255,0.18)" stroke-width="1"/>
+      <!-- Shield icon -->
+      <g transform="translate(58, 10)">
+        <rect width="14" height="14" rx="3" fill="none" stroke="#72748a" stroke-width="1.2"/>
+        <path d="M7 3 L11 5 L11 9 C11 11 9 13 7 13 C5 13 3 11 3 9 L3 5 Z" fill="none" stroke="#72748a" stroke-width="1"/>
+      </g>
+      <text x="80" y="18" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="600">Admin</text>
+      <text x="80" y="50" font-family="'JetBrains Mono', Consolas, monospace" font-size="10" fill="#72748a" text-anchor="middle">admin@cybershield.io</text>
     </g>
 
-    <!-- Register link -->
-    <text x="210" y="440" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#8892b0" text-anchor="middle">
-      Don't have an account? <tspan fill="#00ff88">Sign up</tspan>
-    </text>
+    <!-- Analyst card -->
+    <g transform="translate(208, 464)">
+      <rect width="160" height="64" rx="10" fill="rgba(34,38,68,0.6)" stroke="rgba(59,158,255,0.18)" stroke-width="1"/>
+      <!-- User icon -->
+      <g transform="translate(58, 10)">
+        <circle cx="7" cy="5" r="3" fill="none" stroke="#72748a" stroke-width="1.2"/>
+        <path d="M1 14 C1 10 4 8 7 8 C10 8 13 10 13 14" fill="none" stroke="#72748a" stroke-width="1.2"/>
+      </g>
+      <text x="80" y="18" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="600">Security Analyst</text>
+      <text x="80" y="50" font-family="'JetBrains Mono', Consolas, monospace" font-size="10" fill="#72748a" text-anchor="middle">analyst@cybershield.io</text>
+    </g>
   </g>
-
-  <!-- Bottom accent -->
-  <rect x="0" y="745" width="1200" height="5" fill="url(#btnGrad)" opacity="0.4"/>
 </svg>
