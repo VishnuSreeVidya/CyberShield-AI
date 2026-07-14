@@ -32,7 +32,7 @@ Built by **Kotturu Vishnu Sree Vidya** — Computer Science Student, Full-Stack 
 ## Dashboard Preview
 
 <p align="center">
-  <img src="assets/images/dashboard.svg" alt="SOC Dashboard" width="100%"/>
+  <img src="assets/images/dashboard-screenshot.png" alt="SOC Dashboard" width="100%"/>
 </p>
 
 ---
@@ -99,7 +99,7 @@ Built by **Kotturu Vishnu Sree Vidya** — Computer Science Student, Full-Stack 
 ## Login Page
 
 <p align="center">
-  <img src="assets/images/login.svg" alt="Login Page" width="100%"/>
+  <img src="assets/images/login-screenshot.png" alt="Login Page" width="100%"/>
 </p>
 
 ---
