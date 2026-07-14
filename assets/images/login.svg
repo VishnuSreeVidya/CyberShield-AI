@@ -21,7 +21,7 @@
   <!-- Background -->
   <rect width="1200" height="750" fill="url(#bg)"/>
 
-  <!-- Grid pattern overlay (matches CSS: 60px grid, oklch 72% .19 230 /.08) -->
+  <!-- Grid pattern overlay -->
   <g opacity="0.06" stroke="#3b9eff" stroke-width="0.5">
     <line x1="0" y1="0" x2="0" y2="750"/><line x1="60" y1="0" x2="60" y2="750"/><line x1="120" y1="0" x2="120" y2="750"/>
     <line x1="180" y1="0" x2="180" y2="750"/><line x1="240" y1="0" x2="240" y2="750"/><line x1="300" y1="0" x2="300" y2="750"/>
@@ -39,7 +39,7 @@
     <line x1="0" y1="720" x2="1200" y2="720"/>
   </g>
 
-  <!-- Glow orb 1 (top-left, CSS: top:-30% left:-10% 700px blue) -->
+  <!-- Glow orb 1 -->
   <circle cx="80" cy="-50" r="350" fill="url(#bg)" opacity="0.08">
     <animate attributeName="cx" values="80;160;80" dur="12s" repeatCount="indefinite" fill="freeze"/>
     <animate attributeName="cy" values="-50;10;-50" dur="12s" repeatCount="indefinite" fill="freeze"/>
@@ -49,24 +49,155 @@
     <animate attributeName="cy" values="-50;10;-50" dur="12s" repeatCount="indefinite" fill="freeze"/>
   </circle>
 
-  <!-- Glow orb 2 (bottom-right, CSS: bottom:-20% right:-15% 600px green) -->
+  <!-- Glow orb 2 -->
   <circle cx="1100" cy="850" r="300" fill="#22c55e" opacity="0.03">
     <animate attributeName="cx" values="1100;1040;1100" dur="15s" repeatCount="indefinite" fill="freeze"/>
     <animate attributeName="cy" values="850;810;850" dur="15s" repeatCount="indefinite" fill="freeze"/>
   </circle>
 
-  <!-- Particle dots -->
-  <g opacity="0.3">
-    <circle cx="150" cy="120" r="1.5" fill="#3b9eff"><animate attributeName="cy" values="120;100;120" dur="3s" repeatCount="indefinite"/></circle>
-    <circle cx="350" cy="200" r="1" fill="#22c55e"><animate attributeName="cy" values="200;220;200" dur="4s" repeatCount="indefinite"/></circle>
-    <circle cx="550" cy="80" r="1.8" fill="#3b9eff"><animate attributeName="cy" values="80;60;80" dur="2.5s" repeatCount="indefinite"/></circle>
-    <circle cx="750" cy="300" r="1.2" fill="#22c55e"><animate attributeName="cy" values="300;320;300" dur="3.5s" repeatCount="indefinite"/></circle>
-    <circle cx="950" cy="150" r="1.5" fill="#3b9eff"><animate attributeName="cy" values="150;130;150" dur="2.8s" repeatCount="indefinite"/></circle>
-    <circle cx="200" cy="500" r="1" fill="#22c55e"><animate attributeName="cy" values="500;520;500" dur="4.2s" repeatCount="indefinite"/></circle>
-    <circle cx="1050" cy="400" r="1.3" fill="#3b9eff"><animate attributeName="cy" values="400;380;400" dur="3.2s" repeatCount="indefinite"/></circle>
-    <circle cx="400" cy="600" r="1" fill="#22c55e"><animate attributeName="cy" values="600;620;600" dur="5s" repeatCount="indefinite"/></circle>
-    <circle cx="850" cy="550" r="1.5" fill="#3b9eff"><animate attributeName="cy" values="550;530;550" dur="3.8s" repeatCount="indefinite"/></circle>
-    <circle cx="100" cy="400" r="1.2" fill="#22c55e"><animate attributeName="cy" values="400;420;400" dur="4.5s" repeatCount="indefinite"/></circle>
+  <!-- ========== SPIDER WEB PARTICLE EFFECT ========== -->
+  <!-- Connection lines (distance < 150px, rgba(80,140,255, alpha)) -->
+  <g stroke="#508cff" stroke-width="0.6" fill="none">
+    <!-- Cluster 1: top-left -->
+    <line x1="45" y1="68" x2="112" y2="95" opacity="0.18"/>
+    <line x1="45" y1="68" x2="78" y2="155" opacity="0.14"/>
+    <line x1="112" y1="95" x2="78" y2="155" opacity="0.16"/>
+    <line x1="112" y1="95" x2="165" y2="42" opacity="0.12"/>
+    <line x1="78" y1="155" x2="140" y2="190" opacity="0.15"/>
+    <line x1="140" y1="190" x2="45" y2="68" opacity="0.08"/>
+    <line x1="165" y1="42" x2="230" y2="78" opacity="0.13"/>
+    <line x1="230" y1="78" x2="112" y2="95" opacity="0.10"/>
+
+    <!-- Cluster 2: top-right -->
+    <line x1="820" y1="55" x2="895" y2="110" opacity="0.17"/>
+    <line x1="895" y1="110" x2="960" y2="65" opacity="0.14"/>
+    <line x1="960" y1="65" x2="1020" y2="130" opacity="0.16"/>
+    <line x1="1020" y1="130" x2="895" y2="110" opacity="0.12"/>
+    <line x1="820" y1="55" x2="760" y2="120" opacity="0.15"/>
+    <line x1="760" y1="120" x2="895" y2="110" opacity="0.11"/>
+    <line x1="1020" y1="130" x2="1080" y2="85" opacity="0.13"/>
+    <line x1="1080" y1="85" x2="960" y2="65" opacity="0.09"/>
+    <line x1="760" y1="120" x2="820" y2="55" opacity="0.10"/>
+
+    <!-- Cluster 3: middle-left -->
+    <line x1="30" y1="280" x2="95" y2="310" opacity="0.16"/>
+    <line x1="95" y1="310" x2="55" y2="380" opacity="0.14"/>
+    <line x1="55" y1="380" x2="120" y2="405" opacity="0.17"/>
+    <line x1="120" y1="405" x2="30" y2="280" opacity="0.08"/>
+    <line x1="95" y1="310" x2="170" y2="260" opacity="0.12"/>
+    <line x1="170" y1="260" x2="30" y2="280" opacity="0.10"/>
+    <line x1="120" y1="405" x2="180" y2="450" opacity="0.15"/>
+    <line x1="55" y1="380" x2="30" y2="280" opacity="0.09"/>
+    <line x1="180" y1="450" x2="95" y2="310" opacity="0.07"/>
+
+    <!-- Cluster 4: bottom-right -->
+    <line x1="880" y1="520" x2="950" y2="570" opacity="0.18"/>
+    <line x1="950" y1="570" x2="1010" y2="510" opacity="0.15"/>
+    <line x1="1010" y1="510" x2="1070" y2="580" opacity="0.14"/>
+    <line x1="1070" y1="580" x2="950" y2="570" opacity="0.12"/>
+    <line x1="880" y1="520" x2="830" y2="600" opacity="0.16"/>
+    <line x1="830" y1="600" x2="950" y2="570" opacity="0.10"/>
+    <line x1="1010" y1="510" x2="880" y2="520" opacity="0.11"/>
+    <line x1="1070" y1="580" x2="1130" y2="640" opacity="0.13"/>
+    <line x1="1130" y1="640" x2="1010" y2="510" opacity="0.06"/>
+    <line x1="830" y1="600" x2="880" y2="520" opacity="0.09"/>
+
+    <!-- Cluster 5: bottom-left -->
+    <line x1="60" y1="580" x2="130" y2="620" opacity="0.15"/>
+    <line x1="130" y1="620" x2="85" y2="680" opacity="0.17"/>
+    <line x1="85" y1="680" x2="170" y2="700" opacity="0.14"/>
+    <line x1="170" y1="700" x2="130" y2="620" opacity="0.11"/>
+    <line x1="60" y1="580" x2="85" y2="680" opacity="0.08"/>
+    <line x1="170" y1="700" x2="60" y2="580" opacity="0.06"/>
+
+    <!-- Cross-cluster long connections -->
+    <line x1="165" y1="42" x2="30" y2="280" opacity="0.04"/>
+    <line x1="760" y1="120" x2="820" y2="55" opacity="0.08"/>
+    <line x1="1080" y1="85" x2="1130" y2="640" opacity="0.03"/>
+    <line x1="180" y1="450" x2="130" y2="620" opacity="0.05"/>
+    <line x1="830" y1="600" x2="1070" y2="580" opacity="0.06"/>
+
+    <!-- Scattered connections -->
+    <line x1="340" y1="50" x2="410" y2="100" opacity="0.10"/>
+    <line x1="410" y1="100" x2="470" y2="55" opacity="0.12"/>
+    <line x1="470" y1="55" x2="530" y2="110" opacity="0.09"/>
+    <line x1="340" y1="50" x2="470" y2="55" opacity="0.08"/>
+    <line x1="530" y1="110" x2="410" y2="100" opacity="0.07"/>
+
+    <line x1="300" y1="480" x2="380" y2="520" opacity="0.11"/>
+    <line x1="380" y1="520" x2="440" y2="470" opacity="0.13"/>
+    <line x1="440" y1="470" x2="500" y2="530" opacity="0.10"/>
+    <line x1="300" y1="480" x2="440" y2="470" opacity="0.07"/>
+    <line x1="500" y1="530" x2="380" y2="520" opacity="0.08"/>
+
+    <line x1="600" y1="30" x2="680" y2="80" opacity="0.12"/>
+    <line x1="680" y1="80" x2="740" y2="40" opacity="0.10"/>
+    <line x1="600" y1="30" x2="740" y2="40" opacity="0.08"/>
+
+    <line x1="580" y1="650" x2="650" y2="700" opacity="0.14"/>
+    <line x1="650" y1="700" x2="720" y2="660" opacity="0.11"/>
+    <line x1="720" y1="660" x2="580" y2="650" opacity="0.06"/>
+    <line x1="580" y1="650" x2="720" y2="660" opacity="0.08"/>
+  </g>
+
+  <!-- Particle dots (rgba(80,140,255), r = random 0.5-2) -->
+  <g>
+    <!-- Cluster 1: top-left -->
+    <circle cx="45" cy="68" r="1.4" fill="#508cff" opacity="0.5"><animate attributeName="cy" values="68;58;68" dur="3.2s" repeatCount="indefinite"/></circle>
+    <circle cx="112" cy="95" r="1.0" fill="#508cff" opacity="0.6"><animate attributeName="cy" values="95;85;95" dur="4.1s" repeatCount="indefinite"/></circle>
+    <circle cx="78" cy="155" r="1.8" fill="#508cff" opacity="0.4"><animate attributeName="cy" values="155;140;155" dur="2.8s" repeatCount="indefinite"/></circle>
+    <circle cx="165" cy="42" r="0.8" fill="#508cff" opacity="0.55"><animate attributeName="cy" values="42;32;42" dur="3.6s" repeatCount="indefinite"/></circle>
+    <circle cx="140" cy="190" r="1.2" fill="#508cff" opacity="0.45"><animate attributeName="cy" values="190;178;190" dur="4.4s" repeatCount="indefinite"/></circle>
+    <circle cx="230" cy="78" r="1.6" fill="#508cff" opacity="0.5"><animate attributeName="cy" values="78;66;78" dur="2.9s" repeatCount="indefinite"/></circle>
+
+    <!-- Cluster 2: top-right -->
+    <circle cx="820" cy="55" r="1.2" fill="#508cff" opacity="0.5"><animate attributeName="cy" values="55;43;55" dur="3.4s" repeatCount="indefinite"/></circle>
+    <circle cx="895" cy="110" r="1.5" fill="#508cff" opacity="0.55"><animate attributeName="cy" values="110;98;110" dur="4.2s" repeatCount="indefinite"/></circle>
+    <circle cx="960" cy="65" r="0.9" fill="#508cff" opacity="0.6"><animate attributeName="cy" values="65;55;65" dur="3.0s" repeatCount="indefinite"/></circle>
+    <circle cx="1020" cy="130" r="1.7" fill="#508cff" opacity="0.45"><animate attributeName="cy" values="130;118;130" dur="2.6s" repeatCount="indefinite"/></circle>
+    <circle cx="760" cy="120" r="1.0" fill="#508cff" opacity="0.5"><animate attributeName="cy" values="120;108;120" dur="3.8s" repeatCount="indefinite"/></circle>
+    <circle cx="1080" cy="85" r="1.3" fill="#508cff" opacity="0.48"><animate attributeName="cy" values="85;73;85" dur="4.6s" repeatCount="indefinite"/></circle>
+
+    <!-- Cluster 3: middle-left -->
+    <circle cx="30" cy="280" r="1.1" fill="#508cff" opacity="0.52"><animate attributeName="cy" values="280;268;280" dur="3.3s" repeatCount="indefinite"/></circle>
+    <circle cx="95" cy="310" r="1.6" fill="#508cff" opacity="0.48"><animate attributeName="cy" values="310;298;310" dur="4.0s" repeatCount="indefinite"/></circle>
+    <circle cx="55" cy="380" r="0.8" fill="#508cff" opacity="0.55"><animate attributeName="cy" values="380;370;380" dur="2.7s" repeatCount="indefinite"/></circle>
+    <circle cx="120" cy="405" r="1.4" fill="#508cff" opacity="0.5"><animate attributeName="cy" values="405;393;405" dur="3.9s" repeatCount="indefinite"/></circle>
+    <circle cx="170" cy="260" r="1.0" fill="#508cff" opacity="0.53"><animate attributeName="cy" values="260;250;260" dur="4.3s" repeatCount="indefinite"/></circle>
+    <circle cx="180" cy="450" r="1.3" fill="#508cff" opacity="0.46"><animate attributeName="cy" values="450;438;450" dur="3.1s" repeatCount="indefinite"/></circle>
+
+    <!-- Cluster 4: bottom-right -->
+    <circle cx="880" cy="520" r="1.5" fill="#508cff" opacity="0.5"><animate attributeName="cy" values="520;508;520" dur="3.5s" repeatCount="indefinite"/></circle>
+    <circle cx="950" cy="570" r="1.2" fill="#508cff" opacity="0.55"><animate attributeName="cy" values="570;558;570" dur="4.1s" repeatCount="indefinite"/></circle>
+    <circle cx="1010" cy="510" r="0.9" fill="#508cff" opacity="0.6"><animate attributeName="cy" values="510;500;510" dur="2.9s" repeatCount="indefinite"/></circle>
+    <circle cx="1070" cy="580" r="1.7" fill="#508cff" opacity="0.45"><animate attributeName="cy" values="580;568;580" dur="3.7s" repeatCount="indefinite"/></circle>
+    <circle cx="830" cy="600" r="1.1" fill="#508cff" opacity="0.52"><animate attributeName="cy" values="600;590;600" dur="4.5s" repeatCount="indefinite"/></circle>
+    <circle cx="1130" cy="640" r="1.4" fill="#508cff" opacity="0.48"><animate attributeName="cy" values="640;628;640" dur="3.2s" repeatCount="indefinite"/></circle>
+
+    <!-- Cluster 5: bottom-left -->
+    <circle cx="60" cy="580" r="1.0" fill="#508cff" opacity="0.53"><animate attributeName="cy" values="580;570;580" dur="3.6s" repeatCount="indefinite"/></circle>
+    <circle cx="130" cy="620" r="1.6" fill="#508cff" opacity="0.5"><animate attributeName="cy" values="620;608;620" dur="4.2s" repeatCount="indefinite"/></circle>
+    <circle cx="85" cy="680" r="1.3" fill="#508cff" opacity="0.47"><animate attributeName="cy" values="680;668;680" dur="3.0s" repeatCount="indefinite"/></circle>
+    <circle cx="170" cy="700" r="0.8" fill="#508cff" opacity="0.56"><animate attributeName="cy" values="700;692;700" dur="2.8s" repeatCount="indefinite"/></circle>
+
+    <!-- Scattered particles -->
+    <circle cx="340" cy="50" r="1.2" fill="#508cff" opacity="0.5"><animate attributeName="cy" values="50;40;50" dur="3.4s" repeatCount="indefinite"/></circle>
+    <circle cx="410" cy="100" r="1.5" fill="#508cff" opacity="0.48"><animate attributeName="cy" values="100;88;100" dur="4.3s" repeatCount="indefinite"/></circle>
+    <circle cx="470" cy="55" r="0.9" fill="#508cff" opacity="0.54"><animate attributeName="cy" values="55;45;55" dur="2.9s" repeatCount="indefinite"/></circle>
+    <circle cx="530" cy="110" r="1.4" fill="#508cff" opacity="0.51"><animate attributeName="cy" values="110;98;110" dur="3.8s" repeatCount="indefinite"/></circle>
+    <circle cx="600" cy="30" r="1.0" fill="#508cff" opacity="0.55"><animate attributeName="cy" values="30;20;30" dur="4.1s" repeatCount="indefinite"/></circle>
+    <circle cx="680" cy="80" r="1.3" fill="#508cff" opacity="0.49"><animate attributeName="cy" values="80;68;80" dur="3.3s" repeatCount="indefinite"/></circle>
+    <circle cx="740" cy="40" r="0.8" fill="#508cff" opacity="0.56"><animate attributeName="cy" values="40;32;40" dur="2.7s" repeatCount="indefinite"/></circle>
+    <circle cx="300" cy="480" r="1.1" fill="#508cff" opacity="0.52"><animate attributeName="cy" values="480;470;480" dur="3.9s" repeatCount="indefinite"/></circle>
+    <circle cx="380" cy="520" r="1.6" fill="#508cff" opacity="0.47"><animate attributeName="cy" values="520;508;520" dur="4.4s" repeatCount="indefinite"/></circle>
+    <circle cx="440" cy="470" r="1.0" fill="#508cff" opacity="0.53"><animate attributeName="cy" values="470;460;470" dur="3.1s" repeatCount="indefinite"/></circle>
+    <circle cx="500" cy="530" r="1.4" fill="#508cff" opacity="0.5"><animate attributeName="cy" values="530;518;530" dur="3.6s" repeatCount="indefinite"/></circle>
+    <circle cx="580" cy="650" r="1.2" fill="#508cff" opacity="0.51"><animate attributeName="cy" values="650;638;650" dur="4.0s" repeatCount="indefinite"/></circle>
+    <circle cx="650" cy="700" r="0.9" fill="#508cff" opacity="0.55"><animate attributeName="cy" values="700;690;700" dur="2.8s" repeatCount="indefinite"/></circle>
+    <circle cx="720" cy="660" r="1.5" fill="#508cff" opacity="0.48"><animate attributeName="cy" values="660;648;660" dur="3.5s" repeatCount="indefinite"/></circle>
+    <circle cx="250" cy="350" r="1.1" fill="#508cff" opacity="0.52"><animate attributeName="cy" values="350;340;350" dur="4.2s" repeatCount="indefinite"/></circle>
+    <circle cx="1100" cy="350" r="1.3" fill="#508cff" opacity="0.5"><animate attributeName="cy" values="350;338;350" dur="3.7s" repeatCount="indefinite"/></circle>
+    <circle cx="1150" cy="200" r="1.0" fill="#508cff" opacity="0.54"><animate attributeName="cy" values="200;188;200" dur="4.5s" repeatCount="indefinite"/></circle>
   </g>
 
   <!-- Auth Card (centered, max-width 400px, padding 32px) -->
@@ -80,7 +211,6 @@
       <rect width="52" height="52" rx="6" fill="rgba(59,158,255,0.15)" stroke="#3b9eff" stroke-width="1">
         <animate attributeName="stroke-opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
       </rect>
-      <!-- Shield-check icon -->
       <path d="M26 12 L38 18 L38 30 C38 37 32 42 26 45 C20 42 14 37 14 30 L14 18 Z"
             fill="none" stroke="#3b9eff" stroke-width="1.8"/>
       <path d="M20 30 L24 34 L33 23" fill="none" stroke="#3b9eff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -110,7 +240,7 @@
     </g>
     <text x="368" y="311" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" fill="#72748a" text-anchor="end">Forgot password?</text>
 
-    <!-- Sign in button (btn-primary, btn-lg, width 100%) -->
+    <!-- Sign in button -->
     <g transform="translate(32, 330)">
       <rect width="336" height="44" rx="6" fill="url(#btnBg)"/>
       <text x="168" y="27" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="14" font-weight="700" fill="#0f1729" text-anchor="middle">Sign in to SOC</text>
@@ -125,11 +255,9 @@
     <!-- Demo Roles label -->
     <text x="200" y="450" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="10" fill="#72748a" text-anchor="middle" letter-spacing="1.5">DEMO ROLES</text>
 
-    <!-- Demo Role Cards (2-column grid) -->
     <!-- Admin card -->
     <g transform="translate(32, 464)">
       <rect width="160" height="64" rx="10" fill="rgba(34,38,68,0.6)" stroke="rgba(59,158,255,0.18)" stroke-width="1"/>
-      <!-- Shield icon -->
       <g transform="translate(58, 10)">
         <rect width="14" height="14" rx="3" fill="none" stroke="#72748a" stroke-width="1.2"/>
         <path d="M7 3 L11 5 L11 9 C11 11 9 13 7 13 C5 13 3 11 3 9 L3 5 Z" fill="none" stroke="#72748a" stroke-width="1"/>
@@ -141,7 +269,6 @@
     <!-- Analyst card -->
     <g transform="translate(208, 464)">
       <rect width="160" height="64" rx="10" fill="rgba(34,38,68,0.6)" stroke="rgba(59,158,255,0.18)" stroke-width="1"/>
-      <!-- User icon -->
       <g transform="translate(58, 10)">
         <circle cx="7" cy="5" r="3" fill="none" stroke="#72748a" stroke-width="1.2"/>
         <path d="M1 14 C1 10 4 8 7 8 C10 8 13 10 13 14" fill="none" stroke="#72748a" stroke-width="1.2"/>
