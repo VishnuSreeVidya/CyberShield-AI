@@ -421,7 +421,7 @@ Navigate to New Analysis → Select Type → Enter Input → Run Engine
 ### Home Page
 
 <p align="center">
-  <img src="screenshots/home.png" alt="Home Page" width="80%"/>
+  <img src="screenshots/home.svg" alt="Home Page" width="80%"/>
 </p>
 
 ---
@@ -509,7 +509,7 @@ Navigate to New Analysis → Select Type → Enter Input → Run Engine
 ### Analysis Results
 
 <p align="center">
-  <img src="screenshots/results.png" alt="Analysis Results" width="80%"/>
+  <img src="screenshots/results.svg" alt="Analysis Results" width="80%"/>
 </p>
 
 ---

@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 550">
+  <defs>
+    <linearGradient id="outBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e27"/>
+      <stop offset="100%" style="stop-color:#0d1117"/>
+    </linearGradient>
+    <linearGradient id="glassGrad" x1="0%" y1="0%" x2="135%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(34,38,74,0.55)"/>
+      <stop offset="100%" style="stop-color:rgba(24,30,58,0.35)"/>
+    </linearGradient>
+    <linearGradient id="redLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff4444;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#ff4444;stop-opacity:0"/>
+    </linearGradient>
+    <filter id="termGlow">
+      <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="550" fill="url(#outBg)"/>
+
+  <!-- Title -->
+  <text x="600" y="30" font-family="'Segoe UI', Arial, sans-serif" font-size="18" font-weight="600" fill="white" text-anchor="middle">Sample Analysis Outputs</text>
+  <text x="600" y="48" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0" text-anchor="middle">Examples from Log Analysis and Intelligence Analysis Modules</text>
+
+  <!-- ========== ROW 1: Log Analysis (left) + URL Analysis (right) ========== -->
+  <!-- Left: Input Log -->
+  <g transform="translate(30, 65)">
+    <rect width="555" height="210" rx="10" fill="url(#glassGrad)" stroke="rgba(59,158,255,0.18)" stroke-width="0.5"/>
+    <rect x="0" y="0" width="555" height="32" rx="10" fill="rgba(59,158,255,0.06)"/>
+    <rect x="0" y="22" width="555" height="10" fill="rgba(59,158,255,0.06)"/>
+    <circle cx="16" cy="16" r="4" fill="#ff5f56"/>
+    <circle cx="30" cy="16" r="4" fill="#ffbd2e"/>
+    <circle cx="44" cy="16" r="4" fill="#27c93f"/>
+    <text x="277" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600" fill="#8892b0" text-anchor="middle">Log Analysis Output</text>
+
+    <!-- Log threats -->
+    <g transform="translate(12, 44)">
+      <rect width="531" height="52" rx="6" fill="rgba(255,170,0,0.05)" stroke="rgba(255,170,0,0.15)" stroke-width="0.5"/>
+      <rect x="0" y="0" width="3" height="52" rx="1.5" fill="#ffaa00"/>
+      <text x="12" y="18" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600" fill="#ffaa00">Brute Force Attack</text>
+      <rect x="155" y="6" width="36" height="16" rx="8" fill="rgba(255,170,0,0.15)"/>
+      <text x="173" y="17" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#ffaa00" text-anchor="middle">HIGH</text>
+      <text x="12" y="38" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#8892b0">IP: 192.168.1.15 | 5 failed logins in 15s</text>
+    </g>
+
+    <g transform="translate(12, 104)">
+      <rect width="531" height="52" rx="6" fill="rgba(255,68,68,0.05)" stroke="rgba(255,68,68,0.15)" stroke-width="0.5"/>
+      <rect x="0" y="0" width="3" height="52" rx="1.5" fill="#ff4444"/>
+      <text x="12" y="18" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600" fill="#ff4444">SQL Injection</text>
+      <rect x="120" y="6" width="56" height="16" rx="8" fill="rgba(255,68,68,0.15)"/>
+      <text x="148" y="17" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#ff4444" text-anchor="middle">CRITICAL</text>
+      <text x="12" y="38" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#8892b0">IP: 10.0.0.88 | ' OR 1=1 --</text>
+    </g>
+
+    <g transform="translate(12, 154)">
+      <rect width="531" height="44" rx="6" fill="rgba(255,170,0,0.05)" stroke="rgba(255,170,0,0.15)" stroke-width="0.5"/>
+      <rect x="0" y="0" width="3" height="44" rx="1.5" fill="#ffaa00"/>
+      <text x="12" y="18" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600" fill="#ffaa00">Directory Traversal</text>
+      <rect x="160" y="6" width="36" height="16" rx="8" fill="rgba(255,170,0,0.15)"/>
+      <text x="178" y="17" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#ffaa00" text-anchor="middle">HIGH</text>
+      <text x="12" y="36" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#8892b0">IP: 203.0.113.42 | GET /etc/passwd</text>
+    </g>
+  </g>
+
+  <!-- Right: URL Analysis -->
+  <g transform="translate(615, 65)">
+    <rect width="555" height="210" rx="10" fill="url(#glassGrad)" stroke="rgba(59,158,255,0.18)" stroke-width="0.5"/>
+    <rect x="0" y="0" width="555" height="32" rx="10" fill="rgba(59,158,255,0.06)"/>
+    <rect x="0" y="22" width="555" height="10" fill="rgba(59,158,255,0.06)"/>
+    <circle cx="16" cy="16" r="4" fill="#3b9eff"/>
+    <text x="30" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600" fill="#3b9eff">URL Analysis</text>
+    <text x="540" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="end">3 threats found</text>
+
+    <g transform="translate(12, 44)">
+      <rect width="531" height="52" rx="6" fill="rgba(255,68,68,0.05)" stroke="rgba(255,68,68,0.15)" stroke-width="0.5"/>
+      <rect x="0" y="0" width="3" height="52" rx="1.5" fill="#ff4444"/>
+      <text x="12" y="18" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600" fill="#ff4444">Phishing Detected</text>
+      <rect x="145" y="6" width="56" height="16" rx="8" fill="rgba(255,68,68,0.15)"/>
+      <text x="173" y="17" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#ff4444" text-anchor="middle">CRITICAL</text>
+      <text x="12" y="38" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#8892b0">paypa1-secure.login.com.ru (typosquat)</text>
+    </g>
+
+    <g transform="translate(12, 104)">
+      <rect width="531" height="52" rx="6" fill="rgba(255,170,0,0.05)" stroke="rgba(255,170,0,0.15)" stroke-width="0.5"/>
+      <rect x="0" y="0" width="3" height="52" rx="1.5" fill="#ffaa00"/>
+      <text x="12" y="18" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600" fill="#ffaa00">Shortened URL</text>
+      <rect x="130" y="6" width="36" height="16" rx="8" fill="rgba(255,170,0,0.15)"/>
+      <text x="148" y="17" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#ffaa00" text-anchor="middle">HIGH</text>
+      <text x="12" y="38" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#8892b0">bit.ly/3xK9m2 - resolves to malware host</text>
+    </g>
+
+    <g transform="translate(12, 164)">
+      <rect width="531" height="36" rx="6" fill="rgba(255,170,0,0.05)" stroke="rgba(255,170,0,0.15)" stroke-width="0.5"/>
+      <rect x="0" y="0" width="3" height="36" rx="1.5" fill="#ffaa00"/>
+      <text x="12" y="18" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600" fill="#ffaa00">Suspicious TLD</text>
+      <rect x="130" y="6" width="36" height="16" rx="8" fill="rgba(255,170,0,0.15)"/>
+      <text x="148" y="17" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#ffaa00" text-anchor="middle">HIGH</text>
+      <text x="12" y="30" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#8892b0">free-prize.xyz (known malicious domain)</text>
+    </g>
+  </g>
+
+  <!-- ========== ROW 2: IP Analysis (left) + Hash Analysis (right) ========== -->
+  <!-- Left: IP Analysis -->
+  <g transform="translate(30, 290)">
+    <rect width="555" height="240" rx="10" fill="url(#glassGrad)" stroke="rgba(59,158,255,0.18)" stroke-width="0.5"/>
+    <rect x="0" y="0" width="555" height="32" rx="10" fill="rgba(34,197,94,0.06)"/>
+    <rect x="0" y="22" width="555" height="10" fill="rgba(34,197,94,0.06)"/>
+    <circle cx="16" cy="16" r="4" fill="#22c55e"/>
+    <text x="30" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600" fill="#22c55e">IP Analysis: 185.220.101.45</text>
+    <text x="540" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="end">HIGH RISK</text>
+
+    <g transform="translate(12, 44)" font-family="'JetBrains Mono', Consolas, monospace" font-size="10">
+      <!-- Info rows -->
+      <text x="0" y="12" fill="#8892b0">Country:</text>
+      <text x="100" y="12" fill="#ccd6f6">Germany (DE)</text>
+
+      <text x="0" y="32" fill="#8892b0">ASN:</text>
+      <text x="100" y="32" fill="#ccd6f6">AS24941 (Hetzner Online GmbH)</text>
+
+      <text x="0" y="52" fill="#8892b0">Blacklists:</text>
+      <text x="100" y="52" fill="#ff4444">Listed on 7/12 databases</text>
+
+      <text x="0" y="72" fill="#8892b0">Open Ports:</text>
+      <text x="100" y="72" fill="#ccd6f6">22 (SSH), 80 (HTTP), 443 (HTTPS)</text>
+
+      <text x="0" y="92" fill="#8892b0">Last Seen:</text>
+      <text x="100" y="92" fill="#ccd6f6">2026-07-15 08:23:41 UTC</text>
+    </g>
+
+    <!-- Risk bar -->
+    <g transform="translate(12, 150)">
+      <text x="0" y="10" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0">Risk Score</text>
+      <rect x="0" y="18" width="531" height="8" rx="4" fill="rgba(255,255,255,0.05)"/>
+      <rect x="0" y="18" width="425" height="8" rx="4" fill="rgba(255,68,68,0.6)"/>
+      <text x="430" y="26" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="10" font-weight="600" fill="#ff4444">80/100</text>
+    </g>
+
+    <!-- Tags -->
+    <g transform="translate(12, 192)">
+      <rect x="0" y="0" width="60" height="18" rx="9" fill="rgba(255,68,68,0.12)"/>
+      <text x="30" y="13" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#ff4444" text-anchor="middle">Tor Exit</text>
+      <rect x="68" y="0" width="72" height="18" rx="9" fill="rgba(255,170,0,0.12)"/>
+      <text x="104" y="13" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#ffaa00" text-anchor="middle">Brute Force</text>
+      <rect x="148" y="0" width="70" height="18" rx="9" fill="rgba(255,170,0,0.12)"/>
+      <text x="183" y="13" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#ffaa00" text-anchor="middle">Scanning</text>
+      <rect x="226" y="0" width="56" height="18" rx="9" fill="rgba(255,68,68,0.12)"/>
+      <text x="254" y="13" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#ff4444" text-anchor="middle">Spam</text>
+    </g>
+  </g>
+
+  <!-- Right: Hash Analysis -->
+  <g transform="translate(615, 290)">
+    <rect width="555" height="240" rx="10" fill="url(#glassGrad)" stroke="rgba(59,158,255,0.18)" stroke-width="0.5"/>
+    <rect x="0" y="0" width="555" height="32" rx="10" fill="rgba(170,0,255,0.06)"/>
+    <rect x="0" y="22" width="555" height="10" fill="rgba(170,0,255,0.06)"/>
+    <circle cx="16" cy="16" r="4" fill="#aa00ff"/>
+    <text x="30" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600" fill="#aa00ff">Hash Analysis</text>
+    <text x="540" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0" text-anchor="end">MALICIOUS</text>
+
+    <g transform="translate(12, 44)">
+      <text x="0" y="10" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#8892b0">MD5:</text>
+      <text x="40" y="10" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#ccd6f6">d41d8cd98f00b204e9800998ecf8427e</text>
+
+      <text x="0" y="30" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#8892b0">SHA256:</text>
+      <text x="65" y="30" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#ccd6f6">e3b0c44298fc1c149afbf4c8996fb924...</text>
+
+      <text x="0" y="50" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#8892b0">File Type:</text>
+      <text x="80" y="50" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#ccd6f6">PE32 executable (Windows)</text>
+
+      <text x="0" y="70" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#8892b0">File Size:</text>
+      <text x="80" y="70" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#ccd6f6">2.4 MB (2,519,040 bytes)</text>
+    </g>
+
+    <!-- VirusTotal results -->
+    <g transform="translate(12, 128)">
+      <text x="0" y="10" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600" fill="#ff4444">VirusTotal: 47/72 detections</text>
+
+      <g transform="translate(0, 22)" font-family="'Segoe UI', Arial, sans-serif" font-size="10">
+        <rect x="0" y="0" width="80" height="16" rx="4" fill="rgba(255,68,68,0.15)"/>
+        <text x="40" y="12" fill="#ff4444" text-anchor="middle">Trojan</text>
+        <rect x="88" y="0" width="100" height="16" rx="4" fill="rgba(255,170,0,0.15)"/>
+        <text x="138" y="12" fill="#ffaa00" text-anchor="middle">Ransomware</text>
+        <rect x="196" y="0" width="74" height="16" rx="4" fill="rgba(255,68,68,0.15)"/>
+        <text x="233" y="12" fill="#ff4444" text-anchor="middle">Backdoor</text>
+        <rect x="278" y="0" width="62" height="16" rx="4" fill="rgba(255,170,0,0.15)"/>
+        <text x="309" y="12" fill="#ffaa00" text-anchor="middle">Worm</text>
+      </g>
+    </g>
+
+    <!-- File behavior -->
+    <g transform="translate(12, 192)">
+      <text x="0" y="10" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0">Behavior Summary</text>
+      <g transform="translate(0, 18)" font-family="'JetBrains Mono', Consolas, monospace" font-size="9">
+        <text fill="#ff4444">&#x2022;</text><text x="12" fill="#ccd6f6">Modifies Windows Registry run keys</text>
+        <text x="300" fill="#ff4444">&#x2022;</text><text x="312" fill="#ccd6f6">Injects into explorer.exe</text>
+        <text y="16" fill="#ff4444">&#x2022;</text><text x="12" y="16" fill="#ccd6f6">Establishes C2 connection to 45.33.32.156</text>
+        <text x="300" y="16" fill="#ff4444">&#x2022;</text><text x="312" y="16" fill="#ccd6f6">Drops 3 child processes</text>
+      </g>
+    </g>
+  </g>
+</svg>
