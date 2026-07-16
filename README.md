@@ -19,6 +19,14 @@
 
 ---
 
+## Dashboard Preview
+
+<p align="center">
+  <img src="assets/images/dashboard.svg" alt="SOC Dashboard" width="100%"/>
+</p>
+
+---
+
 ## Overview
 
 CyberShield AI is a production-inspired cybersecurity web application that analyzes multiple types of security inputs, detects suspicious activities, identifies common cyber attacks, and visualizes security events through an interactive **Security Operations Center (SOC) Dashboard**.
@@ -62,6 +70,10 @@ A central hub with 6 interactive analysis cards, each with icon, description, an
 - Threat-filtered view showing only logs with detected threats
 
 ### Threat Detection Engine
+
+<p align="center">
+  <img src="assets/images/detection.svg" alt="Threat Detection Rules" width="100%"/>
+</p>
 
 **7 Log Analysis Rules:**
 
@@ -120,7 +132,19 @@ A central hub with 6 interactive analysis cards, each with icon, description, an
 
 ---
 
+## Login Page
+
+<p align="center">
+  <img src="assets/images/login-screenshot.png" alt="Login Page" width="100%"/>
+</p>
+
+---
+
 ## Sample Analysis
+
+<p align="center">
+  <img src="assets/images/sample-output.svg" alt="Sample Input and Detected Threats" width="100%"/>
+</p>
 
 ### URL Analysis Input
 ```
@@ -217,6 +241,14 @@ Findings:    Match found: EICAR-Test-File
 | **Docker** | Containerization |
 | **Docker Compose** | Multi-service orchestration |
 | **Gunicorn** | Production WSGI server (4 workers) |
+
+---
+
+## System Architecture
+
+<p align="center">
+  <img src="assets/images/architecture.svg" alt="System Architecture" width="100%"/>
+</p>
 
 ---
 
