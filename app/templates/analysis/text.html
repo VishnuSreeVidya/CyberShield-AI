@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block title %}Text Analysis — CyberShield AI{% endblock %}
+{% block content %}
+<div class="space-y-6">
+  <div style="display:flex;align-items:center;gap:12px;">
+    <a href="{{ url_for('analysis.choose_analysis') }}" class="btn btn-outline btn-sm">
+      <i data-lucide="arrow-left"></i> Back
+    </a>
+    <div>
+      <h1 class="page-title">Text Analysis</h1>
+      <p class="page-subtitle">Analyze emails, SMS, and messages for threats</p>
+    </div>
+  </div>
+
+  <div class="glass-card" style="padding:24px;max-width:640px;">
+    <form method="POST">
+      <div class="form-group">
+        <label class="form-label">Enter Text to Analyze</label>
+        <textarea name="text" class="form-input" rows="6" required
+                  placeholder="Paste email, SMS, or message content here...">{{ request.form.get('text', '') }}</textarea>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">
+        <i data-lucide="scan"></i> Analyze Text
+      </button>
+    </form>
+  </div>
+
+  {% if result %}
+  <div class="result-section">
+    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="stat-card glass-card">
+        <div class="stat-card-info">
+          <div class="stat-card-label">Classification</div>
+          <div class="stat-card-value">
+            <span class="severity-badge {% if result.classification == 'Malicious' %}critical{% elif result.classification == 'Suspicious' %}high{% elif result.classification == 'Spam' %}medium{% elif result.classification == 'Caution' %}medium{% else %}low{% endif %}">{{ result.classification }}</span>
+          </div>
+        </div>
+        <div class="stat-card-icon" style="background:oklch(65% .25 22/.15);color:var(--chart-1);">
+          <i data-lucide="shield-alert"></i>
+        </div>
+      </div>
+      <div class="stat-card glass-card">
+        <div class="stat-card-info">
+          <div class="stat-card-label">Confidence Score</div>
+          <div class="stat-card-value" style="color:var(--primary);">{{ result.confidence_score }}%</div>
+        </div>
+        <div class="stat-card-icon" style="background:oklch(72% .19 230/.15);color:var(--primary);">
+          <i data-lucide="percent"></i>
+        </div>
+      </div>
+      <div class="stat-card glass-card">
+        <div class="stat-card-info">
+          <div class="stat-card-label">Risk Score</div>
+          <div class="stat-card-value" style="color:{% if result.risk_score >= 70 %}var(--chart-1){% elif result.risk_score >= 40 %}var(--chart-2){% else %}var(--accent){% endif %};">{{ result.risk_score }}/100</div>
+        </div>
+        <div class="stat-card-icon" style="background:oklch(82% .19 75/.15);color:var(--chart-2);">
+          <i data-lucide="gauge"></i>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px;">
+      <div class="glass-card" style="padding:16px;text-align:center;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted-foreground);margin-bottom:8px;">Phishing</div>
+        <div style="font-size:18px;font-weight:700;color:{% if result.is_phishing %}var(--chart-1){% else %}var(--accent){% endif %};">{% if result.is_phishing %}DETECTED{% else %}Clear{% endif %}</div>
+      </div>
+      <div class="glass-card" style="padding:16px;text-align:center;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted-foreground);margin-bottom:8px;">Scam</div>
+        <div style="font-size:18px;font-weight:700;color:{% if result.is_scam %}var(--chart-1){% else %}var(--accent){% endif %};">{% if result.is_scam %}DETECTED{% else %}Clear{% endif %}</div>
+      </div>
+      <div class="glass-card" style="padding:16px;text-align:center;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted-foreground);margin-bottom:8px;">Spam</div>
+        <div style="font-size:18px;font-weight:700;color:{% if result.is_spam %}var(--chart-2){% else %}var(--accent){% endif %};">{% if result.is_spam %}DETECTED{% else %}Clear{% endif %}</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div class="glass-card" style="padding:20px;">
+        <h5 style="font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+          <i data-lucide="search" style="width:16px;height:16px;color:var(--primary);"></i>
+          Findings
+        </h5>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          {% for finding in result.findings.split('\n') %}
+          <div style="display:flex;align-items:flex-start;gap:8px;font-size:13px;">
+            <i data-lucide="alert-circle" style="width:14px;height:14px;color:var(--chart-2);flex-shrink:0;margin-top:2px;"></i>
+            <span>{{ finding }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="glass-card" style="padding:20px;">
+        <h5 style="font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+          <i data-lucide="lightbulb" style="width:16px;height:16px;color:var(--accent);"></i>
+          Recommendations
+        </h5>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          {% for rec in result.recommendations.split('\n') %}
+          <div style="display:flex;align-items:flex-start;gap:8px;font-size:13px;">
+            <i data-lucide="check-circle" style="width:14px;height:14px;color:var(--accent);flex-shrink:0;margin-top:2px;"></i>
+            <span>{{ rec }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    {% if result.suspicious_words %}
+    <div class="glass-card" style="padding:16px;">
+      <h5 style="font-weight:600;margin-bottom:8px;">Suspicious Words Detected</h5>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;">
+        {% for word in result.suspicious_words.split(',') %}
+        <span style="padding:3px 10px;border-radius:4px;font-size:12px;background:oklch(65% .25 22/.15);color:var(--chart-1);border:1px solid oklch(65% .25 22/.3);">{{ word }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

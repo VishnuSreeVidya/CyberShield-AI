@@ -1008,6 +1008,102 @@ pre {
   margin-top: 4px;
 }
 
+/* ---- Analysis Grid ---- */
+.analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.analysis-card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.analysis-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), oklch(70% .22 300));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.analysis-card:hover::before {
+  opacity: 1;
+}
+.analysis-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px -10px oklch(72% .19 230/.5), 0 0 0 1px oklch(72% .19 230/.2);
+  border-color: oklch(72% .19 230/.3);
+}
+.analysis-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 16px;
+  transition: transform 0.3s;
+}
+.analysis-card:hover .analysis-card-icon {
+  transform: scale(1.08);
+}
+.analysis-card-icon svg { width: 24px; height: 24px; }
+.analysis-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--foreground);
+}
+.analysis-card-desc {
+  font-size: 13px;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+  flex: 1;
+  margin-bottom: 16px;
+}
+.analysis-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.analysis-card-count {
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.analysis-card-arrow {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  background: oklch(72% .19 230/.1);
+  color: var(--primary);
+  transition: all 0.3s;
+}
+.analysis-card-arrow svg { width: 14px; height: 14px; }
+.analysis-card:hover .analysis-card-arrow {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  transform: translateX(3px);
+}
+
+/* ---- Result Section ---- */
+.result-section {
+  animation: card-enter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* ---- Space utility ---- */
+.space-y-6 > * + * { margin-top: 24px; }
+
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
   .sidebar {
@@ -1021,6 +1117,9 @@ pre {
   }
   .stat-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .analysis-grid {
+    grid-template-columns: 1fr;
   }
   .charts-grid {
     grid-template-columns: 1fr;

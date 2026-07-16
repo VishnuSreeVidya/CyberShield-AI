@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}File Hash Analysis — CyberShield AI{% endblock %}
+{% block content %}
+<div class="space-y-6">
+  <div style="display:flex;align-items:center;gap:12px;">
+    <a href="{{ url_for('analysis.choose_analysis') }}" class="btn btn-outline btn-sm">
+      <i data-lucide="arrow-left"></i> Back
+    </a>
+    <div>
+      <h1 class="page-title">File Hash Analysis</h1>
+      <p class="page-subtitle">Validate file hashes (MD5, SHA1, SHA256) against threat databases</p>
+    </div>
+  </div>
+
+  <div class="glass-card" style="padding:24px;max-width:640px;">
+    <form method="POST">
+      <div class="form-group">
+        <label class="form-label">Enter File Hash</label>
+        <input type="text" name="hash" class="form-input" required
+               placeholder="MD5, SHA1, or SHA256 hash"
+               value="{{ request.form.get('hash', '') }}"
+               style="font-family:var(--font-mono);font-size:13px;">
+        <div style="font-size:11px;color:var(--muted-foreground);margin-top:4px;">Supported: MD5 (32 chars), SHA1 (40 chars), SHA256 (64 chars)</div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">
+        <i data-lucide="scan"></i> Analyze Hash
+      </button>
+    </form>
+  </div>
+
+  {% if result %}
+  <div class="result-section">
+    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="stat-card glass-card">
+        <div class="stat-card-info">
+          <div class="stat-card-label">Threat Level</div>
+          <div class="stat-card-value">
+            <span class="severity-badge {{ result.threat_level|lower }}">{{ result.threat_level }}</span>
+          </div>
+        </div>
+        <div class="stat-card-icon" style="background:oklch(65% .25 22/.15);color:var(--chart-1);">
+          <i data-lucide="shield-alert"></i>
+        </div>
+      </div>
+      <div class="stat-card glass-card">
+        <div class="stat-card-info">
+          <div class="stat-card-label">Threat Status</div>
+          <div class="stat-card-value">
+            <span class="severity-badge {% if result.threat_status == 'Malicious' %}critical{% elif result.threat_status == 'Suspicious' %}high{% elif result.threat_status == 'Unknown' %}medium{% else %}low{% endif %}">{{ result.threat_status }}</span>
+          </div>
+        </div>
+        <div class="stat-card-icon" style="background:oklch(82% .19 75/.15);color:var(--chart-2);">
+          <i data-lucide="virus"></i>
+        </div>
+      </div>
+      <div class="stat-card glass-card">
+        <div class="stat-card-info">
+          <div class="stat-card-label">Hash Type</div>
+          <div class="stat-card-value" style="color:var(--primary);">{{ result.hash_type }}</div>
+        </div>
+        <div class="stat-card-icon" style="background:oklch(72% .19 230/.15);color:var(--primary);">
+          <i data-lucide="hash"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass-card" style="padding:20px;">
+      <h5 style="font-weight:600;margin-bottom:8px;">Hash Value</h5>
+      <code style="display:block;word-break:break-all;font-size:12px;padding:12px;background:oklch(14% .03 250);border:1px solid var(--border);border-radius:6px;">{{ result.hash_value }}</code>
+    </div>
+
+    <div class="glass-card" style="padding:20px;">
+      <div class="detail-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="detail-field">
+          <div class="detail-label">Valid Format</div>
+          <div class="detail-value" style="color:{% if result.is_valid_format %}var(--accent){% else %}var(--chart-1){% endif %};">{% if result.is_valid_format %}Yes{% else %}No{% endif %}</div>
+        </div>
+        <div class="detail-field">
+          <div class="detail-label">Risk Score</div>
+          <div class="detail-value" style="color:{% if result.risk_score >= 70 %}var(--chart-1){% elif result.risk_score >= 40 %}var(--chart-2){% else %}var(--accent){% endif %};">{{ result.risk_score }}/100</div>
+        </div>
+        <div class="detail-field">
+          <div class="detail-label">Hash Length</div>
+          <div class="detail-value">{{ result.hash_value|length }} characters</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div class="glass-card" style="padding:20px;">
+        <h5 style="font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+          <i data-lucide="search" style="width:16px;height:16px;color:var(--primary);"></i>
+          Findings
+        </h5>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          {% for finding in result.findings.split('\n') %}
+          <div style="display:flex;align-items:flex-start;gap:8px;font-size:13px;">
+            <i data-lucide="alert-circle" style="width:14px;height:14px;color:var(--chart-2);flex-shrink:0;margin-top:2px;"></i>
+            <span>{{ finding }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="glass-card" style="padding:20px;">
+        <h5 style="font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+          <i data-lucide="lightbulb" style="width:16px;height:16px;color:var(--accent);"></i>
+          Recommendations
+        </h5>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          {% for rec in result.recommendations.split('\n') %}
+          <div style="display:flex;align-items:flex-start;gap:8px;font-size:13px;">
+            <i data-lucide="check-circle" style="width:14px;height:14px;color:var(--accent);flex-shrink:0;margin-top:2px;"></i>
+            <span>{{ rec }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

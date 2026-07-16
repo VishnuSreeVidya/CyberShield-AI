@@ -26,13 +26,19 @@ def create_app(config_class=Config):
         from app.dashboard import dashboard_bp
         from app.logs import logs_bp
         from app.routes import main_bp
+        from app.analysis import analysis_bp
 
         app.register_blueprint(auth_bp, url_prefix='/auth')
         app.register_blueprint(dashboard_bp, url_prefix='/dashboard')
         app.register_blueprint(logs_bp, url_prefix='/logs')
+        app.register_blueprint(analysis_bp, url_prefix='/analysis')
         app.register_blueprint(main_bp)
 
-        from app.models import User, LogEntry, Alert, Report
+        from app.models import (
+            User, LogEntry, Alert, Report,
+            AnalysisHistory, URLAnalysis, TextAnalysis,
+            PDFAnalysis, IPAnalysis, HashAnalysis,
+        )
         db.create_all()
 
         try:

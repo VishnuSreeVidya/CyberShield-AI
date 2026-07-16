@@ -2,7 +2,7 @@ from flask import jsonify
 from flask_login import login_required
 from datetime import datetime, timedelta, timezone
 from app import db
-from app.models import LogEntry, Alert, Report
+from app.models import LogEntry, Alert, Report, AnalysisHistory
 from sqlalchemy import func, extract, case
 
 
@@ -18,6 +18,7 @@ def register_api_routes(main_bp):
         medium = Alert.query.filter_by(severity='Medium').count()
         low = Alert.query.filter_by(severity='Low').count()
         total_reports = Report.query.count()
+        total_analyses = AnalysisHistory.query.count()
 
         return jsonify({
             'total_logs': total_logs,
@@ -27,6 +28,7 @@ def register_api_routes(main_bp):
             'medium': medium,
             'low': low,
             'total_reports': total_reports,
+            'total_analyses': total_analyses,
         })
 
     @main_bp.route('/api/dashboard/alerts_by_type')

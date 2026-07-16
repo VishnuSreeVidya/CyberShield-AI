@@ -4,7 +4,10 @@ import json
 from datetime import datetime, timezone
 from flask import render_template, request, redirect, url_for, flash, Response
 from flask_login import login_required, current_user
-from app.models import LogEntry, Alert, User
+from app.models import (
+    LogEntry, Alert, User, AnalysisHistory,
+    URLAnalysis, TextAnalysis, PDFAnalysis, IPAnalysis, HashAnalysis,
+)
 from sqlalchemy import func
 from app import db
 from app.auth.forms import ChangePasswordForm, ProfileForm
@@ -41,6 +44,22 @@ def index():
         Alert.detected_at.desc()
     ).limit(10).all()
 
+    total_analyses = AnalysisHistory.query.count()
+    url_count = URLAnalysis.query.count()
+    text_count = TextAnalysis.query.count()
+    pdf_count = PDFAnalysis.query.count()
+    ip_count = IPAnalysis.query.count()
+    hash_count = HashAnalysis.query.count()
+
+    critical_analyses = AnalysisHistory.query.filter_by(threat_level='Critical').count()
+    high_analyses = AnalysisHistory.query.filter_by(threat_level='High').count()
+    medium_analyses = AnalysisHistory.query.filter_by(threat_level='Medium').count()
+    low_analyses = AnalysisHistory.query.filter_by(threat_level='Low').count()
+
+    recent_analyses = AnalysisHistory.query.filter_by(
+        user_id=current_user.id
+    ).order_by(AnalysisHistory.created_at.desc()).limit(10).all()
+
     return render_template(
         'dashboard/index.html',
         total_logs=total_logs,
@@ -58,6 +77,17 @@ def index():
         low=low,
         high_risk_ips=high_risk_ips,
         recent_alerts=recent_alerts,
+        total_analyses=total_analyses,
+        url_count=url_count,
+        text_count=text_count,
+        pdf_count=pdf_count,
+        ip_count=ip_count,
+        hash_count=hash_count,
+        critical_analyses=critical_analyses,
+        high_analyses=high_analyses,
+        medium_analyses=medium_analyses,
+        low_analyses=low_analyses,
+        recent_analyses=recent_analyses,
     )
 
 
@@ -91,6 +121,15 @@ def reports():
 
     recent_alerts = Alert.query.order_by(Alert.detected_at.desc()).limit(50).all()
 
+    total_analyses = AnalysisHistory.query.count()
+    analysis_types = db.session.query(
+        AnalysisHistory.analysis_type, func.count(AnalysisHistory.id)
+    ).group_by(AnalysisHistory.analysis_type).all()
+
+    analysis_threats = db.session.query(
+        AnalysisHistory.threat_level, func.count(AnalysisHistory.id)
+    ).group_by(AnalysisHistory.threat_level).all()
+
     return render_template(
         'dashboard/reports.html',
         total_logs=total_logs,
@@ -100,6 +139,9 @@ def reports():
         top_ips=top_ips,
         recent_alerts=recent_alerts,
         now=datetime.now,
+        total_analyses=total_analyses,
+        analysis_types=analysis_types,
+        analysis_threats=analysis_threats,
     )
 
 
@@ -177,6 +219,7 @@ def export_pdf():
 
     total_logs = LogEntry.query.count()
     total_alerts = Alert.query.count()
+    total_analyses = AnalysisHistory.query.count()
 
     tmp = tempfile.NamedTemporaryFile(suffix='.pdf', delete=False)
     tmp_path = tmp.name
@@ -195,6 +238,8 @@ def export_pdf():
             ax.text(0.5, 0.40, f'Total Logs Processed: {total_logs}', fontsize=11,
                     ha='center', va='center', color='#e8e8f0')
             ax.text(0.5, 0.30, f'Total Alerts Generated: {total_alerts}', fontsize=11,
+                    ha='center', va='center', color='#e8e8f0')
+            ax.text(0.5, 0.20, f'Total Analyses Performed: {total_analyses}', fontsize=11,
                     ha='center', va='center', color='#e8e8f0')
             fig.patch.set_facecolor('#0a0a0f')
             pdf.savefig(fig, facecolor=fig.get_facecolor())

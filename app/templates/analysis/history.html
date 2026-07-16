@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block title %}Analysis History — CyberShield AI{% endblock %}
+{% block content %}
+<div class="space-y-6">
+  <div style="display:flex;align-items:center;justify-content:space-between;">
+    <div>
+      <h1 class="page-title">Analysis History</h1>
+      <p class="page-subtitle">View and filter all previous analyses</p>
+    </div>
+    <a href="{{ url_for('analysis.choose_analysis') }}" class="btn btn-primary">
+      <i data-lucide="plus"></i> New Analysis
+    </a>
+  </div>
+
+  <div class="glass-card" style="padding:16px;">
+    <form method="GET" style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;">
+      <div style="flex:1;min-width:200px;">
+        <label class="form-label">Search</label>
+        <input type="text" name="search" class="form-input" placeholder="Search analyses..." value="{{ current_search }}">
+      </div>
+      <div style="min-width:160px;">
+        <label class="form-label">Type</label>
+        <select name="type" class="form-input">
+          <option value="">All Types</option>
+          <option value="URL" {% if current_type == 'URL' %}selected{% endif %}>URL</option>
+          <option value="Text" {% if current_type == 'Text' %}selected{% endif %}>Text</option>
+          <option value="PDF" {% if current_type == 'PDF' %}selected{% endif %}>PDF</option>
+          <option value="IP" {% if current_type == 'IP' %}selected{% endif %}>IP</option>
+          <option value="Hash" {% if current_type == 'Hash' %}selected{% endif %}>Hash</option>
+        </select>
+      </div>
+      <div style="min-width:160px;">
+        <label class="form-label">Threat Level</label>
+        <select name="threat" class="form-input">
+          <option value="">All Levels</option>
+          <option value="Critical" {% if current_threat == 'Critical' %}selected{% endif %}>Critical</option>
+          <option value="High" {% if current_threat == 'High' %}selected{% endif %}>High</option>
+          <option value="Medium" {% if current_threat == 'Medium' %}selected{% endif %}>Medium</option>
+          <option value="Low" {% if current_threat == 'Low' %}selected{% endif %}>Low</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">
+        <i data-lucide="search"></i> Filter
+      </button>
+    </form>
+  </div>
+
+  {% if analyses %}
+  <div class="glass-card" style="overflow:hidden;">
+    <div style="overflow-x:auto;">
+      <table class="glass-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Summary</th>
+            <th>Threat Level</th>
+            <th>Risk Score</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for a in analyses %}
+          <tr>
+            <td style="font-family:var(--font-mono);font-size:12px;color:var(--muted-foreground);">#{{ a.id }}</td>
+            <td>
+              <span style="padding:2px 10px;border-radius:4px;font-size:11px;font-weight:600;background:oklch(72% .19 230/.15);color:var(--primary);border:1px solid oklch(72% .19 230/.3);">{{ a.analysis_type }}</span>
+            </td>
+            <td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;">{{ a.summary or '—' }}</td>
+            <td><span class="severity-badge {{ a.threat_level|lower }}">{{ a.threat_level }}</span></td>
+            <td style="font-family:var(--font-mono);font-weight:500;color:{% if a.risk_score >= 70 %}var(--chart-1){% elif a.risk_score >= 40 %}var(--chart-2){% else %}var(--accent){% endif %};">{{ a.risk_score }}/100</td>
+            <td style="font-size:12px;color:var(--muted-foreground);">{{ a.created_at.strftime('%Y-%m-%d %H:%M') if a.created_at else '—' }}</td>
+            <td>
+              <div style="display:flex;gap:4px;">
+                <a href="{{ url_for('analysis.analysis_detail', history_id=a.id) }}" class="btn btn-outline btn-sm">
+                  <i data-lucide="eye"></i>
+                </a>
+                <form method="POST" action="{{ url_for('analysis.delete_analysis', history_id=a.id) }}" style="display:inline;" onsubmit="return confirm('Delete this analysis?')">
+                  <button type="submit" class="btn btn-danger-soft btn-sm"><i data-lucide="trash-2"></i></button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  {% if pagination.pages > 1 %}
+  <div class="pagination-soc">
+    {% for page_num in pagination.iter_pages() %}
+      {% if page_num %}
+        <a href="{{ url_for('analysis.analysis_history', page=page_num, type=current_type, threat=current_threat, search=current_search) }}"
+           class="{{ 'active' if page_num == pagination.page else '' }}">{{ page_num }}</a>
+      {% else %}
+        <span class="disabled">...</span>
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% else %}
+  <div class="glass-card">
+    <div class="empty-state">
+      <i data-lucide="history"></i>
+      <div class="empty-state-title">No Analyses Found</div>
+      <div class="empty-state-desc">Start your first analysis to see results here.</div>
+      <a href="{{ url_for('analysis.choose_analysis') }}" class="btn btn-primary" style="margin-top:16px;">
+        <i data-lucide="plus"></i> New Analysis
+      </a>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

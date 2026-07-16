@@ -1,5 +1,9 @@
 from app import create_app, db
-from app.models import User, LogEntry, Alert, Report
+from app.models import (
+    User, LogEntry, Alert, Report,
+    AnalysisHistory, URLAnalysis, TextAnalysis,
+    PDFAnalysis, IPAnalysis, HashAnalysis,
+)
 
 app = create_app()
 
@@ -12,6 +16,12 @@ def make_shell_context():
         'LogEntry': LogEntry,
         'Alert': Alert,
         'Report': Report,
+        'AnalysisHistory': AnalysisHistory,
+        'URLAnalysis': URLAnalysis,
+        'TextAnalysis': TextAnalysis,
+        'PDFAnalysis': PDFAnalysis,
+        'IPAnalysis': IPAnalysis,
+        'HashAnalysis': HashAnalysis,
     }
 
 

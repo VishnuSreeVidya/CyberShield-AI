@@ -41,21 +41,36 @@
           <a href="{{ url_for('dashboard.index') }}" class="nav-item {% if request.endpoint and request.endpoint == 'dashboard.index' %}active{% endif %}">
             <i data-lucide="layout-dashboard"></i><span>Dashboard</span>
           </a>
-          <a href="{{ url_for('logs.upload') }}" class="nav-item {% if request.endpoint and 'upload' in request.endpoint %}active{% endif %}">
+          <a href="{{ url_for('analysis.choose_analysis') }}" class="nav-item {% if request.endpoint and request.endpoint.startswith('analysis') %}active{% endif %}">
+            <i data-lucide="scan"></i><span>New Analysis</span>
+          </a>
+          <a href="{{ url_for('analysis.analysis_history') }}" class="nav-item {% if request.endpoint == 'analysis.analysis_history' or request.endpoint == 'analysis.analysis_detail' %}active{% endif %}">
+            <i data-lucide="history"></i><span>Analysis History</span>
+          </a>
+        </nav>
+        <div class="nav-group-label">Log Analysis</div>
+        <nav class="sidebar-nav">
+          <a href="{{ url_for('logs.upload') }}" class="nav-item {% if request.endpoint and request.endpoint == 'logs.upload' %}active{% endif %}">
             <i data-lucide="upload"></i><span>Upload Logs</span>
           </a>
-          <a href="{{ url_for('logs.list_logs') }}" class="nav-item {% if request.endpoint and request.endpoint.startswith('logs') and 'upload' not in request.endpoint and 'threat' not in request.endpoint %}active{% endif %}">
+          <a href="{{ url_for('logs.list_logs') }}" class="nav-item {% if request.endpoint and request.endpoint == 'logs.list_logs' or request.endpoint == 'logs.detail' %}active{% endif %}">
             <i data-lucide="search"></i><span>Log Explorer</span>
           </a>
           <a href="{{ url_for('logs.threats') }}" class="nav-item {% if request.endpoint and 'threat' in request.endpoint %}active{% endif %}">
             <i data-lucide="shield-alert"></i><span>Threat Detection</span>
           </a>
+        </nav>
+        <div class="nav-group-label">Intelligence</div>
+        <nav class="sidebar-nav">
           <a href="{{ url_for('dashboard.alerts') }}" class="nav-item {% if request.endpoint and 'alerts' in request.endpoint %}active{% endif %}">
             <i data-lucide="bell"></i><span>Alerts</span>
           </a>
           <a href="{{ url_for('dashboard.reports') }}" class="nav-item {% if request.endpoint and 'reports' in request.endpoint %}active{% endif %}">
             <i data-lucide="file-chart-column"></i><span>Reports</span>
           </a>
+        </nav>
+        <div class="nav-group-label">System</div>
+        <nav class="sidebar-nav">
           <a href="{{ url_for('dashboard.settings') }}" class="nav-item {% if request.endpoint and 'settings' in request.endpoint %}active{% endif %}">
             <i data-lucide="settings"></i><span>Settings</span>
           </a>

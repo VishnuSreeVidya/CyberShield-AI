@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Choose Analysis — CyberShield AI{% endblock %}
+{% block content %}
+<div class="space-y-6">
+  <div>
+    <h1 class="page-title">Choose Analysis Type</h1>
+    <p class="page-subtitle">Select the type of security analysis you want to perform</p>
+  </div>
+
+  <div class="analysis-grid">
+    <a href="{{ url_for('logs.upload') }}" class="analysis-card glass-card">
+      <div class="analysis-card-icon" style="background:oklch(72% .19 230/.15);color:var(--primary);">
+        <i data-lucide="file-text"></i>
+      </div>
+      <h3 class="analysis-card-title">Log Analysis</h3>
+      <p class="analysis-card-desc">Upload server logs (Apache, Nginx, CSV, JSON) for automatic threat detection including SQL injection, XSS, brute force, and more.</p>
+      <div class="analysis-card-meta">
+        <span class="analysis-card-count">{{ counts.log }} analyses</span>
+        <span class="analysis-card-arrow"><i data-lucide="arrow-right"></i></span>
+      </div>
+    </a>
+
+    <a href="{{ url_for('analysis.url_analysis_page') }}" class="analysis-card glass-card">
+      <div class="analysis-card-icon" style="background:oklch(82% .19 75/.15);color:var(--chart-2);">
+        <i data-lucide="globe"></i>
+      </div>
+      <h3 class="analysis-card-title">URL Analysis</h3>
+      <p class="analysis-card-desc">Analyze website URLs for phishing indicators, HTTPS status, suspicious keywords, and domain reputation.</p>
+      <div class="analysis-card-meta">
+        <span class="analysis-card-count">{{ counts.url }} analyses</span>
+        <span class="analysis-card-arrow"><i data-lucide="arrow-right"></i></span>
+      </div>
+    </a>
+
+    <a href="{{ url_for('analysis.text_analysis_page') }}" class="analysis-card glass-card">
+      <div class="analysis-card-icon" style="background:oklch(78% .22 155/.15);color:var(--accent);">
+        <i data-lucide="message-square-text"></i>
+      </div>
+      <h3 class="analysis-card-title">Text Analysis</h3>
+      <p class="analysis-card-desc">Analyze emails, SMS, and messages for phishing, scam, spam content, and suspicious patterns.</p>
+      <div class="analysis-card-meta">
+        <span class="analysis-card-count">{{ counts.text }} analyses</span>
+        <span class="analysis-card-arrow"><i data-lucide="arrow-right"></i></span>
+      </div>
+    </a>
+
+    <a href="{{ url_for('analysis.pdf_analysis_page') }}" class="analysis-card glass-card">
+      <div class="analysis-card-icon" style="background:oklch(65% .25 22/.15);color:var(--chart-1);">
+        <i data-lucide="file-search"></i>
+      </div>
+      <h3 class="analysis-card-title">PDF Analysis</h3>
+      <p class="analysis-card-desc">Upload PDF files to inspect metadata, embedded URLs, suspicious keywords, and potential malware indicators.</p>
+      <div class="analysis-card-meta">
+        <span class="analysis-card-count">{{ counts.pdf }} analyses</span>
+        <span class="analysis-card-arrow"><i data-lucide="arrow-right"></i></span>
+      </div>
+    </a>
+
+    <a href="{{ url_for('analysis.ip_analysis_page') }}" class="analysis-card glass-card">
+      <div class="analysis-card-icon" style="background:oklch(82% .24 95/.15);color:var(--chart-3);">
+        <i data-lucide="wifi"></i>
+      </div>
+      <h3 class="analysis-card-title">IP Address Analysis</h3>
+      <p class="analysis-card-desc">Determine if an IP is public, private, reserved, or invalid. Get classification and threat assessment.</p>
+      <div class="analysis-card-meta">
+        <span class="analysis-card-count">{{ counts.ip }} analyses</span>
+        <span class="analysis-card-arrow"><i data-lucide="arrow-right"></i></span>
+      </div>
+    </a>
+
+    <a href="{{ url_for('analysis.hash_analysis_page') }}" class="analysis-card glass-card">
+      <div class="analysis-card-icon" style="background:oklch(70% .22 300/.15);color:oklch(70% .22 300);">
+        <i data-lucide="hash"></i>
+      </div>
+      <h3 class="analysis-card-title">File Hash Analysis</h3>
+      <p class="analysis-card-desc">Validate MD5, SHA1, or SHA256 hashes against a threat database to detect known malware.</p>
+      <div class="analysis-card-meta">
+        <span class="analysis-card-count">{{ counts.hash }} analyses</span>
+        <span class="analysis-card-arrow"><i data-lucide="arrow-right"></i></span>
+      </div>
+    </a>
+  </div>
+</div>
+{% endblock %}

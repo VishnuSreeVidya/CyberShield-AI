@@ -31,11 +31,20 @@
   </div>
   <div class="stat-card glass-card">
     <div class="stat-card-info">
-      <div class="stat-card-label">Total Alerts Generated</div>
+      <div class="stat-card-label">Total Alerts</div>
       <div class="stat-card-value" style="color:#ffc107;">{{ total_alerts }}</div>
     </div>
     <div class="stat-card-icon" style="background:rgba(255,193,7,0.15);color:#ffc107;">
       <i data-lucide="triangle-alert"></i>
+    </div>
+  </div>
+  <div class="stat-card glass-card">
+    <div class="stat-card-info">
+      <div class="stat-card-label">Total Analyses</div>
+      <div class="stat-card-value" style="color:var(--primary);">{{ total_analyses }}</div>
+    </div>
+    <div class="stat-card-icon" style="background:oklch(72% .19 230/.15);color:var(--primary);">
+      <i data-lucide="scan"></i>
     </div>
   </div>
   <div class="stat-card glass-card">
@@ -47,21 +56,12 @@
       <i data-lucide="list"></i>
     </div>
   </div>
-  <div class="stat-card glass-card">
-    <div class="stat-card-info">
-      <div class="stat-card-label">High Risk IPs</div>
-      <div class="stat-card-value" style="color:var(--high);">{{ top_ips|length }}</div>
-    </div>
-    <div class="stat-card-icon" style="background:var(--high-bg);color:var(--high);">
-      <i data-lucide="earth"></i>
-    </div>
-  </div>
 </div>
 
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
-  <div class="glass-card">
+  <div class="glass-card" style="padding:20px;">
     <h5 style="font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
-      <i data-lucide="bug" style="width:16px;height:16px;color:var(--critical);"></i>
+      <i data-lucide="bug" style="width:16px;height:16px;color:var(--chart-1);"></i>
       Attack Type Breakdown
     </h5>
     {% if attack_types %}
@@ -80,15 +80,42 @@
     </table>
     {% else %}
     <div class="empty-state" style="padding:20px;">
-      <i data-lucide="inbox"></i>
-      <div class="empty-state-title">No Data</div>
+      <div class="empty-state-desc">No data</div>
     </div>
     {% endif %}
   </div>
 
-  <div class="glass-card">
+  <div class="glass-card" style="padding:20px;">
     <h5 style="font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
-      <i data-lucide="flame" style="width:16px;height:16px;color:var(--high);"></i>
+      <i data-lucide="scan" style="width:16px;height:16px;color:var(--primary);"></i>
+      Analysis Types
+    </h5>
+    {% if analysis_types %}
+    <table class="glass-table">
+      <thead>
+        <tr><th>Type</th><th>Count</th></tr>
+      </thead>
+      <tbody>
+        {% for name, cnt in analysis_types %}
+        <tr>
+          <td style="font-weight:500;">{{ name }}</td>
+          <td><span class="severity-badge medium">{{ cnt }}</span></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state" style="padding:20px;">
+      <div class="empty-state-desc">No analyses yet</div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+  <div class="glass-card" style="padding:20px;">
+    <h5 style="font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+      <i data-lucide="flame" style="width:16px;height:16px;color:var(--chart-2);"></i>
       Severity Distribution
     </h5>
     {% if severity_counts %}
@@ -107,28 +134,25 @@
     </table>
     {% else %}
     <div class="empty-state" style="padding:20px;">
-      <i data-lucide="inbox"></i>
-      <div class="empty-state-title">No Data</div>
+      <div class="empty-state-desc">No data</div>
     </div>
     {% endif %}
   </div>
-</div>
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
-  <div class="glass-card">
+  <div class="glass-card" style="padding:20px;">
     <h5 style="font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
-      <i data-lucide="earth" style="width:16px;height:16px;color:var(--high);"></i>
-      Top Attacking IPs
+      <i data-lucide="shield-alert" style="width:16px;height:16px;color:var(--chart-1);"></i>
+      Analysis Threat Levels
     </h5>
-    {% if top_ips %}
+    {% if analysis_threats %}
     <table class="glass-table">
       <thead>
-        <tr><th>IP Address</th><th>Alerts</th></tr>
+        <tr><th>Level</th><th>Count</th></tr>
       </thead>
       <tbody>
-        {% for ip, cnt in top_ips %}
+        {% for name, cnt in analysis_threats %}
         <tr>
-          <td><code>{{ ip }}</code></td>
+          <td><span class="severity-badge {{ name|lower }}">{{ name }}</span></td>
           <td><span class="severity-badge medium">{{ cnt }}</span></td>
         </tr>
         {% endfor %}
@@ -136,38 +160,13 @@
     </table>
     {% else %}
     <div class="empty-state" style="padding:20px;">
-      <i data-lucide="inbox"></i>
-      <div class="empty-state-title">No Data</div>
+      <div class="empty-state-desc">No data</div>
     </div>
     {% endif %}
   </div>
-
-  <div class="glass-card">
-    <h5 style="font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
-      <i data-lucide="download" style="width:16px;height:16px;color:var(--accent);"></i>
-      Export Options
-    </h5>
-    <div style="display:flex;flex-direction:column;gap:12px;padding:12px 0;">
-      <a href="{{ url_for('dashboard.export_csv') }}" class="btn btn-outline" style="justify-content:flex-start;">
-        <i data-lucide="file-text"></i> Download All Alerts as CSV
-      </a>
-      <a href="{{ url_for('dashboard.export_json') }}" class="btn btn-outline" style="justify-content:flex-start;">
-        <i data-lucide="code"></i> Download All Alerts as JSON
-      </a>
-      <a href="{{ url_for('dashboard.export_pdf') }}" class="btn btn-outline" style="justify-content:flex-start;">
-        <i data-lucide="file-down"></i> Download Report as PDF
-      </a>
-    </div>
-    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border-color);">
-      <div class="detail-label" style="margin-bottom:4px;">Report Summary</div>
-      <div style="font-size:13px;color:var(--text-secondary);">
-        Generated: {{ now().strftime('%Y-%m-%d %H:%M:%S UTC') if now else '' }}
-      </div>
-    </div>
-  </div>
 </div>
 
-<div class="glass-card">
+<div class="glass-card" style="padding:20px;">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
     <h5 style="font-weight:600;display:flex;align-items:center;gap:8px;">
       <i data-lucide="bell" style="width:16px;height:16px;color:var(--accent);"></i>
@@ -189,7 +188,7 @@
       <tbody>
         {% for alert in recent_alerts %}
         <tr>
-          <td style="color:var(--text-muted);font-family:var(--font-mono);">#{{ alert.id }}</td>
+          <td style="color:var(--muted-foreground);font-family:var(--font-mono);">#{{ alert.id }}</td>
           <td style="font-weight:500;">{{ alert.attack_type }}</td>
           <td><span class="severity-badge {{ alert.severity|lower }}">{{ alert.severity }}</span></td>
           <td><code>{{ alert.source_ip or '—' }}</code></td>
@@ -201,7 +200,6 @@
   </div>
   {% else %}
   <div class="empty-state">
-    <i data-lucide="inbox"></i>
     <div class="empty-state-title">No Alerts Yet</div>
     <div class="empty-state-desc">Upload logs to generate data for reports.</div>
   </div>

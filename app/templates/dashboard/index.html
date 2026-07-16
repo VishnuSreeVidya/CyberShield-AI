@@ -7,17 +7,17 @@
 <div class="space-y-6">
   <div>
     <h1 class="page-title">SOC Dashboard</h1>
-    <p class="page-subtitle">Real-time threat intelligence and log analytics.</p>
+    <p class="page-subtitle">Multi-source threat intelligence and analysis platform.</p>
   </div>
 
   <div class="stat-grid">
     <div class="stat-card glass-card">
       <div class="stat-card-info">
-        <div class="stat-card-label">Total Logs Processed</div>
-        <div class="stat-card-value" style="color:var(--primary);">{{ total_logs }}</div>
+        <div class="stat-card-label">Total Analyses</div>
+        <div class="stat-card-value" style="color:var(--primary);">{{ total_analyses }}</div>
       </div>
       <div class="stat-card-icon" style="background:oklch(72% .19 230/.15);color:var(--primary);">
-        <i data-lucide="database"></i>
+        <i data-lucide="scan"></i>
       </div>
     </div>
     <div class="stat-card glass-card">
@@ -31,44 +31,8 @@
     </div>
     <div class="stat-card glass-card">
       <div class="stat-card-info">
-        <div class="stat-card-label">Failed Login Attempts</div>
-        <div class="stat-card-value" style="color:var(--primary);">{{ failed_login }}</div>
-      </div>
-      <div class="stat-card-icon" style="background:oklch(72% .19 230/.15);color:var(--primary);">
-        <i data-lucide="key-round"></i>
-      </div>
-    </div>
-    <div class="stat-card glass-card">
-      <div class="stat-card-info">
-        <div class="stat-card-label">Brute Force Attacks</div>
-        <div class="stat-card-value" style="color:var(--chart-2);">{{ brute_force }}</div>
-      </div>
-      <div class="stat-card-icon" style="background:oklch(82% .19 75/.15);color:var(--chart-2);">
-        <i data-lucide="zap"></i>
-      </div>
-    </div>
-    <div class="stat-card glass-card">
-      <div class="stat-card-info">
-        <div class="stat-card-label">SQL Injection Attempts</div>
-        <div class="stat-card-value" style="color:var(--chart-1);">{{ sql_injection }}</div>
-      </div>
-      <div class="stat-card-icon" style="background:oklch(65% .25 22/.15);color:var(--chart-1);">
-        <i data-lucide="bug"></i>
-      </div>
-    </div>
-    <div class="stat-card glass-card">
-      <div class="stat-card-info">
-        <div class="stat-card-label">XSS Attempts</div>
-        <div class="stat-card-value" style="color:var(--chart-5);">{{ xss }}</div>
-      </div>
-      <div class="stat-card-icon" style="background:oklch(78% .22 155/.15);color:var(--chart-5);">
-        <i data-lucide="activity"></i>
-      </div>
-    </div>
-    <div class="stat-card glass-card">
-      <div class="stat-card-info">
         <div class="stat-card-label">Critical Threats</div>
-        <div class="stat-card-value" style="color:var(--chart-1);">{{ critical }}</div>
+        <div class="stat-card-value" style="color:var(--chart-1);">{{ critical + critical_analyses }}</div>
       </div>
       <div class="stat-card-icon" style="background:oklch(65% .25 22/.15);color:var(--chart-1);">
         <i data-lucide="flame"></i>
@@ -85,12 +49,51 @@
     </div>
   </div>
 
+  <div class="stat-grid" style="grid-template-columns:repeat(6,1fr);">
+    <div class="stat-card glass-card" style="padding:12px;">
+      <div class="stat-card-info">
+        <div class="stat-card-label" style="font-size:10px;">Log</div>
+        <div class="stat-card-value" style="font-size:18px;color:var(--primary);">{{ total_logs }}</div>
+      </div>
+    </div>
+    <div class="stat-card glass-card" style="padding:12px;">
+      <div class="stat-card-info">
+        <div class="stat-card-label" style="font-size:10px;">URL</div>
+        <div class="stat-card-value" style="font-size:18px;color:var(--chart-2);">{{ url_count }}</div>
+      </div>
+    </div>
+    <div class="stat-card glass-card" style="padding:12px;">
+      <div class="stat-card-info">
+        <div class="stat-card-label" style="font-size:10px;">Text</div>
+        <div class="stat-card-value" style="font-size:18px;color:var(--accent);">{{ text_count }}</div>
+      </div>
+    </div>
+    <div class="stat-card glass-card" style="padding:12px;">
+      <div class="stat-card-info">
+        <div class="stat-card-label" style="font-size:10px;">PDF</div>
+        <div class="stat-card-value" style="font-size:18px;color:var(--chart-1);">{{ pdf_count }}</div>
+      </div>
+    </div>
+    <div class="stat-card glass-card" style="padding:12px;">
+      <div class="stat-card-info">
+        <div class="stat-card-label" style="font-size:10px;">IP</div>
+        <div class="stat-card-value" style="font-size:18px;color:var(--chart-3);">{{ ip_count }}</div>
+      </div>
+    </div>
+    <div class="stat-card glass-card" style="padding:12px;">
+      <div class="stat-card-info">
+        <div class="stat-card-label" style="font-size:10px;">Hash</div>
+        <div class="stat-card-value" style="font-size:18px;color:oklch(70% .22 300);">{{ hash_count }}</div>
+      </div>
+    </div>
+  </div>
+
   <div class="charts-grid">
     <div class="chart-card glass-card">
       <div class="chart-card-header">
         <div>
-          <div class="chart-card-title">Attack Timeline</div>
-          <div class="chart-card-subtitle">Attacks detected per hour (last 24h)</div>
+          <div class="chart-card-title">Threat Trend</div>
+          <div class="chart-card-subtitle">Alerts detected per hour (last 24h)</div>
         </div>
       </div>
       <div class="chart-container">
@@ -100,22 +103,22 @@
     <div class="chart-card glass-card">
       <div class="chart-card-header">
         <div>
-          <div class="chart-card-title">Attack Types Distribution</div>
+          <div class="chart-card-title">Analysis Distribution</div>
+          <div class="chart-card-subtitle">By analysis type</div>
         </div>
       </div>
       <div class="chart-container">
-        <canvas id="attackTypesChart"></canvas>
+        <canvas id="analysisDistChart"></canvas>
       </div>
     </div>
     <div class="chart-card glass-card">
       <div class="chart-card-header">
         <div>
-          <div class="chart-card-title">Top Attacking IPs</div>
-          <div class="chart-card-subtitle">Most active source addresses</div>
+          <div class="chart-card-title">Alert Types</div>
         </div>
       </div>
       <div class="chart-container">
-        <canvas id="topIpsChart"></canvas>
+        <canvas id="attackTypesChart"></canvas>
       </div>
     </div>
     <div class="chart-card glass-card">
@@ -130,30 +133,52 @@
     </div>
   </div>
 
-  <div class="alert-feed-card glass-card">
-    <div class="alert-feed-header">
-      <div class="alert-feed-title">Live Alert Feed</div>
-      <span class="alert-feed-status">Auto-updating</span>
-    </div>
-    {% if recent_alerts %}
-    <div class="alert-feed-list">
-      {% for alert in recent_alerts %}
-      <div class="alert-feed-item">
-        <span class="severity-badge {{ alert.severity|lower }}">{{ alert.severity }}</span>
-        <span style="font-weight:500;">{{ alert.attack_type }}</span>
-        <span class="alert-desc">from</span>
-        <span class="alert-ip">{{ alert.source_ip or '—' }}</span>
-        <span class="alert-time">{{ alert.detected_at.strftime('%Y-%m-%d %H:%M') if alert.detected_at else '—' }}</span>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="alert-feed-card glass-card">
+      <div class="alert-feed-header">
+        <div class="alert-feed-title">Recent Alerts</div>
+        <a href="{{ url_for('dashboard.alerts') }}" class="btn btn-outline btn-sm" style="font-size:11px;">View All</a>
       </div>
-      {% endfor %}
+      {% if recent_alerts %}
+      <div class="alert-feed-list">
+        {% for alert in recent_alerts[:8] %}
+        <div class="alert-feed-item">
+          <span class="severity-badge {{ alert.severity|lower }}">{{ alert.severity }}</span>
+          <span style="font-weight:500;font-size:12px;">{{ alert.attack_type }}</span>
+          <span class="alert-ip">{{ alert.source_ip or '—' }}</span>
+          <span class="alert-time">{{ alert.detected_at.strftime('%H:%M') if alert.detected_at else '—' }}</span>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="empty-state" style="padding:20px;">
+        <div class="empty-state-desc">No alerts yet</div>
+      </div>
+      {% endif %}
     </div>
-    {% else %}
-    <div class="empty-state">
-      <i data-lucide="inbox"></i>
-      <div class="empty-state-title">No Alerts</div>
-      <div class="empty-state-desc">Upload logs to start threat detection.</div>
+
+    <div class="alert-feed-card glass-card">
+      <div class="alert-feed-header">
+        <div class="alert-feed-title">Recent Analyses</div>
+        <a href="{{ url_for('analysis.analysis_history') }}" class="btn btn-outline btn-sm" style="font-size:11px;">View All</a>
+      </div>
+      {% if recent_analyses %}
+      <div class="alert-feed-list">
+        {% for a in recent_analyses[:8] %}
+        <div class="alert-feed-item">
+          <span style="padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;background:oklch(72% .19 230/.15);color:var(--primary);border:1px solid oklch(72% .19 230/.3);">{{ a.analysis_type }}</span>
+          <span class="severity-badge {{ a.threat_level|lower }}" style="font-size:10px;">{{ a.threat_level }}</span>
+          <span style="font-size:12px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ a.summary or '—' }}</span>
+          <span class="alert-time">{{ a.created_at.strftime('%H:%M') if a.created_at else '—' }}</span>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="empty-state" style="padding:20px;">
+        <div class="empty-state-desc">No analyses yet</div>
+      </div>
+      {% endif %}
     </div>
-    {% endif %}
   </div>
 </div>
 {% endblock %}
@@ -166,6 +191,8 @@ const chartColors = {
   medium: 'oklch(82% .24 95)',
   low: 'oklch(55% .03 250)',
   primary: 'oklch(72% .19 230)',
+  accent: 'oklch(78% .22 155)',
+  purple: 'oklch(70% .22 300)',
   grid: 'rgba(255,255,255,0.04)',
   text: '#8888aa',
 };
@@ -187,7 +214,7 @@ async function loadCharts() {
           labels: labels,
           datasets: [{
             data: values,
-            backgroundColor: [chartColors.critical, chartColors.high, chartColors.medium, chartColors.primary, 'oklch(78% .22 155)', 'oklch(70% .22 300)', chartColors.low],
+            backgroundColor: [chartColors.critical, chartColors.high, chartColors.medium, chartColors.primary, chartColors.accent, chartColors.purple, chartColors.low],
             borderWidth: 0,
           }],
         },
@@ -197,7 +224,7 @@ async function loadCharts() {
           plugins: {
             legend: {
               position: 'bottom',
-              labels: { padding: 16, usePointStyle: true, pointStyle: 'circle' },
+              labels: { padding: 16, usePointStyle: true, pointStyle: 'circle', font: { size: 11 } },
             },
           },
         },
@@ -260,31 +287,38 @@ async function loadCharts() {
       },
     });
 
-    const topIpsRes = await fetch('/api/dashboard/top_ips');
-    const topIpsData = await topIpsRes.json();
+    const distData = {
+      labels: ['Log', 'URL', 'Text', 'PDF', 'IP', 'Hash'],
+      datasets: [{
+        data: [
+          {{ total_logs }},
+          {{ url_count }},
+          {{ text_count }},
+          {{ pdf_count }},
+          {{ ip_count }},
+          {{ hash_count }}
+        ],
+        backgroundColor: [chartColors.primary, chartColors.high, chartColors.accent, chartColors.critical, chartColors.medium, chartColors.purple],
+        borderWidth: 0,
+      }],
+    };
 
-    new Chart(document.getElementById('topIpsChart'), {
-      type: 'bar',
-      data: {
-        labels: topIpsData.labels.length ? topIpsData.labels : ['No data'],
-        datasets: [{
-          label: 'Alerts',
-          data: topIpsData.data.length ? topIpsData.data : [0],
-          backgroundColor: 'oklch(72% .19 230/.4)',
-          borderRadius: 4,
-        }],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        indexAxis: 'y',
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { beginAtZero: true, grid: { color: chartColors.grid } },
-          y: { grid: { display: false } },
+    if (distData.datasets[0].data.some(v => v > 0)) {
+      new Chart(document.getElementById('analysisDistChart'), {
+        type: 'doughnut',
+        data: distData,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { padding: 16, usePointStyle: true, pointStyle: 'circle', font: { size: 11 } },
+            },
+          },
         },
-      },
-    });
+      });
+    }
 
   } catch (e) { console.error('Chart error:', e); }
 }
