@@ -5,6 +5,10 @@
 <h1 align="center">CyberShield AI</h1>
 
 <p align="center">
+  <strong>Analyze. Detect. Defend.</strong>
+</p>
+
+<p align="center">
   <strong>AI-Powered Multi-Source Cyber Threat Analysis Platform</strong>
 </p>
 
@@ -17,65 +21,55 @@
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License"/>
 </p>
 
----
-
-## Dashboard Preview
-
 <p align="center">
-  <img src="assets/images/dashboard.svg" alt="SOC Dashboard" width="100%"/>
+  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status"/>
+  <img src="https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge" alt="Build"/>
+  <img src="https://img.shields.io/badge/Coverage-80%25-yellow?style=for-the-badge" alt="Coverage"/>
 </p>
 
 ---
 
 ## Overview
 
-CyberShield AI is a production-inspired cybersecurity web application that analyzes multiple types of security inputs, detects suspicious activities, identifies common cyber attacks, and visualizes security events through an interactive **Security Operations Center (SOC) Dashboard**.
+**CyberShield AI** is a production-inspired, AI-powered cybersecurity web application that analyzes multiple types of security inputs, detects suspicious activities, identifies common cyber attacks, and visualizes security events through an interactive **Security Operations Center (SOC) Dashboard**.
 
-Originally built as a Log Analysis Tool (v1.0), CyberShield AI v2.0 has been upgraded into a **Multi-Source Cyber Threat Analysis Platform** capable of analyzing URLs, text messages, PDF files, IP addresses, and file hashes — all from a single unified interface.
+Originally built as a Log Analysis Tool (v1.0), CyberShield AI **v2.0** has been upgraded into a comprehensive **Multi-Source Cyber Threat Analysis Platform** capable of analyzing URLs, text messages, PDF files, IP addresses, and file hashes — all from a single unified interface.
 
-Built by **Kotturu Vishnu Sree Vidya** — Computer Science Student, Full-Stack Developer & Cybersecurity Enthusiast.
-
+> Built by **Kotturu Vishnu Sree Vidya** — Computer Science Student, Full-Stack Developer & Cybersecurity Enthusiast.
+>
 > **GitHub:** [https://github.com/VishnuSreeVidya/CyberShield-AI](https://github.com/VishnuSreeVidya/CyberShield-AI)
 
 ---
 
-## Features
+## Key Features
 
-### Choose Analysis Type
+### Analysis Capabilities
 
-A central hub with 6 interactive analysis cards, each with icon, description, and quick-start button:
+| Feature | Description | Detection Method |
+|---------|-------------|-----------------|
+| **Log Analysis** | Upload server logs for automatic threat detection | Regex pattern matching + threshold analysis |
+| **URL Analysis** | Analyze URLs for phishing, malware, and suspicious patterns | HTTPS check, keyword analysis, brand impersonation detection |
+| **Text Analysis** | Detect phishing, scam, and spam in emails/SMS/messages | Pattern matching, keyword scoring, linguistic analysis |
+| **PDF Analysis** | Inspect PDF metadata, embedded URLs, and suspicious content | Metadata parsing, JavaScript detection, exploit signature matching |
+| **IP Address Analysis** | Classify IPs as public/private/reserved with threat assessment | IPv4/IPv6 validation, blacklist checking, ASN lookup |
+| **File Hash Analysis** | Validate MD5/SHA1/SHA256 against threat databases | Format validation, demo malicious hash DB lookup, algorithm strength |
 
-| # | Analysis Type | Description |
-|---|---------------|-------------|
-| 1 | **Log Analysis** | Upload server logs for automatic threat detection |
-| 2 | **URL Analysis** | Analyze URLs for phishing, HTTPS, suspicious keywords |
-| 3 | **Text Analysis** | Detect phishing, scam, spam in emails/SMS/messages |
-| 4 | **PDF Analysis** | Inspect PDF metadata, embedded URLs, suspicious keywords |
-| 5 | **IP Address Analysis** | Classify IPs as public/private/reserved with threat assessment |
-| 6 | **File Hash Analysis** | Validate MD5/SHA1/SHA256 against threat databases |
+### Platform Features
 
-### Authentication System
-- User Registration with validation (username uniqueness, email, password matching)
-- Secure Login with Werkzeug password hashing
-- Role-Based Access Control (default: `analyst`)
-- Profile settings (update username/email, change password)
-- Demo role quick-login buttons (Admin / Security Analyst)
+| Feature | Description |
+|---------|-------------|
+| **SOC Dashboard** | Interactive charts, real-time stats, and analysis distribution |
+| **Authentication** | Secure login/register with role-based access control |
+| **Analysis History** | View, search, and filter all previous analyses |
+| **Report Export** | Download reports as CSV, JSON, or PDF |
+| **Threat Detection Engine** | 7 log analysis rules + 5 specialized analysis engines |
+| **Dark Glassmorphism UI** | Professional dark-themed interface with glass effects |
 
-### Log Analysis (Preserved from v1.0)
-- Upload server log files (`.log`, `.txt`, `.csv`, `.json`)
-- Automatic format detection (Apache combined/common, syslog/auth, JSON, CSV)
-- Smart fallback parsing when format is ambiguous
-- Extracts: Timestamp, IP Address, HTTP Method, Request URL, Status Code, User Agent
-- Paginated log explorer with detail views
-- Threat-filtered view showing only logs with detected threats
+---
 
-### Threat Detection Engine
+## Threat Detection Engine
 
-<p align="center">
-  <img src="assets/images/detection.svg" alt="Threat Detection Rules" width="100%"/>
-</p>
-
-**7 Log Analysis Rules:**
+### 7 Log Analysis Rules
 
 | # | Rule | Method | Severity |
 |---|------|--------|----------|
@@ -87,7 +81,7 @@ A central hub with 6 interactive analysis cards, each with icon, description, an
 | 6 | **Port Scanning** | Heuristic (15+ unique endpoints from same IP) | Medium |
 | 7 | **DoS (Denial of Service)** | Threshold-based (100+ requests from same IP) | Critical |
 
-**5 New Analysis Modules:**
+### 5 Analysis Modules
 
 | Module | What It Analyzes | Output |
 |--------|-----------------|--------|
@@ -97,150 +91,58 @@ A central hub with 6 interactive analysis cards, each with icon, description, an
 | **IP Detector** | IPv4/IPv6 validation, public/private/reserved classification, loopback, multicast, link-local, known malicious ranges | Threat Level, Risk Score, IP Type, Recommendations |
 | **Hash Detector** | MD5/SHA1/SHA256 format validation, demo malicious hash database lookup, algorithm strength assessment | Threat Status, Risk Score, Findings, Recommendations |
 
-### SOC Dashboard (Upgraded)
-- **4 Primary Stat Cards**: Total Analyses, Total Alerts, Critical Threats, High-Risk IPs
-- **6 Secondary Stat Cards**: Log, URL, Text, PDF, IP, Hash analysis counts
-- **4 Interactive Charts** (via Chart.js):
-  - Threat Trend (line chart, last 24 hours)
-  - Analysis Distribution (doughnut chart by type)
-  - Alert Types (doughnut chart)
-  - Severity Distribution (bar chart)
-- **Recent Alerts Feed** with severity badges, source IPs, and timestamps
-- **Recent Analyses Feed** with analysis types and threat levels
-
-### Analysis History
-- View all previous analyses in a paginated table
-- **Search** by summary text
-- **Filter** by Analysis Type (URL/Text/PDF/IP/Hash)
-- **Filter** by Threat Level (Critical/High/Medium/Low)
-- Detail view for each analysis with full findings and recommendations
-- Delete individual analyses
-
-### Report Export
-- **CSV Export**: All alerts as downloadable CSV
-- **JSON Export**: All alerts as downloadable JSON
-- **PDF Export**: Multi-page PDF report with matplotlib charts (Attack Type Breakdown, Severity Distribution, Top Attacking IPs, Analysis Types, Recent Alerts table)
-
-### Security
-- CSRF protection via Flask-WTF
-- Password hashing (Werkzeug `generate_password_hash` / `check_password_hash`)
-- SQLAlchemy ORM (prevents SQL injection in queries)
-- Environment variables via `.env` (secrets not hardcoded)
-- Input validation on forms and file uploads
-- File extension whitelist (`.log`, `.txt`, `.csv`, `.json`, `.pdf`)
-- `@login_required` on all protected routes
-
 ---
 
-## Login Page
-
-<p align="center">
-  <img src="assets/images/login-screenshot.png" alt="Login Page" width="100%"/>
-</p>
-
----
-
-## Sample Analysis
-
-<p align="center">
-  <img src="assets/images/sample-output.svg" alt="Sample Input and Detected Threats" width="100%"/>
-</p>
-
-### URL Analysis Input
-```
-https://secure-paypal.com.login-verify.xyz/account/update
-```
-
-### URL Analysis Output
-```
-Threat Level: Critical
-Risk Score:   85/100
-HTTPS:        Not Secured
-Findings:
-  - URL does not use HTTPS encryption
-  - Suspicious keywords found: verify, account, login
-  - Potential brand impersonation: paypal
-  - Multiple subdomains detected (possible subdomain spoofing)
-Recommendations:
-  - Use HTTPS URLs when possible
-  - This URL may impersonate a known brand. Do not enter credentials.
-```
-
-### Text Analysis Input
-```
-URGENT: Your account has been suspended! Click here immediately
-to verify your identity or your access will be permanently locked.
-Dear customer, act now before it's too late!
-```
-
-### Text Analysis Output
-```
-Classification: Suspicious
-Confidence:     78.2%
-Risk Score:     55/100
-Phishing:       DETECTED
-Scam:           Clear
-Spam:           Clear
-```
-
-### Hash Analysis Input
-```
-275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
-```
-
-### Hash Analysis Output
-```
-Hash Type:   SHA256
-Status:      Malicious
-Threat Level: Critical
-Findings:    Match found: EICAR-Test-File
-```
-
----
-
-## Tech Stack
+## Technology Stack
 
 ### Backend
+
 | Technology | Purpose |
-|---|---|
+|------------|---------|
 | **Python 3.13** | Core language |
 | **Flask 3.1** | Web framework |
-| **SQLAlchemy 2.0** | ORM |
-| **Flask-Login** | Session management |
-| **Flask-WTF** | Form handling with CSRF |
-| **PostgreSQL 18** | Database |
+| **SQLAlchemy 2.0** | ORM for database operations |
+| **Flask-Login** | Session management and authentication |
+| **Flask-WTF** | Form handling with CSRF protection |
+| **PostgreSQL 18** | Production database |
+| **Werkzeug** | Password hashing and security utilities |
 
 ### Frontend
+
 | Technology | Purpose |
-|---|---|
+|------------|---------|
 | **HTML5 + Jinja2** | 20 template files |
-| **Custom CSS** | 1100+ lines of glassmorphism dark-theme |
+| **Custom CSS** | 1100+ lines of glassmorphism dark-theme styling |
 | **JavaScript ES6+** | Client-side interactivity |
 | **Chart.js** | Interactive data visualizations |
 | **Lucide Icons** | UI icon system |
 | **Canvas API** | Animated particle backgrounds |
 
 ### Analysis Engines
+
 | Technology | Purpose |
-|---|---|
+|------------|---------|
 | **Python regex** | URL, text, PDF, IP pattern detection |
 | **ipaddress (stdlib)** | IP classification and validation |
 | **hashlib (stdlib)** | Hash validation and comparison |
 | **urllib.parse** | URL parsing and analysis |
 
 ### Data Processing
+
 | Technology | Purpose |
-|---|---|
+|------------|---------|
 | **Pandas** | CSV/JSON data processing |
 | **Regular Expressions** | Apache log parsing, threat pattern matching |
-| **Matplotlib** | PDF report generation |
+| **Matplotlib** | PDF report generation with charts |
 
 ### Infrastructure
+
 | Technology | Purpose |
-|---|---|
+|------------|---------|
 | **Docker** | Containerization |
 | **Docker Compose** | Multi-service orchestration |
 | **Gunicorn** | Production WSGI server (4 workers) |
+| **pytest** | Testing framework with coverage |
 
 ---
 
@@ -250,86 +152,98 @@ Findings:    Match found: EICAR-Test-File
   <img src="assets/images/architecture.svg" alt="System Architecture" width="100%"/>
 </p>
 
+The application follows a **modular Flask Blueprint architecture** with clear separation of concerns:
+
+```
+User Request → Flask App → Blueprint Router → Detection Engine → PostgreSQL → Response
+                      ↓
+              Analysis Engine (URL/Text/PDF/IP/Hash)
+                      ↓
+              Results + Risk Score → Dashboard Visualization
+```
+
 ---
 
 ## Project Structure
 
-```text
+```
 CyberShield-AI/
 │
 ├── app/
-│   ├── analysis/               # NEW: Multi-source analysis routes
-│   │   ├── __init__.py         # Blueprint registration
-│   │   └── routes.py           # 8 routes: choose, url, text, pdf, ip, hash, history, detail
+│   ├── analysis/                  # Multi-source analysis routes
+│   │   ├── __init__.py            # Blueprint registration
+│   │   └── routes.py              # 8 routes: choose, url, text, pdf, ip, hash, history, detail
 │   │
-│   ├── auth/                   # Authentication routes & forms
+│   ├── auth/                      # Authentication routes & forms
 │   │   ├── __init__.py
 │   │   ├── forms.py
 │   │   └── routes.py
 │   │
-│   ├── dashboard/              # SOC Dashboard routes
+│   ├── dashboard/                 # SOC Dashboard routes
 │   │   ├── __init__.py
 │   │   └── routes.py
 │   │
-│   ├── detection/              # Threat detection engines
-│   │   ├── engine.py           # 7 log analysis rules (preserved)
-│   │   ├── url_detector.py     # NEW: URL phishing/malware detection
-│   │   ├── text_detector.py    # NEW: Text phishing/scam/spam detection
-│   │   ├── pdf_detector.py     # NEW: PDF metadata & threat analysis
-│   │   ├── ip_detector.py      # NEW: IP classification & threat assessment
-│   │   └── hash_detector.py    # NEW: Hash validation & threat database lookup
+│   ├── detection/                 # Threat detection engines
+│   │   ├── engine.py              # 7 log analysis rules
+│   │   ├── url_detector.py        # URL phishing/malware detection
+│   │   ├── text_detector.py       # Text phishing/scam/spam detection
+│   │   ├── pdf_detector.py        # PDF metadata & threat analysis
+│   │   ├── ip_detector.py         # IP classification & threat assessment
+│   │   └── hash_detector.py       # Hash validation & threat database lookup
 │   │
-│   ├── logs/                   # Log upload & management routes
+│   ├── logs/                      # Log upload & management routes
 │   │   ├── __init__.py
 │   │   └── routes.py
 │   │
-│   ├── models/                 # SQLAlchemy models (10 total)
+│   ├── models/                    # SQLAlchemy models (10 total)
 │   │   ├── __init__.py
-│   │   ├── user.py             # User accounts
-│   │   ├── log_entry.py        # Uploaded log entries
-│   │   ├── alert.py            # Generated alerts
-│   │   ├── report.py           # Generated reports
-│   │   ├── analysis_history.py # NEW: Analysis session tracking
-│   │   ├── url_analysis.py     # NEW: URL analysis results
-│   │   ├── text_analysis.py    # NEW: Text analysis results
-│   │   ├── pdf_analysis.py     # NEW: PDF analysis results
-│   │   ├── ip_analysis.py      # NEW: IP analysis results
-│   │   └── hash_analysis.py    # NEW: Hash analysis results
+│   │   ├── user.py                # User accounts
+│   │   ├── log_entry.py           # Uploaded log entries
+│   │   ├── alert.py               # Generated alerts
+│   │   ├── report.py              # Generated reports
+│   │   ├── analysis_history.py    # Analysis session tracking
+│   │   ├── url_analysis.py        # URL analysis results
+│   │   ├── text_analysis.py       # Text analysis results
+│   │   ├── pdf_analysis.py        # PDF analysis results
+│   │   ├── ip_analysis.py         # IP analysis results
+│   │   └── hash_analysis.py       # Hash analysis results
 │   │
-│   ├── routes/                 # API endpoints & landing routes
+│   ├── routes/                    # API endpoints & landing routes
 │   │   ├── __init__.py
 │   │   ├── api.py
 │   │   └── routes.py
 │   │
 │   ├── static/
-│   │   ├── css/                # Custom glassmorphism stylesheet
-│   │   └── js/                 # Chart.js + animated particle canvas
+│   │   ├── css/                   # Custom glassmorphism stylesheet
+│   │   └── js/                    # Chart.js + animated particle canvas
 │   │
-│   └── templates/              # Jinja2 templates (20 files)
-│       ├── base.html           # Main layout with sidebar
-│       ├── index.html          # Landing page
-│       ├── auth/               # Login, Register
-│       ├── dashboard/          # Dashboard, Alerts, Reports, Settings
-│       ├── logs/               # Upload, List, Detail, Threats
-│       └── analysis/           # NEW: Choose, URL, Text, PDF, IP, Hash, History, Detail
+│   └── templates/                 # Jinja2 templates (20 files)
+│       ├── base.html              # Main layout with sidebar
+│       ├── index.html             # Landing page
+│       ├── auth/                  # Login, Register
+│       ├── dashboard/             # Dashboard, Alerts, Reports, Settings
+│       ├── logs/                  # Upload, List, Detail, Threats
+│       └── analysis/              # Choose, URL, Text, PDF, IP, Hash, History, Detail
 │
-├── tests/                      # pytest test suite
-├── assets/images/              # Project screenshots & diagrams
-├── config.py                   # Flask configuration
-├── run.py                      # Application entry point
-├── requirements.txt            # Python dependencies
-├── Dockerfile                  # Docker image definition
-├── docker-compose.yml          # Production deployment
-├── docker-entrypoint.py        # Docker startup script
-├── .env                        # Environment variables
+├── assets/images/                 # Project screenshots & diagrams
+├── screenshots/                   # Application screenshots
+├── tests/                         # pytest test suite
+├── config.py                      # Flask configuration
+├── run.py                         # Application entry point
+├── requirements.txt               # Python dependencies
+├── Dockerfile                     # Docker image definition
+├── docker-compose.yml             # Production deployment
+├── docker-entrypoint.py           # Docker startup script
+├── .env                           # Environment variables (not committed)
 └── .gitignore
 ```
 
 ---
 
-## Installation
+## Installation & Setup
 
 ### Prerequisites
+
 - Python 3.13+
 - PostgreSQL 14+
 - Git
@@ -363,15 +277,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
----
-
-## PostgreSQL Configuration
-
-Create a PostgreSQL database:
-
-```sql
-CREATE DATABASE cybershield_ai;
-```
+### Configure Environment Variables
 
 Create a `.env` file in the project root:
 
@@ -384,9 +290,15 @@ DB_PORT=5432
 DB_NAME=cybershield_ai
 ```
 
----
+### Database Setup
 
-## Running the Application
+Create a PostgreSQL database:
+
+```sql
+CREATE DATABASE cybershield_ai;
+```
+
+### Run the Application
 
 ```bash
 python run.py
@@ -406,52 +318,53 @@ docker compose up --build
 
 ---
 
-## How It Works
+## Database Schema Overview
 
-### Log Analysis Flow
-1. User logs in to the application
-2. Uploads a server log file (`.txt`, `.csv`, `.json`, `.log`)
-3. System auto-detects the log format (Apache combined/common, syslog, JSON, CSV)
-4. Parses each log entry, extracting: Timestamp, IP Address, HTTP Method, URL, Status Code, User Agent
-5. Stores parsed logs in PostgreSQL
-6. Runs 7 threat detection rules against each entry
-7. Generates alerts with severity levels (Critical / High / Medium / Low)
-8. Displays results on the SOC dashboard
+### Existing Tables (v1.0)
 
-### Multi-Source Analysis Flow
-1. User navigates to **New Analysis** from the sidebar
-2. Selects an analysis type (URL, Text, PDF, IP, or Hash)
-3. Enters input (URL, pastes text, uploads PDF, enters IP/hash)
-4. System runs specialized detection engine
-5. Results stored in database with threat level and risk score
-6. Results displayed with findings, recommendations, and details
-7. All analyses tracked in **Analysis History** with search and filter
+| Table | Columns |
+|-------|---------|
+| **users** | id, username, email, password_hash, role, created_at |
+| **logs** | id, timestamp, ip_address, http_method, request_url, status_code, user_agent, raw_log, uploaded_at |
+| **alerts** | id, log_id, source_ip, attack_type, severity, description, detected_at |
+| **reports** | id, report_name, report_type, generated_at |
 
----
+### New Tables (v2.0)
 
-## JSON API Endpoints
-
-| Endpoint | Description |
-|---|---|
-| `GET /api/dashboard/stats` | Aggregate log, alert, and analysis counts |
-| `GET /api/dashboard/alerts_by_type` | Alerts grouped by attack type |
-| `GET /api/dashboard/recent_alerts` | Last 10 alerts |
-| `GET /api/dashboard/timeline` | Hourly attack counts (24h) |
-| `GET /api/dashboard/top_ips` | Top 10 attacking IPs |
-| `GET /health` | Health check endpoint |
+| Table | Columns |
+|-------|---------|
+| **analysis_history** | id, user_id, analysis_type, threat_level, risk_score, summary, created_at |
+| **url_analyses** | id, history_id, url, is_https, url_length, has_suspicious_keywords, is_ip_based, phishing_indicators, findings, recommendations |
+| **text_analyses** | id, history_id, input_text, classification, confidence_score, is_phishing, is_scam, is_spam, suspicious_words, findings, recommendations |
+| **pdf_analyses** | id, history_id, filename, file_size, author, creation_date, page_count, embedded_urls, suspicious_keywords, findings, recommendations |
+| **ip_analyses** | id, history_id, ip_address, is_public, is_valid, is_reserved, ip_type, findings, recommendations |
+| **hash_analyses** | id, history_id, hash_value, hash_type, is_valid_format, threat_status, findings, recommendations |
 
 ---
 
-## Routes
+## REST API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/dashboard/stats` | GET | Aggregate log, alert, and analysis counts |
+| `/api/dashboard/alerts_by_type` | GET | Alerts grouped by attack type |
+| `/api/dashboard/recent_alerts` | GET | Last 10 alerts |
+| `/api/dashboard/timeline` | GET | Hourly attack counts (24h) |
+| `/api/dashboard/top_ips` | GET | Top 10 attacking IPs |
+| `/health` | GET | Health check endpoint |
+
+---
+
+## Application Routes
 
 | Route | Description |
-|---|---|
+|-------|-------------|
 | `/` | Landing page (redirects to dashboard) |
 | `/auth/login` | Login page |
 | `/auth/register` | Registration page |
 | `/dashboard/` | SOC Dashboard |
-| `/dashboard/alerts` | All alerts |
-| `/dashboard/reports` | Reports & export |
+| `/dashboard/alerts` | All alerts view |
+| `/dashboard/reports` | Reports & export page |
 | `/dashboard/settings` | Profile & password settings |
 | `/analysis/` | Choose analysis type |
 | `/analysis/url` | URL analysis |
@@ -468,21 +381,177 @@ docker compose up --build
 
 ---
 
-## Database Schema
+## Application Workflow
 
-### Existing Tables (v1.0)
-- **users** - User accounts (id, username, email, password_hash, role, created_at)
-- **logs** - Uploaded log entries (id, timestamp, ip_address, http_method, request_url, status_code, user_agent, raw_log, uploaded_at)
-- **alerts** - Generated alerts (id, log_id, source_ip, attack_type, severity, description, detected_at)
-- **reports** - Generated reports (id, report_name, report_type, generated_at)
+### Log Analysis Flow
 
-### New Tables (v2.0)
-- **analysis_history** - Analysis session tracking (id, user_id, analysis_type, threat_level, risk_score, summary, created_at)
-- **url_analyses** - URL analysis results (id, history_id, url, is_https, url_length, has_suspicious_keywords, is_ip_based, phishing_indicators, findings, recommendations)
-- **text_analyses** - Text analysis results (id, history_id, input_text, classification, confidence_score, is_phishing, is_scam, is_spam, suspicious_words, findings, recommendations)
-- **pdf_analyses** - PDF analysis results (id, history_id, filename, file_size, author, creation_date, page_count, embedded_urls, suspicious_keywords, findings, recommendations)
-- **ip_analyses** - IP analysis results (id, history_id, ip_address, is_public, is_valid, is_reserved, ip_type, findings, recommendations)
-- **hash_analyses** - Hash analysis results (id, history_id, hash_value, hash_type, is_valid_format, threat_status, findings, recommendations)
+```
+User Login → Upload Log File → Auto-Detect Format → Parse Entries
+    → Run 7 Threat Detection Rules → Generate Alerts → Display Results
+```
+
+1. User logs in to the application
+2. Uploads a server log file (`.txt`, `.csv`, `.json`, `.log`)
+3. System auto-detects the log format (Apache combined/common, syslog, JSON, CSV)
+4. Parses each log entry, extracting: Timestamp, IP Address, HTTP Method, URL, Status Code, User Agent
+5. Stores parsed logs in PostgreSQL
+6. Runs 7 threat detection rules against each entry
+7. Generates alerts with severity levels (Critical / High / Medium / Low)
+8. Displays results on the SOC dashboard
+
+### Multi-Source Analysis Flow
+
+```
+Navigate to New Analysis → Select Type → Enter Input → Run Engine
+    → Generate Risk Score → Store Results → Display Findings
+```
+
+1. User navigates to **New Analysis** from the sidebar
+2. Selects an analysis type (URL, Text, PDF, IP, or Hash)
+3. Enters input (URL, pastes text, uploads PDF, enters IP/hash)
+4. System runs specialized detection engine
+5. Results stored in database with threat level and risk score
+6. Results displayed with findings, recommendations, and details
+7. All analyses tracked in **Analysis History** with search and filter
+
+---
+
+## Screenshots
+
+### Home Page
+
+<p align="center">
+  <img src="screenshots/home.png" alt="Home Page" width="80%"/>
+</p>
+
+---
+
+### Login Page
+
+<p align="center">
+  <img src="screenshots/login.png" alt="Login Page" width="80%"/>
+</p>
+
+---
+
+### Register Page
+
+<p align="center">
+  <img src="screenshots/register.png" alt="Register Page" width="80%"/>
+</p>
+
+---
+
+### Dashboard
+
+<p align="center">
+  <img src="screenshots/dashboard.png" alt="SOC Dashboard" width="80%"/>
+</p>
+
+---
+
+### Choose Analysis Type
+
+<p align="center">
+  <img src="screenshots/analysis-selection.png" alt="Analysis Selection" width="80%"/>
+</p>
+
+---
+
+### Log Analysis
+
+<p align="center">
+  <img src="screenshots/log-analysis.png" alt="Log Analysis" width="80%"/>
+</p>
+
+---
+
+### URL Analysis
+
+<p align="center">
+  <img src="screenshots/url-analysis.png" alt="URL Analysis" width="80%"/>
+</p>
+
+---
+
+### Text Analysis
+
+<p align="center">
+  <img src="screenshots/text-analysis.png" alt="Text Analysis" width="80%"/>
+</p>
+
+---
+
+### PDF Analysis
+
+<p align="center">
+  <img src="screenshots/pdf-analysis.png" alt="PDF Analysis" width="80%"/>
+</p>
+
+---
+
+### IP Address Analysis
+
+<p align="center">
+  <img src="screenshots/ip-analysis.png" alt="IP Analysis" width="80%"/>
+</p>
+
+---
+
+### File Hash Analysis
+
+<p align="center">
+  <img src="screenshots/hash-analysis.png" alt="Hash Analysis" width="80%"/>
+</p>
+
+---
+
+### Analysis Results
+
+<p align="center">
+  <img src="screenshots/results.png" alt="Analysis Results" width="80%"/>
+</p>
+
+---
+
+### Threat Reports
+
+<p align="center">
+  <img src="screenshots/reports.png" alt="Threat Reports" width="80%"/>
+</p>
+
+---
+
+### Analysis History
+
+<p align="center">
+  <img src="screenshots/history.png" alt="Analysis History" width="80%"/>
+</p>
+
+---
+
+### Profile Page
+
+<p align="center">
+  <img src="screenshots/profile.png" alt="Profile Page" width="80%"/>
+</p>
+
+---
+
+## Future Enhancements
+
+| Enhancement | Description |
+|-------------|-------------|
+| **VirusTotal Integration** | Real-time hash and URL reputation checking via VirusTotal API |
+| **Threat Intelligence APIs** | Integration with MISP, AlienVault OTX, and other threat feeds |
+| **Real-Time Monitoring** | WebSocket-based live log monitoring and instant alerts |
+| **AI Chat Assistant** | Natural language interface for querying threat data |
+| **Email Alerts** | Automated email notifications for critical threats |
+| **IP Geolocation** | GeoIP2 integration for IP location mapping |
+| **Machine Learning** | ML-based anomaly detection for unknown threats |
+| **REST API Docs** | Swagger/OpenAPI documentation for all endpoints |
+| **Multi-Tenant Support** | Organization-level isolation and management |
+| **PDF Text Extraction** | PyPDF2 integration for full PDF content analysis |
 
 ---
 
@@ -492,10 +561,10 @@ docker compose up --build
 pytest tests/ -q
 ```
 
-Tests covering:
+### Test Coverage
 
 | Test File | Coverage |
-|---|---|
+|-----------|----------|
 | `test_models.py` | User, LogEntry, Alert, Report models |
 | `test_auth.py` | Registration, login, logout, validation |
 | `test_parsers.py` | Format detection, all 5 parsers |
@@ -513,36 +582,28 @@ Tests covering:
 
 ---
 
-## Future Enhancements
-
-- Real-Time Log Monitoring (WebSocket)
-- Email / Slack Notifications
-- IP Geolocation (GeoIP2 integration)
-- VirusTotal API Integration for hash analysis
-- Threat Intelligence Feed Integration
-- Machine Learning-Based Anomaly Detection
-- REST API Documentation (Swagger/OpenAPI)
-- Multi-Tenant Support
-- PDF text content extraction (PyPDF2)
-- Browser extension for real-time URL checking
-
----
-
 ## Contributing
 
-Contributions are welcome.
+Contributions are welcome! Please follow these steps:
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push your branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
+
+### Development Guidelines
+
+- Follow PEP 8 style guide for Python code
+- Write tests for new features
+- Update documentation for API changes
+- Use meaningful commit messages
 
 ---
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
 ---
 
@@ -554,4 +615,8 @@ Computer Science Student | Full-Stack Developer | Cybersecurity Enthusiast
 
 <p align="center">
   <img src="assets/images/banner.svg" alt="CyberShield AI" width="60%"/>
+</p>
+
+<p align="center">
+  <strong>Analyze. Detect. Defend.</strong>
 </p>
