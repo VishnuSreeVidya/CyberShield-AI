@@ -14,7 +14,8 @@
   <img src="https://img.shields.io/badge/PostgreSQL-18-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL"/>
   <img src="https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"/>
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License"/>
-  <img src="https://img.shields.io/badge/Tests-95%20Passed-brightgreen?style=for-the-badge" alt="Tests"/>
+  <img src="https://img.shields.io/badge/Tests-146%20Passed-brightgreen?style=for-the-badge" alt="Tests"/>
+  <img src="https://img.shields.io/badge/Coverage-86%25-blue?style=for-the-badge" alt="Coverage"/>
 </p>
 
 ---
@@ -46,13 +47,22 @@ Built by **Kotturu Vishnu Sree Vidya** — Computer Science Student, Full-Stack 
 - Profile settings (update username/email, change password)
 - Demo role quick-login buttons (Admin / Security Analyst)
 
-### Log Management
+### Log Management & Asynchronous Engine
 - Upload server log files (`.log`, `.txt`, `.csv`, `.json`)
+- **Asynchronous Background Processing**: Non-blocking `ThreadPoolExecutor` worker for large log files (>100 lines) with real-time status API (`/logs/upload/status/<job_id>`)
 - Automatic format detection (Apache combined/common, syslog/auth, JSON, CSV)
 - Smart fallback parsing when format is ambiguous
 - Extracts: Timestamp, IP Address, HTTP Method, Request URL, Status Code, User Agent
 - Paginated log explorer with detail views
 - Threat-filtered view showing only logs with detected threats
+
+### Advanced Threat Intelligence & Deep Analysis Module
+- **URL Security Scanner**: Analyzes HTTP vs HTTPS, IP-based domains, brand impersonation (PayPal, Amazon, etc.), and URL shortener detection.
+- **File Hash Inspection**: Validates MD5, SHA1, and SHA256 hashes against a demo malware database.
+- **PDF Document Scanner**: Extracts metadata, page counts, embedded URLs, and detects suspicious keywords (`/JavaScript`, `/OpenAction`).
+- **Text Payload Analyzer**: Classifies text input for phishing indicators, scam language, spam patterns, and credential leaks.
+- **IP Threat Analyzer**: Inspects IPv4/IPv6 addresses, reserved RFC1918 spaces, and suspicious scanning prefixes.
+
 
 ### Threat Detection Engine (7 Detection Rules)
 
@@ -314,6 +324,7 @@ docker compose up --build
 | `GET /api/dashboard/recent_alerts` | Last 10 alerts |
 | `GET /api/dashboard/timeline` | Hourly attack counts (24h) |
 | `GET /api/dashboard/top_ips` | Top 10 attacking IPs |
+| `GET /logs/upload/status/<job_id>` | Real-time status of async log parsing job |
 | `GET /health` | Health check endpoint |
 
 ---
@@ -321,18 +332,22 @@ docker compose up --build
 ## Running Tests
 
 ```bash
-pytest tests/ -q
+pytest --cov=app tests/
 ```
 
-95 tests covering:
+**146 tests passing** with **86% total code coverage**:
 
-| Test File | Tests | Coverage |
-|---|---|---|
-| `test_models.py` | 13 | User, LogEntry, Alert, Report models |
-| `test_auth.py` | 11 | Registration, login, logout, validation |
-| `test_parsers.py` | 22 | Format detection, all 5 parsers |
-| `test_detection.py` | 20 | All 7 detection rules + orchestrator |
-| `test_routes.py` | 29 | Dashboard, logs, API, exports |
+| Test File | Tests | Coverage | Components Tested |
+|---|---|---|---|
+| `test_models.py` | 13 | 95%+ | User, LogEntry, Alert, Report, Analysis models |
+| `test_auth.py` | 11 | 97% | Registration, login, logout, validation |
+| `test_parsers.py` | 22 | 86% | Format detection, all 5 log parsers |
+| `test_detection.py` | 20 | 96% | All 7 threat detection rules + orchestrator |
+| `test_detectors.py` | 25 | 92%+ | IP, Hash, PDF, Text, URL security detectors |
+| `test_analysis_routes.py` | 22 | 89% | URL, Text, PDF, IP, Hash analysis routes & history |
+| `test_async_parser.py` | 2 | 79% | Background task parsing & status polling |
+| `test_routes.py` | 31 | 82%+ | Dashboard, log explorer, API, PDF/CSV/JSON exports |
+
 
 ---
 
