@@ -73,8 +73,8 @@ def parse_auth_log(line: str) -> Optional[dict]:
     timestamp = None
     if ts_match:
         try:
-            timestamp = datetime.strptime(ts_match.group(1), '%b %d %H:%M:%S')
-            timestamp = timestamp.replace(year=datetime.now().year)
+            current_year = datetime.now().year
+            timestamp = datetime.strptime(f"{current_year} {ts_match.group(1)}", '%Y %b %d %H:%M:%S')
         except ValueError:
             pass
     return {

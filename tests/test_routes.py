@@ -13,8 +13,8 @@ class TestDashboardRoutes:
 
     def test_dashboard_shows_stats(self, client, auth_headers):
         rv = client.get('/dashboard/', follow_redirects=True)
-        assert b'Total Logs' in rv.data
-        assert b'Alerts' in rv.data
+        assert b'Total Analyses' in rv.data
+        assert b'Total Alerts' in rv.data
 
 
 class TestLogsRoutes:
@@ -82,6 +82,21 @@ class TestLogsRoutes:
                     content_type='multipart/form-data', follow_redirects=True)
         rv = client.post('/logs/1/delete', follow_redirects=True)
         assert rv.status_code == 200
+
+    def test_logs_upload_async(self, client, auth_headers):
+        log_lines = b"192.168.1.1 - - [10/Jul/2026:08:30:15 +0000] \"GET /index.html HTTP/1.1\" 200 1234 \"-\" \"Mozilla/5.0\"\n" * 105
+        data = {'file': (io.BytesIO(log_lines), 'large.log'), 'async': '1'}
+        rv = client.post('/logs/upload', data=data, content_type='multipart/form-data', headers=[('X-Requested-With', 'XMLHttpRequest')])
+        assert rv.status_code == 200
+        res_json = rv.get_json()
+        assert res_json['status'] == 'queued'
+        assert 'job_id' in res_json
+
+        status_rv = client.get(f'/logs/upload/status/{res_json["job_id"]}')
+        assert status_rv.status_code == 200
+        assert status_rv.get_json()['status'] in ('pending', 'processing', 'completed')
+
+
 
 
 class TestAPIRoutes:

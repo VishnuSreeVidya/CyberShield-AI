@@ -32,6 +32,8 @@ def list_logs():
     )
 
 
+from app.services.async_parser import enqueue_log_upload, get_job_status, UPLOAD_JOBS
+
 @logs_bp.route('/upload', methods=['GET', 'POST'])
 @login_required
 def upload():
@@ -50,6 +52,16 @@ def upload():
         except Exception:
             flash('Could not read file. Ensure it is UTF-8 encoded.', 'danger')
             return render_template('logs/upload.html')
+
+        is_async = request.form.get('async') == '1' or content.count('\n') > 100
+
+        if is_async:
+            job_id = enqueue_log_upload(current_app, content, file.filename)
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.is_json:
+                return jsonify({'status': 'queued', 'job_id': job_id})
+
+            flash(f'Background log parsing job started (Job ID: {job_id[:8]}...). Processing in background.', 'info')
+            return redirect(url_for('logs.list_logs'))
 
         parsed = parse_file(content, filename=file.filename)
         if not parsed:
@@ -93,6 +105,14 @@ def upload():
         return redirect(url_for('logs.list_logs'))
 
     return render_template('logs/upload.html')
+
+
+@logs_bp.route('/upload/status/<job_id>')
+@login_required
+def upload_status(job_id):
+    status_info = get_job_status(job_id)
+    return jsonify(status_info)
+
 
 
 @logs_bp.route('/threats')
