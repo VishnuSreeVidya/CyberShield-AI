@@ -92,9 +92,14 @@ class TestLogsRoutes:
         assert res_json['status'] == 'queued'
         assert 'job_id' in res_json
 
-        status_rv = client.get(f'/logs/upload/status/{res_json["job_id"]}')
-        assert status_rv.status_code == 200
-        assert status_rv.get_json()['status'] in ('pending', 'processing', 'completed')
+        import time
+        for _ in range(50):
+            status_rv = client.get(f'/logs/upload/status/{res_json["job_id"]}')
+            assert status_rv.status_code == 200
+            if status_rv.get_json()['status'] in ('completed', 'failed'):
+                break
+            time.sleep(0.1)
+        assert status_rv.get_json()['status'] == 'completed'
 
 
 

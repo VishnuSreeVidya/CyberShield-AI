@@ -1,6 +1,6 @@
 import os
 from datetime import datetime, timezone
-from flask import render_template, redirect, url_for, flash, request, current_app
+from flask import render_template, redirect, url_for, flash, request, current_app, jsonify
 from flask_login import login_required
 from app import db
 from app.models import LogEntry, Alert
