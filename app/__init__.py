@@ -1,10 +1,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_migrate import Migrate
 from config import Config
 
 db = SQLAlchemy()
 login_manager = LoginManager()
+migrate = Migrate()
 login_manager.login_view = 'auth.login'
 login_manager.login_message_category = 'info'
 
@@ -15,6 +17,7 @@ def create_app(config_class=Config):
 
     db.init_app(app)
     login_manager.init_app(app)
+    migrate.init_app(app, db)
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -41,14 +44,19 @@ def create_app(config_class=Config):
         )
         db.create_all()
 
-        try:
-            db.session.execute(db.text('ALTER TABLE alerts ADD COLUMN source_ip VARCHAR(45)'))
-            db.session.commit()
-        except Exception:
-            db.session.rollback()
+        pass
 
     @app.route('/health')
     def health():
         return {'status': 'ok', 'app': 'CyberShield AI'}
+
+    
+    @app.after_request
+    def apply_security_headers(response):
+        response.headers['X-Content-Type-Options'] = 'nosniff'
+        response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+        response.headers['X-XSS-Protection'] = '1; mode=block'
+        response.headers['Content-Security-Policy'] = "default-src 'self' 'unsafe-inline' 'unsafe-eval' https:;"
+        return response
 
     return app

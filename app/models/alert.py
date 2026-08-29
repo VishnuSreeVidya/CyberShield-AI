@@ -9,9 +9,9 @@ class Alert(db.Model):
     log_id = db.Column(db.Integer, db.ForeignKey('logs.id'), nullable=False, index=True)
     source_ip = db.Column(db.String(45), nullable=True, index=True)
     attack_type = db.Column(db.String(100), nullable=False, index=True)
-    severity = db.Column(db.String(20), nullable=False, default='Low')
+    severity = db.Column(db.String(20), nullable=False, default='Low', index=True)
     description = db.Column(db.Text, nullable=True)
-    detected_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+    detected_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), index=True)
 
     def __repr__(self):
         return f'<Alert {self.attack_type} [{self.severity}]>'

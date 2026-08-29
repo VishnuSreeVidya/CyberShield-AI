@@ -13,7 +13,7 @@ class LogEntry(db.Model):
     status_code = db.Column(db.Integer, nullable=True)
     user_agent = db.Column(db.Text, nullable=True)
     raw_log = db.Column(db.Text, nullable=False)
-    uploaded_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+    uploaded_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), index=True)
 
     alerts = db.relationship(
         'Alert', backref='log', lazy='dynamic', cascade='all, delete-orphan'
